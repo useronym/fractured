@@ -7,10 +7,10 @@ varying vec2 TexCoord;
 void main()
 {
     vec2 z, c;
-    int iter = 25;
-    c = vec2(sin(time/3.0), cos(time/3.0));
-    z.x= (TexCoord.x*0.5 - 0.25) * 5.0;
-    z.y= (TexCoord.y*0.5 - 0.25) * 5.0;
+    int iter = 400;
+    c = vec2(0.36, 0.36);
+    z.x= ((TexCoord.x+0.2)*0.1 - 0.05) * 5.0;
+    z.y= ((TexCoord.y+0.7)*0.1 - 0.05) * 5.0;
 
     int i;
     for(i= 0; i < iter; i++)
