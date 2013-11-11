@@ -1,16 +1,17 @@
 precision mediump float;
 
-uniform float time;
+uniform vec2 u_c;
+uniform vec2 u_translation;
 
 varying vec2 TexCoord;
 
 void main()
 {
     vec2 z, c;
-    int iter = 400;
-    c = vec2(0.36, 0.36);
-    z.x= ((TexCoord.x+0.2)*0.1 - 0.05) * 5.0;
-    z.y= ((TexCoord.y+0.7)*0.1 - 0.05) * 5.0;
+    int iter = 75;
+    c = u_c;
+    z.x = ((TexCoord.x + u_translation.x)*0.5 - 0.25) * 5.0;
+    z.y = ((TexCoord.y + u_translation.y)*0.5 - 0.25) * 5.0;
 
     int i;
     for(i= 0; i < iter; i++)

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.utils.TimeUtils;
 
 /**
@@ -20,46 +21,33 @@ import com.badlogic.gdx.utils.TimeUtils;
  */
 
 public class Fractured extends Game {
-    private FrameBuffer fBuff;
-    private boolean rendered = false;
+    private FracturedGestureListener gestureListener = null;
+    private FractalRenderer renderer = null;
+
     private Sprite fractal;
     private OrthographicCamera camera;
     private Sprite logoSprite;
     private SpriteBatch Batch;
-    private ShaderProgram testShader;
-    private Mesh testMesh;
     private float timeMs = 0;
 
     @Override
     public void create() {
-        fBuff = new FrameBuffer(Pixmap.Format.RGB888, 512, 512, false);
+        gestureListener = new FracturedGestureListener();
+        Gdx.input.setInputProcessor(new GestureDetector(gestureListener));
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800f, 480f);
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         Texture logoTex = new Texture(Gdx.files.internal("gdxlogo.png"));
         logoSprite = new Sprite(logoTex);
-        logoSprite.setPosition(250, 215);
+        logoSprite.setRotation(90f);
+        logoSprite.setPosition(-100f, 150f);
         Batch = new SpriteBatch();
 
-        String vSource, fSource;
-        vSource = Gdx.files.internal("shaders/default.vert").readString();
-        fSource = Gdx.files.internal("shaders/julia_time.frag").readString();
-        testShader = new ShaderProgram(vSource, fSource);
-        if (!testShader.isCompiled()) {
-            Gdx.app.log("Shader compile error", testShader.getLog());
-            Gdx.app.exit();
-        }
-
-        testMesh = new Mesh(true, 4, 6, VertexAttribute.Position(), VertexAttribute.TexCoords(0));
-        testMesh.setVertices(new float[]
-                {-1, -1, 0, 0, 1,
-                 1, -1, 0, 1, 1,
-                 1, 1, 0, 1, 0,
-                 -1, 1, 0, 0, 0});
-        testMesh.setIndices(new short[] {0, 1, 2, 2, 3, 0});
-
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        renderer = new FractalRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        renderer.loadShader("default.vert", "julia_time.frag");
+        renderer.render();
+        fractal = new Sprite(renderer.getTexture());
     }
 
     @Override
@@ -69,35 +57,20 @@ public class Fractured extends Game {
 
     @Override
     public void render() {
-        timeMs += Gdx.graphics.getDeltaTime();
+        timeMs = timeMs + Gdx.graphics.getDeltaTime();
 
-        logoSprite.setRotation((float) (logoSprite.getRotation()+0.25));
+        /*renderer.setTranslation(renderer.getTranslationX() - gestureListener.getDeltaTapX()/800f,
+                renderer.getTranslationY() + gestureListener.getDeltaTapY()/480f);
+        renderer.render();*/
+        fractal.setPosition(fractal.getX() + gestureListener.getDeltaTapX(),
+                fractal.getY() - gestureListener.getDeltaTapY());
+
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (!rendered) {
-            long timeNow = TimeUtils.nanoTime();
-            fBuff.begin();
-            testShader.begin();
-            //testShader.setUniformf("time", timeMs);
-            testMesh.render(testShader, GL20.GL_TRIANGLES);
-            testShader.end();
-            fBuff.end();
-
-            long renderTime = TimeUtils.nanoTime() - timeNow;
-            renderTime /= 1000000;
-            Gdx.app.log("Time to render texture", String.valueOf(renderTime));
-            fractal = new Sprite(fBuff.getColorBufferTexture());
-            fractal.setPosition(50, 50);
-            rendered = true;
-        }
-
         Batch.setProjectionMatrix(camera.combined);
         Batch.begin();
-        if (rendered) {
-            fractal.draw(Batch);
-            fractal.rotate(-0.1f);
-        }
+        fractal.draw(Batch);
         logoSprite.draw(Batch);
         Batch.end();
     }
