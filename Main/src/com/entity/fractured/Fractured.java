@@ -23,12 +23,16 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class Fractured extends Game {
     private FracturedGestureListener gestureListener = null;
     private FractalRenderer renderer = null;
+    private boolean needsRender;
+    private float timeSinceLastRender = 0;
 
     private Sprite fractal;
     private OrthographicCamera camera;
     private Sprite logoSprite;
     private SpriteBatch Batch;
+
     private float timeMs = 0;
+    private final float timeToWaitForRender = 0.5f;
 
     @Override
     public void create() {
@@ -46,7 +50,7 @@ public class Fractured extends Game {
 
         renderer = new FractalRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         renderer.loadShader("default.vert", "julia_time.frag");
-        renderer.render();
+        needsRender = true;
         fractal = new Sprite(renderer.getTexture());
     }
 
@@ -59,13 +63,32 @@ public class Fractured extends Game {
     public void render() {
         timeMs = timeMs + Gdx.graphics.getDeltaTime();
 
-        /*renderer.setTranslation(renderer.getTranslationX() - gestureListener.getDeltaTapX()/800f,
-                renderer.getTranslationY() + gestureListener.getDeltaTapY()/480f);
-        renderer.render();*/
-        fractal.setPosition(fractal.getX() + gestureListener.getDeltaTapX(),
-                fractal.getY() - gestureListener.getDeltaTapY());
+        float inDeltaX = gestureListener.getDeltaPanX(),
+                inDeltaY = gestureListener.getDeltaPanY();
 
-        Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
+        if (inDeltaX != 0 && inDeltaY != 0) {
+            fractal.setPosition(fractal.getX() + inDeltaX, fractal.getY() - inDeltaY);
+            needsRender = true;
+        }
+
+        if (needsRender) {
+            timeSinceLastRender += Gdx.graphics.getDeltaTime();
+        }
+
+        if (needsRender && timeSinceLastRender > timeToWaitForRender) {
+            renderer.setTranslation(renderer.getTranslationX() - fractal.getX()/Gdx.graphics.getWidth(),
+                    renderer.getTranslationY() - fractal.getY()/Gdx.graphics.getHeight());
+            fractal.setPosition(0f, 0f);
+            renderer.render();
+            timeSinceLastRender = 0f;
+            needsRender = false;
+        }
+
+
+        fractal.setPosition(fractal.getX() + gestureListener.getDeltaPanX(),
+                fractal.getY() - gestureListener.getDeltaPanY());
+
+        Gdx.gl.glClearColor(0.f, 0.f, 0.f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Batch.setProjectionMatrix(camera.combined);

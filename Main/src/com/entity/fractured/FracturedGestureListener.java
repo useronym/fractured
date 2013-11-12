@@ -11,28 +11,28 @@ import com.badlogic.gdx.math.Vector2;
  * To change this template use File | Settings | File Templates.
  */
 public class FracturedGestureListener implements GestureDetector.GestureListener {
-    private float tapX;
-    private float tapY;
-    private float deltaTapX;
-    private float deltaTapY;
+    private float panX;
+    private float panY;
+    private float deltaPanX;
+    private float deltaPanY;
 
-    public float getTapX() {
-        return tapX;
+    public float getPanX() {
+        return panX;
     }
 
-    public float getTapY() {
-        return tapY;
+    public float getPanY() {
+        return panY;
     }
 
-    public float getDeltaTapX() {
-        float retVal = deltaTapX;
-        deltaTapX = 0f;
+    public float getDeltaPanX() {
+        float retVal = deltaPanX;
+        deltaPanX = 0f;
         return retVal;
     }
 
-    public float getDeltaTapY() {
-        float retVal = deltaTapY;
-        deltaTapY = 0f;
+    public float getDeltaPanY() {
+        float retVal = deltaPanY;
+        deltaPanY = 0f;
         return retVal;
     }
 
@@ -59,10 +59,10 @@ public class FracturedGestureListener implements GestureDetector.GestureListener
 
     @Override
     public boolean pan(float v, float v2, float v3, float v4) {
-        tapX = v;
-        tapY = v2;
-        deltaTapX = v3;
-        deltaTapY = v4;
+        panX = v;
+        panY = v2;
+        deltaPanX = v3;
+        deltaPanY = v4;
 
         return false;
     }

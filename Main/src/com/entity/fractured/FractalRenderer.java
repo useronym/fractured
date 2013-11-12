@@ -18,6 +18,7 @@ public class FractalRenderer {
     private ShaderProgram shader = null;
     private boolean ready = false;
 
+    // fractal uniforms
     private float fractalTransX = 0f, fractalTransY = 0f;
     private float fractalCX = 0.33f, fractalCY = 0.4f;
 
