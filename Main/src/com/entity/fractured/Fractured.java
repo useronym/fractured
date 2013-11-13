@@ -31,11 +31,13 @@ public class Fractured extends Game {
     private Sprite logoSprite;
     private SpriteBatch Batch;
 
+    private float aspectRatio = 1f;
     private float timeMs = 0;
     private final float timeToWaitForRender = 0.5f;
 
     @Override
     public void create() {
+        aspectRatio = Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
         gestureListener = new FracturedGestureListener();
         Gdx.input.setInputProcessor(new GestureDetector(gestureListener));
 
@@ -76,10 +78,11 @@ public class Fractured extends Game {
         }
 
         if (needsRender && timeSinceLastRender > timeToWaitForRender) {
-            renderer.setTranslation(renderer.getTranslationX() - fractal.getX()/Gdx.graphics.getWidth(),
-                    renderer.getTranslationY() - fractal.getY()/Gdx.graphics.getHeight());
+            renderer.setTranslation(renderer.getTranslationX() - (fractal.getX()/Gdx.graphics.getWidth()),
+                    renderer.getTranslationY() - (fractal.getY()/Gdx.graphics.getHeight())/aspectRatio);
             fractal.setPosition(0f, 0f);
             renderer.render();
+
             timeSinceLastRender = 0f;
             needsRender = false;
         }
@@ -110,6 +113,6 @@ public class Fractured extends Game {
 
     @Override
     public void dispose() {
-
+        renderer.dispose();
     }
 }

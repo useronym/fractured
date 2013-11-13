@@ -1,17 +1,18 @@
-precision mediump float;
+precision highp float;
 
 uniform vec2 u_c;
 uniform vec2 u_translation;
+uniform float u_zoom, u_zoom_half;
 
 varying vec2 TexCoord;
 
 void main()
 {
-    vec2 z, c;
-    int iter = 75;
-    c = u_c;
-    z.x = ((TexCoord.x + u_translation.x)*0.5 - 0.25) * 5.0;
-    z.y = ((TexCoord.y + u_translation.y)*0.5 - 0.25) * 5.0;
+    int iter = 100;
+    vec2 c = u_c;
+    vec2 z;
+    z.x = ((TexCoord.x + u_translation.x) * u_zoom - u_zoom_half) * 5.0;
+    z.y = ((TexCoord.y + u_translation.y) * u_zoom - u_zoom_half) * 5.0;
 
     int i;
     for(i= 0; i < iter; i++)

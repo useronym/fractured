@@ -21,6 +21,7 @@ public class FractalRenderer {
     // fractal uniforms
     private float fractalTransX = 0f, fractalTransY = 0f;
     private float fractalCX = 0.33f, fractalCY = 0.4f;
+    private float fractalZoom = 0.25f;
 
 
     FractalRenderer(int sx, int sy) {
@@ -59,12 +60,19 @@ public class FractalRenderer {
         }
     }
 
+    public void dispose() {
+        unloadShader();
+        fbo.dispose();
+    }
+
     public void render() {
         fbo.begin();
         shader.begin();
 
         shader.setUniformf("u_c", fractalCX, fractalCY);
         shader.setUniformf("u_translation", fractalTransX, fractalTransY);
+        shader.setUniformf("u_zoom", fractalZoom);
+        shader.setUniformf("u_zoom_half", fractalZoom / 2f);
 
         planeMesh.render(shader, GL20.GL_TRIANGLES);
         shader.end();
@@ -81,6 +89,10 @@ public class FractalRenderer {
         fractalCY = cy;
     }
 
+    public void setZoom(float z) {
+        fractalZoom = z;
+    }
+
     public Texture getTexture() {
         if (ready) {
             return fbo.getColorBufferTexture();
@@ -95,5 +107,9 @@ public class FractalRenderer {
 
     public float getTranslationY() {
         return fractalTransY;
+    }
+
+    public float getZoom() {
+        return fractalZoom;
     }
 }
