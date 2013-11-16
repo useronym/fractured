@@ -4,6 +4,7 @@ package com.entity.fractured;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,7 +25,8 @@ public class Fractured extends Game {
     private FracturedGestureListener gestureListener = null;
     private FractalRenderer renderer = null;
     private boolean needsRender;
-    private float timeSinceLastRender = 0;
+    private boolean justRendered;
+    private long renderStart;
 
     private Sprite fractal;
     private OrthographicCamera camera;
@@ -33,10 +35,13 @@ public class Fractured extends Game {
 
     private float aspectRatio = 1f;
     private float timeMs = 0;
-    private final float timeToWaitForRender = 0.5f;
+
+    // settings
+    private float sZoomSpeed = 25f;
 
     @Override
     public void create() {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
         aspectRatio = Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
         gestureListener = new FracturedGestureListener();
         Gdx.input.setInputProcessor(new GestureDetector(gestureListener));
@@ -63,6 +68,11 @@ public class Fractured extends Game {
 
     @Override
     public void render() {
+        if(justRendered) {
+            Gdx.app.debug("fractured!", "rebound time: " + String.valueOf(TimeUtils.millis()-renderStart) + "ms");
+            justRendered = false;
+        }
+
         timeMs = timeMs + Gdx.graphics.getDeltaTime();
 
         float inDeltaX = gestureListener.getDeltaPanX(),
@@ -73,23 +83,38 @@ public class Fractured extends Game {
             needsRender = true;
         }
 
-        if (needsRender) {
-            timeSinceLastRender += Gdx.graphics.getDeltaTime();
+        if(Gdx.input.isKeyPressed(Input.Keys.PLUS)) {
+            float step = renderer.getZoom() / sZoomSpeed;
+            renderer.setZoom(renderer.getZoom() - step);
+            needsRender = true;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.MINUS)) {
+            float step = renderer.getZoom() / sZoomSpeed;
+            renderer.setZoom(renderer.getZoom() + step);
+            needsRender = true;
         }
 
-        if (needsRender && timeSinceLastRender > timeToWaitForRender) {
-            renderer.setTranslation(renderer.getTranslationX() - (fractal.getX()/Gdx.graphics.getWidth()),
+        float zoom = gestureListener.getZoom();
+        if(zoom != 1f) {
+            float step = renderer.getZoom() / sZoomSpeed;
+            if (zoom > 1f) {
+                zoom = -1f / zoom;
+            } else {
+                // do nothing
+            }
+            renderer.setZoom(renderer.getZoom() + zoom*step);
+            needsRender = true;
+        }
+
+        if (needsRender && !Gdx.input.isTouched()) {
+            renderStart = TimeUtils.millis();
+            renderer.setTranslation(renderer.getTranslationX() - fractal.getX()/Gdx.graphics.getWidth(),
                     renderer.getTranslationY() - (fractal.getY()/Gdx.graphics.getHeight())/aspectRatio);
             fractal.setPosition(0f, 0f);
             renderer.render();
-
-            timeSinceLastRender = 0f;
             needsRender = false;
+            justRendered = true;
         }
-
-
-        fractal.setPosition(fractal.getX() + gestureListener.getDeltaPanX(),
-                fractal.getY() - gestureListener.getDeltaPanY());
 
         Gdx.gl.glClearColor(0.f, 0.f, 0.f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -114,5 +139,8 @@ public class Fractured extends Game {
     @Override
     public void dispose() {
         renderer.dispose();
+        Batch.dispose();
+        logoSprite.getTexture().dispose();
+        fractal.getTexture().dispose();
     }
 }

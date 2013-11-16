@@ -8,7 +8,7 @@
         <option name="proGuardCfgFileUrl" value="file://$PROJECT_DIR$/Android/proguard-project.txt" />
       </options>
     </properties>
-    <root id="archive" name="Shaded.apk">
+    <root id="archive" name="fractured.apk">
       <element id="android-final-package" facet="Android/android/Android" />
     </root>
   </artifact>

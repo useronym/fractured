@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.utils.TimeUtils;
 
 /**
  * Created with IntelliJ IDEA.
@@ -66,6 +67,9 @@ public class FractalRenderer {
     }
 
     public void render() {
+        Gdx.app.debug("fractured!", "rendering...");
+        long startTime = TimeUtils.millis();
+
         fbo.begin();
         shader.begin();
 
@@ -77,6 +81,8 @@ public class FractalRenderer {
         planeMesh.render(shader, GL20.GL_TRIANGLES);
         shader.end();
         fbo.end();
+
+        Gdx.app.debug("fractured!", "rendered in " + String.valueOf(TimeUtils.millis() - startTime) + "ms");
     }
 
     public void setTranslation(float tx, float ty) {
