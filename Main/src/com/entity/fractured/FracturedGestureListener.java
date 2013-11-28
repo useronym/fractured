@@ -11,12 +11,19 @@ import com.badlogic.gdx.math.Vector2;
  * To change this template use File | Settings | File Templates.
  */
 public class FracturedGestureListener implements GestureDetector.GestureListener {
+    private boolean active = true;
+
     private float panX = 0f;
     private float panY = 0f;
     private float deltaPanX = 0f;
     private float deltaPanY = 0f;
     private float zoom = 1f;
     private Vector2 zoomCenter;
+
+
+    public void setActive(boolean is) {
+        active = is;
+    }
 
     public float getPanX() {
         return panX;
@@ -76,12 +83,12 @@ public class FracturedGestureListener implements GestureDetector.GestureListener
         deltaPanX = v3;
         deltaPanY = v4;
 
-        return false;
+        return true;
     }
 
     @Override
     public boolean zoom(float v, float v2) {
-        zoom = v2/v;
+        zoom = v/v2;
         return false;
     }
 

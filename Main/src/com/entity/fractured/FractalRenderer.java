@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
 /**
@@ -20,9 +21,9 @@ public class FractalRenderer {
     private boolean ready = false;
 
     // fractal uniforms
-    private float fractalTransX = 0f, fractalTransY = 0f;
-    private float fractalCX = 0.33f, fractalCY = 0.4f;
-    private float fractalZoom = 0.25f;
+    private Vector2 translation = new Vector2(0f, 0f);
+    private Vector2 parameter = new Vector2(0.33f, 0.4f);
+    private float zoom = 0.25f;
 
 
     FractalRenderer(int sx, int sy) {
@@ -67,16 +68,15 @@ public class FractalRenderer {
     }
 
     public void render() {
-        Gdx.app.debug("fractured!", "rendering...");
         long startTime = TimeUtils.millis();
 
         fbo.begin();
         shader.begin();
 
-        shader.setUniformf("u_c", fractalCX, fractalCY);
-        shader.setUniformf("u_translation", fractalTransX, fractalTransY);
-        shader.setUniformf("u_zoom", fractalZoom);
-        shader.setUniformf("u_zoom_half", fractalZoom / 2f);
+        shader.setUniformf("u_c", parameter);
+        shader.setUniformf("u_translation", translation);
+        shader.setUniformf("u_zoom", zoom);
+        shader.setUniformf("u_zoom_half", zoom / 2f);
 
         planeMesh.render(shader, GL20.GL_TRIANGLES);
         shader.end();
@@ -85,18 +85,23 @@ public class FractalRenderer {
         Gdx.app.debug("fractured!", "rendered in " + String.valueOf(TimeUtils.millis() - startTime) + "ms");
     }
 
-    public void setTranslation(float tx, float ty) {
-        fractalTransX = tx;
-        fractalTransY = ty;
+    public void setTranslation(Vector2 nt) {
+        translation = nt;
     }
 
-    public void setC(float cx, float cy) {
-        fractalCX = cx;
-        fractalCY = cy;
+    public void addTranslation(Vector2 at) {
+        Vector2 newT = new Vector2(translation).add(at);
+        setTranslation(newT);
+    }
+
+    public void setParameter(Vector2 np) {
+        parameter = np;
     }
 
     public void setZoom(float z) {
-        fractalZoom = z;
+        float diff = zoom - z;
+
+        zoom = z;
     }
 
     public Texture getTexture() {
@@ -107,15 +112,11 @@ public class FractalRenderer {
         }
     }
 
-    public float getTranslationX() {
-        return fractalTransX;
-    }
-
-    public float getTranslationY() {
-        return fractalTransY;
+    public Vector2 getTranslation() {
+        return translation;
     }
 
     public float getZoom() {
-        return fractalZoom;
+        return zoom;
     }
 }
