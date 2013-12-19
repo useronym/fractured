@@ -5,11 +5,10 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -37,7 +36,7 @@ public class Fractured extends Game {
     private float aspectRatio = 1f;
 
     // settings
-    private final float sZoomSpeed = 25f;
+    private final float sZoomSpeed = 0.08f;
 
     @Override
     public void create() {
@@ -49,10 +48,10 @@ public class Fractured extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        Texture logoTex = new Texture(Gdx.files.internal("gdxlogo.png"));
+        /*Texture logoTex = new Texture(Gdx.files.internal("gdxlogo.png"));
         logoSprite = new Sprite(logoTex);
         logoSprite.setRotation(90f);
-        logoSprite.setPosition(-100f, 150f);
+        logoSprite.setPosition(-100f, 150f);*/
         Batch = new SpriteBatch();
 
         renderer = new FractalRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -82,7 +81,7 @@ public class Fractured extends Game {
         Batch.setProjectionMatrix(camera.combined);
         Batch.begin();
         fractal.draw(Batch);
-        logoSprite.draw(Batch);
+        //logoSprite.draw(Batch);
         Batch.end();
 
         if (needsRender && !Gdx.input.isTouched()) {
@@ -128,32 +127,28 @@ public class Fractured extends Game {
         float inDeltaX = gestureListener.getDeltaPanX(),
                 inDeltaY = gestureListener.getDeltaPanY();
 
-        if (inDeltaX != 0f && inDeltaY != 0f) {
+        if (inDeltaX != 0f || inDeltaY != 0f) {
             fractal.setPosition(fractal.getX() + inDeltaX, fractal.getY() - inDeltaY);
             needsRender = true;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            float step = renderer.getZoom() / sZoomSpeed;
-            renderer.setZoom(renderer.getZoom() - step);
-            needsRender = true;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            float step = renderer.getZoom() / sZoomSpeed;
-            renderer.setZoom(renderer.getZoom() + step);
-            needsRender = true;
-        }
 
         float zoom = gestureListener.getZoom();
+
+        // desktop input
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+            zoom -= 0.05f;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            zoom += 0.05f;
+        }
+
         if (zoom != 1f) {
-            float step = renderer.getZoom() / sZoomSpeed;
+            float step = renderer.getZoom() * sZoomSpeed;
 
             if (zoom > 1f) {
                 zoom = -1f / zoom;
-            } else {
-                // do nothing
             }
-            renderer.setZoom(renderer.getZoom() + zoom * step);
+            renderer.setZoom(renderer.getZoom() - zoom * step);
             needsRender = true;
         }
     }
