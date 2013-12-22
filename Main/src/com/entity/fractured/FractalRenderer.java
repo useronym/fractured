@@ -7,13 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
-/**
- * Created with IntelliJ IDEA.
- * User: entity
- * Date: 11/11/13
- * Time: 10:21 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class FractalRenderer {
     private FrameBuffer fbo;
     private Mesh planeMesh;
@@ -23,7 +17,7 @@ public class FractalRenderer {
     // fractal uniforms
     private Vector2 translation = new Vector2(0f, 0f);
     private Vector2 parameter = new Vector2(0.33f, 0.4f);
-    private float zoom = 0.25f;
+    private float zoom = 2f;
 
 
     FractalRenderer(int sx, int sy) {
@@ -48,7 +42,7 @@ public class FractalRenderer {
         shader = new ShaderProgram(vSource, fSource);
 
         if (!shader.isCompiled()) {
-            Gdx.app.log("Shader compile error", shader.getLog());
+            Gdx.app.log("fractured!", shader.getLog());
             ready = false;
         } else {
             ready = true;
@@ -99,9 +93,15 @@ public class FractalRenderer {
     }
 
     public void setZoom(float z) {
-        float diff = zoom - z;
+        Vector2 addT = new Vector2(getTranslation()).mul(z - zoom);
+        addT.mul(-1f);
+        addTranslation(addT);
 
         zoom = z;
+    }
+
+    public void addZoom(float delta) {
+        setZoom(getZoom() + delta);
     }
 
     public Texture getTexture() {

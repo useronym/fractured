@@ -2,7 +2,9 @@
   <dictionary name="entity">
     <words>
       <w>coord</w>
+      <w>highp</w>
       <w>intelli</w>
+      <w>iter</w>
       <w>vert</w>
     </words>
   </dictionary>

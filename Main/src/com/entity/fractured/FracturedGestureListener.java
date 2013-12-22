@@ -3,13 +3,7 @@ package com.entity.fractured;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * Created with IntelliJ IDEA.
- * User: entity
- * Date: 11/11/13
- * Time: 11:42 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class FracturedGestureListener implements GestureDetector.GestureListener {
     private boolean active = true;
 
@@ -89,7 +83,7 @@ public class FracturedGestureListener implements GestureDetector.GestureListener
     @Override
     public boolean zoom(float v, float v2) {
         zoom = v/v2;
-        return false;
+        return true;
     }
 
     @Override

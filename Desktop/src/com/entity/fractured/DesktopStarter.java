@@ -17,6 +17,7 @@ public class DesktopStarter {
         cfg.useGL20 = true;
         cfg.width = 800;
         cfg.height = 480;
+        cfg.vSyncEnabled = true;
         new LwjglApplication(new Fractured(), cfg);
     }
 }

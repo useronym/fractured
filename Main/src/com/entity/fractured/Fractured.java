@@ -13,30 +13,22 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
-/**
- * Created with IntelliJ IDEA.
- * User: entity
- * Date: 11/2/13
- * Time: 10:33 PM
- * To change this template use File | Settings | File Templates.
- */
 
 public class Fractured extends Game {
     private FracturedGestureListener gestureListener = null;
-    private FractalRenderer renderer = null;
+    private FractalRenderer renderer = null; // class which handles rendering of the fractal to a texture
     private boolean needsRender;
     private boolean justRendered;
     private long renderStart;
 
-    private Sprite fractal;
+    private Sprite fractalSprite; // sprite which renders the screen quad with the rendered fractal texture
     private OrthographicCamera camera;
-    private Sprite logoSprite;
     private SpriteBatch Batch;
 
     private float aspectRatio = 1f;
 
     // settings
-    private final float sZoomSpeed = 0.08f;
+    private final float sZoomSpeed = 0.5f;
 
     @Override
     public void create() {
@@ -48,17 +40,13 @@ public class Fractured extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        /*Texture logoTex = new Texture(Gdx.files.internal("gdxlogo.png"));
-        logoSprite = new Sprite(logoTex);
-        logoSprite.setRotation(90f);
-        logoSprite.setPosition(-100f, 150f);*/
         Batch = new SpriteBatch();
 
         renderer = new FractalRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         renderer.loadShader("default.vert", "julia.frag");
         needsRender = true;
         justRendered = false;
-        fractal = new Sprite(renderer.getTexture());
+        fractalSprite = new Sprite(renderer.getTexture());
     }
 
     @Override
@@ -80,13 +68,16 @@ public class Fractured extends Game {
 
         Batch.setProjectionMatrix(camera.combined);
         Batch.begin();
-        fractal.draw(Batch);
-        //logoSprite.draw(Batch);
+        fractalSprite.draw(Batch);
         Batch.end();
 
-        if (needsRender && !Gdx.input.isTouched()) {
-            renderFractal();
+        if (needsRender) {
+            if (!Gdx.input.isTouched() && !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+                renderFractal();
+            }
         }
+
+
     }
 
     @Override
@@ -103,52 +94,58 @@ public class Fractured extends Game {
     public void dispose() {
         renderer.dispose();
         Batch.dispose();
-        logoSprite.getTexture().dispose();
-        fractal.getTexture().dispose();
+        fractalSprite.getTexture().dispose();
     }
 
 
     private void renderFractal() {
         renderStart = TimeUtils.millis();
 
-        Vector2 translationToAdd = new Vector2(0f, 0f);
-        translationToAdd.x = -fractal.getX() / Gdx.graphics.getWidth();
-        translationToAdd.y = -fractal.getY() / Gdx.graphics.getHeight();
-        translationToAdd.y /= aspectRatio;
-        renderer.addTranslation(translationToAdd);
+        Vector2 translationDelta = new Vector2(0f, 0f);
+        translationDelta.x = -fractalSprite.getX() / Gdx.graphics.getWidth();
+        translationDelta.y = -fractalSprite.getY() / Gdx.graphics.getHeight();
+        translationDelta.y /= aspectRatio;
+        renderer.addTranslation(translationDelta);
 
-        fractal.setPosition(0f, 0f);
+        float zoomDelta = (1f / fractalSprite.getScaleX()) - 1f;
+        renderer.addZoom(zoomDelta);
+
+        // reset the screen quad sprite
+        fractalSprite.setPosition(0f, 0f);
+        fractalSprite.setScale(1f);
+
         renderer.render();
         needsRender = false;
         justRendered = true;
     }
 
     private void handleInput() {
+        // translation
         float inDeltaX = gestureListener.getDeltaPanX(),
                 inDeltaY = gestureListener.getDeltaPanY();
 
         if (inDeltaX != 0f || inDeltaY != 0f) {
-            fractal.setPosition(fractal.getX() + inDeltaX, fractal.getY() - inDeltaY);
+            fractalSprite.setPosition(fractalSprite.getX() + inDeltaX, fractalSprite.getY() - inDeltaY);
             needsRender = true;
         }
 
 
-        float zoom = gestureListener.getZoom();
+        // zoom
+        float zoomDelta = (gestureListener.getZoom() - 1f);
 
-        // desktop input
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            zoom -= 0.05f;
+            zoomDelta -= 0.01f;
         } else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            zoom += 0.05f;
+            zoomDelta += 0.01f;
         }
 
-        if (zoom != 1f) {
+        if (zoomDelta != 0f) {
             float step = renderer.getZoom() * sZoomSpeed;
 
-            if (zoom > 1f) {
-                zoom = -1f / zoom;
-            }
-            renderer.setZoom(renderer.getZoom() - zoom * step);
+            fractalSprite.setScale(fractalSprite.getScaleX() - fractalSprite.getScaleX() * zoomDelta * step);
+            /*renderer.addZoom(zoomDelta * step);
+            fractalSprite.setScale(1f / renderer.getZoom());*/
+
             needsRender = true;
         }
     }
