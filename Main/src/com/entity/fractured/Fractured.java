@@ -28,6 +28,7 @@ public class Fractured extends Game {
     private float aspectRatio = 1f;
 
     // settings
+    private final int sQuality = 1; // 1 is 100%; 2 is 50% etc...
     private final float sZoomSpeed = 0.5f;
 
     @Override
@@ -42,11 +43,12 @@ public class Fractured extends Game {
 
         Batch = new SpriteBatch();
 
-        renderer = new FractalRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        renderer = new FractalRenderer(Gdx.graphics.getWidth()/sQuality, Gdx.graphics.getHeight()/sQuality);
         renderer.loadShader("default.vert", "julia.frag");
         needsRender = true;
         justRendered = false;
         fractalSprite = new Sprite(renderer.getTexture());
+        fractalSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -74,6 +76,7 @@ public class Fractured extends Game {
         if (needsRender) {
             if (!Gdx.input.isTouched() && !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
                 renderFractal();
+                needsRender = false;
             }
         }
 
@@ -115,7 +118,6 @@ public class Fractured extends Game {
         fractalSprite.setScale(1f);
 
         renderer.render();
-        needsRender = false;
         justRendered = true;
     }
 
@@ -142,7 +144,7 @@ public class Fractured extends Game {
         if (zoomDelta != 0f) {
             float step = renderer.getZoom() * sZoomSpeed;
 
-            fractalSprite.setScale(fractalSprite.getScaleX() - fractalSprite.getScaleX() * zoomDelta * step);
+            fractalSprite.setScale(fractalSprite.getScaleX() - zoomDelta * step);
             /*renderer.addZoom(zoomDelta * step);
             fractalSprite.setScale(1f / renderer.getZoom());*/
 

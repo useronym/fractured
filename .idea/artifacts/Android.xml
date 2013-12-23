@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="apk" build-on-make="true" name="Android">
-    <output-path>$PROJECT_DIR$/out/artifacts/Android</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts</output-path>
     <properties id="android-properties">
       <options>
         <option name="includeSystemProGuardCfgFile" value="true" />

@@ -17,7 +17,7 @@ public class FractalRenderer {
     // fractal uniforms
     private Vector2 translation = new Vector2(0f, 0f);
     private Vector2 parameter = new Vector2(0.33f, 0.4f);
-    private float zoom = 2f;
+    private float zoom = 1f;
 
 
     FractalRenderer(int sx, int sy) {
@@ -93,9 +93,9 @@ public class FractalRenderer {
     }
 
     public void setZoom(float z) {
-        Vector2 addT = new Vector2(getTranslation()).mul(z - zoom);
-        addT.mul(-1f);
-        addTranslation(addT);
+        //Vector2 addT = new Vector2(getTranslation()).mul(zoom - z);
+        //addT.mul(-1f);
+        //addTranslation(addT);
 
         zoom = z;
     }

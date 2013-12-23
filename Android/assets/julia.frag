@@ -28,9 +28,6 @@ void main()
 
     float escape = float(i) / float(ITER);
     if (i == ITER) escape = 0.0;
-    vec3 col = vec3(mix(0.0, 1.0, escape));
-    col.r = pow(col.g, 2.5);
-    col.b = sin(col.g);
 
-    gl_FragColor = vec4(col, 1.0);
+    gl_FragColor = vec4(0.0, escape, 0.0, 1.0);
 }
