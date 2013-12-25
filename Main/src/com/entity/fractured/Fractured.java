@@ -4,7 +4,6 @@ package com.entity.fractured;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
@@ -127,7 +126,7 @@ public class Fractured extends Game {
         renderer.addTranslation(translationDelta);
 
         float zoomDelta = (1f / fractalSprite.getScaleX()) - 1f;
-        renderer.addZoom(zoomDelta);
+        renderer.addZoom(zoomDelta * renderer.getZoom());
 
         // reset the screen quad sprite
         fractalSprite.setPosition(0f, 0f);

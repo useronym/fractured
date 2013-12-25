@@ -28,8 +28,7 @@ public class FracturedUI {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = font;
         style.fontColor = Color.WHITE;
-        style.downFontColor = Color.GREEN;
-        style.checkedOverFontColor = Color.ORANGE;
+        style.downFontColor = Color.ORANGE;
         TextButton testBtn = new TextButton("Touch me!", style);
         testBtn.addListener(new ChangeListener() {
             @Override

@@ -21,13 +21,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90062549-1e00-4640-981b-58063f1691ca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Android/assets/arial-15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Android/assets/arial-15.fnt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Android/assets/julia.frag" afterPath="$PROJECT_DIR$/Android/assets/julia.frag" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shaded.iws" />
@@ -40,14 +36,14 @@
     <file path="/ShadedActivity.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383598963113" ignored="false" />
     <file path="/default.vert" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383589293209" ignored="false" />
     <file path="/default.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383598785040" ignored="false" />
-    <file path="/Dummy.txt" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387973550502" ignored="false" />
-    <file path="/Fractured.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387970258709" ignored="false" />
-    <file path="/FractalRenderer.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387877884768" ignored="false" />
+    <file path="/Dummy.txt" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387973582402" ignored="false" />
+    <file path="/Fractured.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387982558717" ignored="false" />
+    <file path="/FractalRenderer.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387983440533" ignored="false" />
     <file path="/julia_time.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1384610289546" ignored="false" />
     <file path="/FracturedGestureListener.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387634780280" ignored="false" />
     <file path="/julia.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387879465470" ignored="false" />
     <file path="/a.dummy" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387640092405" ignored="false" />
-    <file path="/FracturedUI.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387973196853" ignored="false" />
+    <file path="/FracturedUI.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387982946003" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,10 +104,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Fractured.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Fractured.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="60" selection-start="2875" selection-end="2875" vertical-scroll-proportion="0.0">
+            <state line="159" column="25" selection-start="4759" selection-end="4759" vertical-scroll-proportion="0.6566901">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -119,14 +115,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FracturedUI.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FracturedUI.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="66" selection-start="1346" selection-end="1346" vertical-scroll-proportion="1.2184874">
+            <state line="30" column="30" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1163#1370#0" expanded="true" />
-                <element signature="e#1359#1360#0" expanded="true" />
+                <element signature="e#1113#1320#0" expanded="true" />
+                <element signature="e#1309#1310#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -135,7 +131,7 @@
       <file leaf-file-name="FractalRenderer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="49" selection-start="2330" selection-end="2330" vertical-scroll-proportion="0.0">
+            <state line="96" column="45" selection-start="2830" selection-end="2830" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -144,7 +140,7 @@
       <file leaf-file-name="FracturedGestureListener.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="97" selection-start="1842" selection-end="1842" vertical-scroll-proportion="0.0">
+            <state line="14" column="20" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -182,8 +178,8 @@
         <option value="$PROJECT_DIR$/Android/assets/julia.frag" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" />
-        <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" />
+        <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" />
       </list>
     </option>
   </component>
@@ -270,20 +266,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fractured" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -291,7 +273,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -313,7 +295,7 @@
       <recent name="C:\Dev\android\fractured\Android\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.Android">
+  <component name="RunManager" selected="Application.DesktopStarter">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -517,7 +499,11 @@
       <created>1387833273446</created>
       <updated>1387833273447</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Got some basic UI prototype working">
+      <created>1387973868683</created>
+      <updated>1387973868683</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -542,7 +528,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="32" width="1370" height="740" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -552,13 +538,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.28691274" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35521886" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35521886" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32323232" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.7919463" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23106061" sideWeight="0.6447812" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23106061" sideWeight="0.6700337" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.25757575" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="92" y="122" width="1182" height="554" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7919463" order="0" side_tool="false" content_ui="tabs" />
@@ -638,11 +624,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Android/ant.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Android/assets/default.vert">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="26" selection-start="120" selection-end="120" vertical-scroll-proportion="0.26681614" />
@@ -694,13 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="97" selection-start="1842" selection-end="1842" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Android/assets/arial-15.fnt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -713,29 +687,43 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="49" selection-start="2330" selection-end="2330" vertical-scroll-proportion="0.0">
+        <state line="14" column="20" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
+    <entry file="file://$PROJECT_DIR$/Desktop/src/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="60" selection-start="2875" selection-end="2875" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="45" selection-start="2830" selection-end="2830" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="66" selection-start="1346" selection-end="1346" vertical-scroll-proportion="1.2184874">
+        <state line="30" column="30" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1163#1370#0" expanded="true" />
-            <element signature="e#1359#1360#0" expanded="true" />
+            <element signature="e#1113#1320#0" expanded="true" />
+            <element signature="e#1309#1310#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="159" column="25" selection-start="4759" selection-end="4759" vertical-scroll-proportion="0.6566901">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -794,7 +782,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Android</last-edited>
+          <last-edited>Desktop</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
