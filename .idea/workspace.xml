@@ -22,8 +22,6 @@
   <component name="ChangeListManager">
     <list default="true" id="90062549-1e00-4640-981b-58063f1691ca" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shaded.iws" />
@@ -36,9 +34,9 @@
     <file path="/ShadedActivity.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383598963113" ignored="false" />
     <file path="/default.vert" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383589293209" ignored="false" />
     <file path="/default.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383598785040" ignored="false" />
-    <file path="/Dummy.txt" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387973582402" ignored="false" />
+    <file path="/Dummy.txt" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387984029355" ignored="false" />
     <file path="/Fractured.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387982558717" ignored="false" />
-    <file path="/FractalRenderer.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387983440533" ignored="false" />
+    <file path="/FractalRenderer.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387984101519" ignored="false" />
     <file path="/julia_time.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1384610289546" ignored="false" />
     <file path="/FracturedGestureListener.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387634780280" ignored="false" />
     <file path="/julia.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387879465470" ignored="false" />
@@ -104,10 +102,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Fractured.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Fractured.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="159" column="25" selection-start="4759" selection-end="4759" vertical-scroll-proportion="0.6566901">
+            <state line="152" column="51" selection-start="4568" selection-end="4568" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -128,10 +126,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FractalRenderer.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FractalRenderer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="45" selection-start="2830" selection-end="2830" vertical-scroll-proportion="0.0">
+            <state line="96" column="38" selection-start="2823" selection-end="2823" vertical-scroll-proportion="0.3943662">
               <folding />
             </state>
           </provider>
@@ -178,8 +176,8 @@
         <option value="$PROJECT_DIR$/Android/assets/julia.frag" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" />
-        <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" />
+        <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" />
       </list>
     </option>
   </component>
@@ -503,7 +501,11 @@
       <created>1387973868683</created>
       <updated>1387973868683</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Zooming is working (almost!) correctly">
+      <created>1387984034790</created>
+      <updated>1387984034790</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -598,7 +600,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Got some basic UI prototype working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Zooming is working (almost!) correctly" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -615,6 +617,7 @@
     <MESSAGE value="Improved the code, zooming is implemented but buggy" />
     <MESSAGE value="Added a quality setting" />
     <MESSAGE value="Got some basic UI prototype working" />
+    <MESSAGE value="Zooming is working (almost!) correctly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -701,10 +704,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="45" selection-start="2830" selection-end="2830" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="152" column="51" selection-start="4568" selection-end="4568" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -719,12 +724,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="25" selection-start="4759" selection-end="4759" vertical-scroll-proportion="0.6566901">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="96" column="38" selection-start="2823" selection-end="2823" vertical-scroll-proportion="0.3943662">
+          <folding />
         </state>
       </provider>
     </entry>

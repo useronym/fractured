@@ -94,7 +94,7 @@ public class FractalRenderer {
 
     public void setZoom(float z) {
         Vector2 addT = new Vector2(getTranslation());
-        addT.mul((zoom - z) * (1f/getZoom()));
+        addT.mul((zoom - z) * (1f/z));
         addTranslation(addT);
         Gdx.app.debug("fractured!", "adding " + addT.x + ", " + addT.y);
 
