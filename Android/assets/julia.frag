@@ -4,7 +4,7 @@ precision highp float;
 
 uniform vec2 u_c;
 uniform vec2 u_translation;
-uniform float u_zoom, u_zoom_half;
+uniform float u_zoom, u_aspectratio;
 
 varying vec2 TexCoord;
 
@@ -13,7 +13,7 @@ void main()
     vec2 c = u_c;
     vec2 z;
     z.x = ((TexCoord.x + u_translation.x) * u_zoom) - u_zoom / 2.0;
-    z.y = ((TexCoord.y + u_translation.y) * u_zoom) - (u_zoom / 2.0) * 0.625;
+    z.y = ((TexCoord.y + u_translation.y) * u_zoom) - (u_zoom / 2.0) * u_aspectratio;
 
     int i = 0;
     for(; i < ITER; i++)

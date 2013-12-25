@@ -18,12 +18,13 @@ public class FractalRenderer {
     private Vector2 translation = new Vector2(0f, 0f);
     private Vector2 parameter = new Vector2(0.33f, 0.4f);
     private float zoom = 1f;
+    private float aspectRatio = 1f;
 
 
     FractalRenderer(int sx, int sy) {
         fbo = new FrameBuffer(Pixmap.Format.RGB888, sx, sy, false);
 
-        float aspectRatio = sy / (float) sx;
+        aspectRatio = sy / (float) sx;
         planeMesh = new Mesh(true, 4, 6, VertexAttribute.Position(), VertexAttribute.TexCoords(0));
         planeMesh.setVertices(new float[]
                         {-1, -1, 0, 0, 1*aspectRatio,
@@ -70,7 +71,7 @@ public class FractalRenderer {
         shader.setUniformf("u_c", parameter);
         shader.setUniformf("u_translation", translation);
         shader.setUniformf("u_zoom", zoom);
-        //shader.setUniformf("u_zoom_half", zoom / 2f);
+        shader.setUniformf("u_aspectratio", aspectRatio);
 
         planeMesh.render(shader, GL20.GL_TRIANGLES);
         shader.end();
@@ -93,10 +94,8 @@ public class FractalRenderer {
     }
 
     public void setZoom(float z) {
-        Vector2 addT = new Vector2(getTranslation());
-        addT.mul((zoom - z) * (1f/z));
+        Vector2 addT = new Vector2(getTranslation()).mul((zoom - z) * (1f/z));
         addTranslation(addT);
-        Gdx.app.debug("fractured!", "adding " + addT.x + ", " + addT.y);
 
         zoom = z;
     }

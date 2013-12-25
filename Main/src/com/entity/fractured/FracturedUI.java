@@ -4,6 +4,7 @@ package com.entity.fractured;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -22,6 +23,7 @@ public class FracturedUI {
         stage = new Stage();
         table = new Table();
         table.setFillParent(true);
+        table.left();
         stage.addActor(table);
         font = new BitmapFont(Gdx.files.internal("arial-15.fnt"), Gdx.files.internal("arial-15.png"), false);
 
@@ -29,11 +31,12 @@ public class FracturedUI {
         style.font = font;
         style.fontColor = Color.WHITE;
         style.downFontColor = Color.ORANGE;
-        TextButton testBtn = new TextButton("Touch me!", style);
+        TextButton testBtn = new TextButton("Randomize!", style);
         testBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                Gdx.app.debug("fractured!", "something happened");
+                app.getFractalRenderer().setParameter(new Vector2((float)Math.random(), (float)Math.random()));
+                app.renderFractal();
             }
         });
         table.add(testBtn);

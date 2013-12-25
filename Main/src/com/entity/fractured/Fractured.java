@@ -115,8 +115,11 @@ public class Fractured extends Game {
         fractalSprite.getTexture().dispose();
     }
 
+    public FractalRenderer getFractalRenderer() {
+        return renderer;
+    }
 
-    private void renderFractal() {
+    public void renderFractal() {
         renderStart = TimeUtils.millis();
 
         Vector2 translationDelta = new Vector2(0f, 0f);
@@ -136,6 +139,7 @@ public class Fractured extends Game {
         justRendered = true;
     }
 
+
     private void handleInput() {
         // translation
         float inDeltaX = gestureListener.getDeltaPanX(),
@@ -148,20 +152,17 @@ public class Fractured extends Game {
 
 
         // zoom
-        float zoomDelta = (gestureListener.getZoom() - 1f);
+        float zoomDelta = (gestureListener.getZoom() - 1f) / 10f;
 
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            zoomDelta -= 0.01f;
+            zoomDelta -= 0.02f;
         } else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            zoomDelta += 0.01f;
+            zoomDelta += 0.02f;
         }
 
         if (zoomDelta != 0f) {
-            float step = renderer.getZoom() * sZoomSpeed;
-
-            fractalSprite.setScale(fractalSprite.getScaleX() - zoomDelta * step);
-            /*renderer.addZoom(zoomDelta * step);
-            fractalSprite.setScale(1f / renderer.getZoom());*/
+            float spriteScale = fractalSprite.getScaleX();
+            fractalSprite.setScale(spriteScale - zoomDelta * sZoomSpeed * spriteScale);
 
             needsRender = true;
         }
