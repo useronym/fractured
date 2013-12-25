@@ -12,8 +12,8 @@ void main()
 {
     vec2 c = u_c;
     vec2 z;
-    z.x = ((TexCoord.x + u_translation.x) * u_zoom - u_zoom_half);// * 5.0;
-    z.y = ((TexCoord.y + u_translation.y) * u_zoom - u_zoom_half);// * 5.0;
+    z.x = ((TexCoord.x + u_translation.x) * u_zoom) - u_zoom / 2.0;
+    z.y = ((TexCoord.y + u_translation.y) * u_zoom) - (u_zoom / 2.0) * 0.625;
 
     int i = 0;
     for(; i < ITER; i++)

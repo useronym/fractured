@@ -83,12 +83,12 @@ public class FracturedGestureListener implements GestureDetector.GestureListener
     @Override
     public boolean zoom(float v, float v2) {
         zoom = v/v2;
+
         return true;
     }
 
     @Override
     public boolean pinch(Vector2 vector2, Vector2 vector22, Vector2 vector23, Vector2 vector24) {
-
         return false;
     }
 }

@@ -70,13 +70,13 @@ public class FractalRenderer {
         shader.setUniformf("u_c", parameter);
         shader.setUniformf("u_translation", translation);
         shader.setUniformf("u_zoom", zoom);
-        shader.setUniformf("u_zoom_half", zoom / 2f);
+        //shader.setUniformf("u_zoom_half", zoom / 2f);
 
         planeMesh.render(shader, GL20.GL_TRIANGLES);
         shader.end();
         fbo.end();
 
-        Gdx.app.debug("fractured!", "rendered in " + String.valueOf(TimeUtils.millis() - startTime) + "ms");
+        Gdx.app.debug("fractured!", "rendered fractal in " + String.valueOf(TimeUtils.millis() - startTime) + "ms");
     }
 
     public void setTranslation(Vector2 nt) {
@@ -93,15 +93,24 @@ public class FractalRenderer {
     }
 
     public void setZoom(float z) {
-        //Vector2 addT = new Vector2(getTranslation()).mul(zoom - z);
-        //addT.mul(-1f);
+        Vector2 addT = new Vector2(getTranslation());
+        addT.mul(zoom - z);
         //addTranslation(addT);
+        Gdx.app.debug("fractured!", "adding " + addT.x + ", " + addT.y);
 
         zoom = z;
     }
 
     public void addZoom(float delta) {
         setZoom(getZoom() + delta);
+    }
+
+    public String toString() {
+        String str = "Param: " + parameter.toString();
+        str += " Trans: " + translation.toString();
+        str += " Zoom: " + zoom;
+
+        return str;
     }
 
     public Texture getTexture() {

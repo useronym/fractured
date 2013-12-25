@@ -1,12 +1,10 @@
 package com.entity.fractured;
 
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
@@ -15,6 +13,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 
 public class Fractured extends Game {
+    FracturedUI ui;
+    InputMultiplexer inputMultiplexer;
     private FracturedGestureListener gestureListener = null;
     private FractalRenderer renderer = null; // class which handles rendering of the fractal to a texture
     private boolean needsRender;
@@ -28,15 +28,26 @@ public class Fractured extends Game {
     private float aspectRatio = 1f;
 
     // settings
+    private final boolean debugMode = true;
     private final int sQuality = 1; // 1 is 100%; 2 is 50% etc...
     private final float sZoomSpeed = 0.5f;
 
+
     @Override
     public void create() {
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        if (debugMode) {
+            Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        }
+
         aspectRatio = Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
+
+        ui = new FracturedUI(this);
+
+        inputMultiplexer = new InputMultiplexer();
         gestureListener = new FracturedGestureListener();
-        Gdx.input.setInputProcessor(new GestureDetector(gestureListener));
+        inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
+        inputMultiplexer.addProcessor(ui.getStage());
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -71,7 +82,12 @@ public class Fractured extends Game {
         Batch.setProjectionMatrix(camera.combined);
         Batch.begin();
         fractalSprite.draw(Batch);
+        if (debugMode) {
+            ui.getFont().draw(Batch, renderer.toString(), 10, 25);
+        }
         Batch.end();
+
+        ui.draw(Gdx.graphics.getDeltaTime());
 
         if (needsRender) {
             if (!Gdx.input.isTouched() && !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
