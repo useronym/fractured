@@ -2,6 +2,7 @@ package com.entity.fractured;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g3d.materials.TextureAttribute;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,7 @@ public class FractalRenderer {
     private Vector2 parameter = new Vector2(0.33f, 0.4f);
     private float zoom = 1f;
     private float aspectRatio = 1f;
+    private Texture gradient = null;
 
 
     FractalRenderer(int sx, int sy) {
@@ -43,7 +45,7 @@ public class FractalRenderer {
         shader = new ShaderProgram(vSource, fSource);
 
         if (!shader.isCompiled()) {
-            Gdx.app.log("fractured!", shader.getLog());
+            Gdx.app.error("fractured!", shader.getLog());
             ready = false;
         } else {
             ready = true;
@@ -55,6 +57,10 @@ public class FractalRenderer {
             shader.dispose();
             shader = null;
         }
+    }
+
+    public void setGradient(Texture newgradient) {
+        gradient = newgradient;
     }
 
     public void dispose() {
@@ -72,6 +78,10 @@ public class FractalRenderer {
         shader.setUniformf("u_translation", translation);
         shader.setUniformf("u_zoom", zoom);
         shader.setUniformf("u_aspectratio", aspectRatio);
+        if (gradient != null) {
+            shader.setUniformi("gradient", 0);
+            gradient.bind(0);
+        }
 
         planeMesh.render(shader, GL20.GL_TRIANGLES);
         shader.end();

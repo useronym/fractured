@@ -5,6 +5,7 @@ precision highp float;
 uniform vec2 u_c;
 uniform vec2 u_translation;
 uniform float u_zoom, u_aspectratio;
+uniform sampler2D gradient;
 
 varying vec2 TexCoord;
 
@@ -29,5 +30,6 @@ void main()
     float escape = float(i) / float(ITER);
     if (i == ITER) escape = 0.0;
 
-    gl_FragColor = vec4(0.0, escape, 0.0, 1.0);
+    vec3 color = texture2D(gradient, vec2(escape, 0.5)).rgb;
+    gl_FragColor = vec4(color, 1.0);
 }

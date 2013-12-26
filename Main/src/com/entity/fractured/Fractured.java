@@ -4,6 +4,7 @@ package com.entity.fractured;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
@@ -55,6 +56,7 @@ public class Fractured extends Game {
 
         renderer = new FractalRenderer(Gdx.graphics.getWidth()/sQuality, Gdx.graphics.getHeight()/sQuality);
         renderer.loadShader("default.vert", "julia.frag");
+        renderer.setGradient(new Texture(Gdx.files.internal("gradients/yellow_contrast.png")));
         needsRender = true;
         justRendered = false;
         fractalSprite = new Sprite(renderer.getTexture());
