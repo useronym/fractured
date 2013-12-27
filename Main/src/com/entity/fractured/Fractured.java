@@ -65,7 +65,12 @@ public class Fractured extends Game {
 
     @Override
     public void resize(int width, int height) {
+        Vector2 param = renderer.getParameter();
 
+        dispose();
+        create();
+
+        renderer.setParameter(param);
     }
 
     @Override

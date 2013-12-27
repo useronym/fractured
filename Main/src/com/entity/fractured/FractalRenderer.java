@@ -130,6 +130,10 @@ public class FractalRenderer {
         }
     }
 
+    public Vector2 getParameter() {
+        return parameter;
+    }
+
     public Vector2 getTranslation() {
         return translation;
     }

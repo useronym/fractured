@@ -1,6 +1,6 @@
 precision highp float;
 
-#define ITER 100
+#define ITER 150
 
 uniform vec2 u_c;
 uniform vec2 u_translation;
