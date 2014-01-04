@@ -29,7 +29,7 @@ public class Fractured extends Game {
 
     // settings
     private final boolean debugMode = true;
-    private final int sQuality = 1; // 1 is 100%; 2 is 50% etc...
+    private final float sQuality = 0.5f; // 0.5 is 200%, 1 is 100%; 2 is 50% etc...
     private final float sZoomSpeed = 0.5f;
 
 
@@ -54,13 +54,14 @@ public class Fractured extends Game {
 
         Batch = new SpriteBatch();
 
-        renderer = new FractalRenderer(Gdx.graphics.getWidth()/sQuality, Gdx.graphics.getHeight()/sQuality);
+        renderer = new FractalRenderer((int)(Gdx.graphics.getWidth()/sQuality), (int)(Gdx.graphics.getHeight()/sQuality));
         renderer.loadShader("default.vert", "fractals/julia_z3.frag");
         renderer.setGradient(new Texture(Gdx.files.internal("gradients/full_spectrum.png")));
         needsRender = true;
         justRendered = false;
         fractalSprite = new Sprite(renderer.getTexture());
         fractalSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        fractalSprite.setOrigin(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
     }
 
     @Override
@@ -119,7 +120,6 @@ public class Fractured extends Game {
     public void dispose() {
         renderer.dispose();
         Batch.dispose();
-        fractalSprite.getTexture().dispose();
     }
 
     public FractalRenderer getFractalRenderer() {
@@ -148,16 +148,6 @@ public class Fractured extends Game {
 
 
     private void handleInput() {
-        // translation
-        float inDeltaX = gestureListener.getDeltaPanX(),
-                inDeltaY = gestureListener.getDeltaPanY();
-
-        if (inDeltaX != 0f || inDeltaY != 0f) {
-            fractalSprite.setPosition(fractalSprite.getX() + inDeltaX, fractalSprite.getY() - inDeltaY);
-            needsRender = true;
-        }
-
-
         // zoom
         float zoomDelta = (gestureListener.getZoom() - 1f) / 10f;
 
@@ -171,6 +161,16 @@ public class Fractured extends Game {
             float spriteScale = fractalSprite.getScaleX();
             fractalSprite.setScale(spriteScale - zoomDelta * sZoomSpeed * spriteScale);
 
+            needsRender = true;
+            return;
+        }
+
+        // translation
+        float inDeltaX = gestureListener.getDeltaPanX(),
+                inDeltaY = gestureListener.getDeltaPanY();
+
+        if (inDeltaX != 0f || inDeltaY != 0f) {
+            fractalSprite.setPosition(fractalSprite.getX() + inDeltaX, fractalSprite.getY() - inDeltaY);
             needsRender = true;
         }
     }
