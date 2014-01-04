@@ -81,6 +81,11 @@ public class FracturedGestureListener implements GestureDetector.GestureListener
     }
 
     @Override
+    public boolean panStop(float f1, float f2, int i1, int i2) {
+        return false;
+    }
+
+    @Override
     public boolean zoom(float v, float v2) {
         zoom = v/v2;
 

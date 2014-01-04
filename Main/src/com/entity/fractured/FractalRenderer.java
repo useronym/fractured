@@ -103,7 +103,7 @@ public class FractalRenderer {
     }
 
     public void setZoom(float z) {
-        Vector2 addT = new Vector2(getTranslation()).mul((zoom - z) * (1f/z));
+        Vector2 addT = new Vector2(getTranslation()).scl((zoom - z) * (1f/z));
         addTranslation(addT);
 
         zoom = z;

@@ -56,7 +56,7 @@ public class Fractured extends Game {
 
         renderer = new FractalRenderer((int)(Gdx.graphics.getWidth()/sQuality), (int)(Gdx.graphics.getHeight()/sQuality));
         renderer.loadShader("default.vert", "fractals/julia_expz3.frag");
-        renderer.setGradient(new Texture(Gdx.files.internal("gradients/tropical_colors.png")));
+        renderer.setGradient(new Texture(Gdx.files.internal("gradients/skyline.png")));
         needsRender = true;
         justRendered = false;
         fractalSprite = new Sprite(renderer.getTexture());
@@ -100,6 +100,7 @@ public class Fractured extends Game {
             if (!Gdx.input.isTouched() && !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
                 renderFractal();
                 needsRender = false;
+                justRendered = true;
             }
         }
 
@@ -143,7 +144,6 @@ public class Fractured extends Game {
         fractalSprite.setScale(1f);
 
         renderer.render();
-        justRendered = true;
     }
 
 

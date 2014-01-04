@@ -22,6 +22,7 @@ public class FracturedUI {
         app = owner;
         stage = new Stage();
         table = new Table();
+        table.debug();
         table.setFillParent(true);
         table.left();
         stage.addActor(table);
@@ -40,6 +41,9 @@ public class FracturedUI {
             }
         });
         table.add(testBtn);
+
+        TextButton saveBtn = new TextButton("Save!", style);
+        table.add(saveBtn);
     }
 
     void draw(float delta) {

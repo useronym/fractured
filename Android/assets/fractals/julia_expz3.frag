@@ -19,7 +19,7 @@ vec2 cmul(in vec2 a, in vec2 b)
 
 vec2 cexp(in vec2 a)
 {
-    return pow(2.71828, a.x) * vec2(cos(a.y), sin(a.y));
+    return exp(a.x) * vec2(cos(a.y), sin(a.y));
 }
 
 void main()
