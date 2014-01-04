@@ -2,7 +2,6 @@ package com.entity.fractured;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g3d.materials.TextureAttribute;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
@@ -18,7 +17,7 @@ public class FractalRenderer {
     // fractal uniforms
     private Vector2 translation = new Vector2(0f, 0f);
     private Vector2 parameter = new Vector2(0.33f, 0.4f);
-    private float zoom = 1f;
+    private float zoom = 4f;
     private float aspectRatio = 1f;
     private Texture gradient = null;
 

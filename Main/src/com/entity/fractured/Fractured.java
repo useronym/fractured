@@ -55,8 +55,8 @@ public class Fractured extends Game {
         Batch = new SpriteBatch();
 
         renderer = new FractalRenderer(Gdx.graphics.getWidth()/sQuality, Gdx.graphics.getHeight()/sQuality);
-        renderer.loadShader("default.vert", "julia.frag");
-        renderer.setGradient(new Texture(Gdx.files.internal("gradients/yellow_contrast.png")));
+        renderer.loadShader("default.vert", "fractals/julia_z3.frag");
+        renderer.setGradient(new Texture(Gdx.files.internal("gradients/full_spectrum.png")));
         needsRender = true;
         justRendered = false;
         fractalSprite = new Sprite(renderer.getTexture());
