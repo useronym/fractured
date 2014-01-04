@@ -20,8 +20,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90062549-1e00-4640-981b-58063f1691ca" name="Default" comment="Added two new gradients and a new julia fractal: z^3 + c">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Android/assets/fractals/julia_expz.frag" />
+    <list default="true" id="90062549-1e00-4640-981b-58063f1691ca" name="Default" comment="Added two new julia fractals: exp(z^3) - c and exp(z^2)-c">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Android/assets/fractals/julia_expz2.frag" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Android/assets/fractals/julia_expz3.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -35,7 +36,7 @@
     <file path="/ShadedActivity.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383598963113" ignored="false" />
     <file path="/default.vert" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383589293209" ignored="false" />
     <file path="/default.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1383598785040" ignored="false" />
-    <file path="/Dummy.txt" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388855610125" ignored="false" />
+    <file path="/Dummy.txt" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388860651670" ignored="false" />
     <file path="/Fractured.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388857584613" ignored="false" />
     <file path="/FractalRenderer.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388149122299" ignored="false" />
     <file path="/julia_time.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1384610289546" ignored="false" />
@@ -45,7 +46,7 @@
     <file path="/FracturedUI.java" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1387985414867" ignored="false" />
     <file path="/julia_z3.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388855286363" ignored="false" />
     <file path="/julia_z2z.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388853933300" ignored="false" />
-    <file path="/julia_expz.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388856420231" ignored="false" />
+    <file path="/julia_expz.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388859786830" ignored="false" />
     <file path="/julia_z2.frag" changelist="90062549-1e00-4640-981b-58063f1691ca" time="1388855437366" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +111,7 @@
       <file leaf-file-name="Fractured.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="24" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.36886632">
+            <state line="41" column="16" selection-start="1330" selection-end="1330" vertical-scroll-proportion="0.07614213">
               <folding />
             </state>
           </provider>
@@ -128,8 +129,10 @@
       <file leaf-file-name="FractalRenderer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="75" column="8" selection-start="2148" selection-end="2148" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -137,25 +140,7 @@
       <file leaf-file-name="FracturedGestureListener.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="julia_expz.frag" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Android/assets/fractals/julia_expz.frag">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="27" selection-start="579" selection-end="579" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="julia_z2.frag" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Android/assets/fractals/julia_z2.frag">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="20" selection-start="521" selection-end="521" vertical-scroll-proportion="0.0">
+            <state line="22" column="20" selection-start="543" selection-end="543" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -179,7 +164,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/Shaded.java" />
         <option value="$PROJECT_DIR$/Android/assets/shaders/default.frag" />
         <option value="$PROJECT_DIR$/Android/src/com/entity/fractured/ShadedActivity.java" />
         <option value="$PROJECT_DIR$/Android/src/com/entity/fractured/FracturedActivity.java" />
@@ -190,10 +174,11 @@
         <option value="$PROJECT_DIR$/Android/assets/julia.frag" />
         <option value="$PROJECT_DIR$/Android/assets/fractals/julia_z2z.frag" />
         <option value="$PROJECT_DIR$/Desktop/src/com/entity/fractured/DesktopStarter.java" />
-        <option value="$PROJECT_DIR$/Android/assets/fractals/julia_z3.frag" />
         <option value="$PROJECT_DIR$/Android/assets/fractals/julia_z2.frag" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" />
+        <option value="$PROJECT_DIR$/Android/assets/fractals/julia_z3.frag" />
         <option value="$PROJECT_DIR$/Android/assets/fractals/julia_expz.frag" />
+        <option value="$PROJECT_DIR$/Android/assets/fractals/julia_expz2.frag" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" />
       </list>
     </option>
@@ -609,7 +594,11 @@
       <created>1388855642873</created>
       <updated>1388855642873</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Implemented supersampling and improved input processing">
+      <created>1388858104277</created>
+      <updated>1388858104277</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -636,7 +625,7 @@
     <frame x="-2" y="32" width="1370" height="740" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6442953" order="4" side_tool="false" content_ui="tabs" />
@@ -650,7 +639,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.7919463" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23106061" sideWeight="0.6450567" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23106061" sideWeight="0.6709887" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.25769854" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7919463" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="92" y="122" width="1182" height="554" />
@@ -666,7 +655,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
@@ -704,7 +693,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added two new gradients and a new julia fractal: z^3 + c" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented supersampling and improved input processing" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -724,6 +713,7 @@
     <MESSAGE value="Zooming is working (almost!) correctly" />
     <MESSAGE value="Fixed the (presumably) last problem in zooming... that was an easy one :)" />
     <MESSAGE value="Added two new gradients and a new julia fractal: z^3 + c" />
+    <MESSAGE value="Implemented supersampling and improved input processing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -774,13 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Desktop/src/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -797,35 +780,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="75" column="8" selection-start="2148" selection-end="2148" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Android/assets/fractals/julia_z3.frag">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="24" selection-start="493" selection-end="493" vertical-scroll-proportion="0.0">
+        <state line="2" column="14" selection-start="38" selection-end="38" vertical-scroll-proportion="0.05263158">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Android/assets/fractals/julia_z2.frag">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="20" selection-start="521" selection-end="521" vertical-scroll-proportion="0.0">
+        <state line="27" column="20" selection-start="521" selection-end="521" vertical-scroll-proportion="0.61928934">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Android/assets/fractals/julia_expz.frag">
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="27" selection-start="579" selection-end="579" vertical-scroll-proportion="0.0">
+        <state line="22" column="20" selection-start="543" selection-end="543" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Android/assets/fractals/julia_expz2.frag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="26" selection-start="281" selection-end="281" vertical-scroll-proportion="0.38071066">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Android/assets/fractals/julia_expz3.frag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="14" selection-start="38" selection-end="38" vertical-scroll-proportion="0.05076142">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="24" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.36886632">
+        <state line="41" column="16" selection-start="1330" selection-end="1330" vertical-scroll-proportion="0.07614213">
           <folding />
         </state>
       </provider>

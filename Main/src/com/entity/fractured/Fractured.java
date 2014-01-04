@@ -29,7 +29,7 @@ public class Fractured extends Game {
 
     // settings
     private final boolean debugMode = true;
-    private final float sQuality = 0.5f; // 0.5 is 200%, 1 is 100%; 2 is 50% etc...
+    private final float sQuality = 1f; // 0.5 is 200%, 1 is 100%; 2 is 50% etc...
     private final float sZoomSpeed = 0.5f;
 
 
@@ -55,8 +55,8 @@ public class Fractured extends Game {
         Batch = new SpriteBatch();
 
         renderer = new FractalRenderer((int)(Gdx.graphics.getWidth()/sQuality), (int)(Gdx.graphics.getHeight()/sQuality));
-        renderer.loadShader("default.vert", "fractals/julia_z3.frag");
-        renderer.setGradient(new Texture(Gdx.files.internal("gradients/full_spectrum.png")));
+        renderer.loadShader("default.vert", "fractals/julia_expz3.frag");
+        renderer.setGradient(new Texture(Gdx.files.internal("gradients/tropical_colors.png")));
         needsRender = true;
         justRendered = false;
         fractalSprite = new Sprite(renderer.getTexture());
