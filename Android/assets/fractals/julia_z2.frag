@@ -24,8 +24,7 @@ void main()
 
     for(; i < ITER; i++)
     {
-        vec2 newz = cmul(z, z);
-        newz += u_c;
+        vec2 newz = cmul(z, z) + u_c;
 
         if (length(newz) > 2.0) break;
         z = newz;

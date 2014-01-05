@@ -45,8 +45,8 @@ public class Fractured extends Game {
 
         inputMultiplexer = new InputMultiplexer();
         gestureListener = new FracturedGestureListener();
-        inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
         inputMultiplexer.addProcessor(ui.getStage());
+        inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         camera = new OrthographicCamera();
@@ -89,9 +89,6 @@ public class Fractured extends Game {
         Batch.setProjectionMatrix(camera.combined);
         Batch.begin();
         fractalSprite.draw(Batch);
-        if (debugMode) {
-            ui.getFont().draw(Batch, renderer.toString(), 10, 25);
-        }
         Batch.end();
 
         ui.draw(Gdx.graphics.getDeltaTime());
@@ -139,11 +136,11 @@ public class Fractured extends Game {
         float zoomDelta = (1f / fractalSprite.getScaleX()) - 1f;
         renderer.addZoom(zoomDelta * renderer.getZoom());
 
+        renderer.render();
+
         // reset the screen quad sprite
         fractalSprite.setPosition(0f, 0f);
         fractalSprite.setScale(1f);
-
-        renderer.render();
     }
 
 

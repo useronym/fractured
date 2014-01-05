@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -15,6 +17,7 @@ public class FracturedUI {
     private Fractured app;
     private Stage stage;
     private Table table;
+    private Skin skin;
     private BitmapFont font;
 
 
@@ -26,13 +29,11 @@ public class FracturedUI {
         table.setFillParent(true);
         table.left();
         stage.addActor(table);
-        font = new BitmapFont(Gdx.files.internal("arial-15.fnt"), Gdx.files.internal("arial-15.png"), false);
 
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font;
-        style.fontColor = Color.WHITE;
-        style.downFontColor = Color.ORANGE;
-        TextButton testBtn = new TextButton("Randomize!", style);
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+        TextButton testBtn = new TextButton("Randomize", skin);
+        testBtn.padLeft(10f).padRight(10f);
         testBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -40,10 +41,12 @@ public class FracturedUI {
                 app.renderFractal();
             }
         });
-        table.add(testBtn);
+        table.add(testBtn).pad(5f);
+        table.row();
 
-        TextButton saveBtn = new TextButton("Save!", style);
-        table.add(saveBtn);
+        TextButton saveBtn = new TextButton("Save", skin);
+        saveBtn.padLeft(10f).padRight(10f);
+        table.add(saveBtn).pad(5f);
     }
 
     void draw(float delta) {
