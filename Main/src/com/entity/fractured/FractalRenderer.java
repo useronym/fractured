@@ -14,6 +14,8 @@ public class FractalRenderer {
     private ShaderProgram shader = null;
     private boolean ready = false;
 
+    private String defaultVertex = "default.vert";
+
     // fractal uniforms
     private Vector2 translation = new Vector2(0f, 0f);
     private Vector2 parameter = new Vector2(0.33f, 0.4f);
@@ -35,7 +37,11 @@ public class FractalRenderer {
         planeMesh.setIndices(new short[] {0, 1, 2, 2, 3, 0});
     }
 
-    public void loadShader(String vertex, String fragment) {
+    public boolean loadShader(String fragment) {
+        return loadShader(defaultVertex, fragment);
+    }
+
+    public boolean loadShader(String vertex, String fragment) {
         unloadShader();
 
         String vSource, fSource;
@@ -46,8 +52,10 @@ public class FractalRenderer {
         if (!shader.isCompiled()) {
             Gdx.app.error("fractured!", shader.getLog());
             ready = false;
+            return false;
         } else {
             ready = true;
+            return true;
         }
     }
 
@@ -111,6 +119,10 @@ public class FractalRenderer {
 
     public void addZoom(float delta) {
         setZoom(getZoom() + delta);
+    }
+
+    public boolean isReady() {
+        return ready;
     }
 
     public String toString() {

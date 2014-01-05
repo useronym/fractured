@@ -17,8 +17,8 @@ public class Fractured extends Game {
     InputMultiplexer inputMultiplexer;
     private FracturedGestureListener gestureListener = null;
     private FractalRenderer renderer = null; // class which handles rendering of the fractal to a texture
-    private boolean needsRender;
-    private boolean justRendered;
+    private boolean needsRender = false;
+    private boolean justRendered = false;
     private long renderStart;
 
     private Sprite fractalSprite; // sprite which renders the screen quad with the rendered fractal texture
@@ -41,6 +41,8 @@ public class Fractured extends Game {
 
         aspectRatio = Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
 
+        renderer = new FractalRenderer((int) (Gdx.graphics.getWidth()/sQuality), (int) (Gdx.graphics.getHeight()/sQuality));
+
         ui = new FracturedUI(this);
 
         inputMultiplexer = new InputMultiplexer();
@@ -54,24 +56,30 @@ public class Fractured extends Game {
 
         Batch = new SpriteBatch();
 
-        renderer = new FractalRenderer((int)(Gdx.graphics.getWidth()/sQuality), (int)(Gdx.graphics.getHeight()/sQuality));
-        renderer.loadShader("default.vert", "fractals/julia_expz3.frag");
-        renderer.setGradient(new Texture(Gdx.files.internal("gradients/skyline.png")));
-        needsRender = true;
-        justRendered = false;
-        fractalSprite = new Sprite(renderer.getTexture());
-        fractalSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        fractalSprite.setOrigin(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        fractalSprite = new Sprite();
     }
 
     @Override
     public void resize(int width, int height) {
-        Vector2 param = renderer.getParameter();
+        camera.setToOrtho(false, width, height);
+        aspectRatio = width / (float) height;
+        ui.invalidate();
 
-        dispose();
-        create();
+        if (renderer != null) {
+            renderer.dispose();
+        }
 
-        renderer.setParameter(param);
+        renderer = new FractalRenderer((int) (width/sQuality), (int) (height/sQuality));
+        renderer.loadShader("fractals/julia_z3.frag");
+        renderer.setGradient(new Texture(Gdx.files.internal("gradients/full_spectrum.png")));
+
+        fractalSprite.setTexture(renderer.getTexture());
+        fractalSprite.setRegion(0f, 0f, 1f, 1f);
+        fractalSprite.setSize(width, height);
+        fractalSprite.setOrigin(width / 2f, height / 2f);
+
+        needsRender = true;
+        justRendered = false;
     }
 
     @Override
@@ -118,6 +126,7 @@ public class Fractured extends Game {
     public void dispose() {
         renderer.dispose();
         Batch.dispose();
+        ui.dispose();
     }
 
     public FractalRenderer getFractalRenderer() {
