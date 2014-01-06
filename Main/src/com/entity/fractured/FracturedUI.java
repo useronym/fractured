@@ -18,7 +18,7 @@ public class FracturedUI {
     //private Table table;
     private Skin skin;
 
-    private Window options;
+    private MyWindow options;
     private OptStatus optStatus;
     private Table optWrapper, optCurrent;
 
@@ -58,10 +58,10 @@ public class FracturedUI {
 
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
-        options = new Window("Options", skin);
-        options.removeListener(options.getListeners().first());
-        options.setHeight(Gdx.graphics.getHeight() + 20);
-        options.setWidth(Gdx.graphics.getWidth() / 3);
+        options = new MyWindow("Options", skin);
+        options.setHeight(Gdx.graphics.getHeight() + 20f);
+        options.setWidth(Gdx.graphics.getWidth() / 3f);
+        options.setPosition((Gdx.graphics.getWidth() / 3f) * 2f + 5f, 0f);
         options.setTitle("");
         options.setModal(false);
         options.setKeepWithinStage(false);
@@ -170,7 +170,7 @@ public class FracturedUI {
     public void draw(float delta) {
         stage.act(delta);
         stage.draw();
-        //Window.drawDebug(stage);
+        Window.drawDebug(stage);
     }
 
     public void dispose() {
@@ -178,8 +178,9 @@ public class FracturedUI {
     }
 
     public void invalidate() {
+        destroyUI();
         stage.setViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        options.invalidateHierarchy();
+        createUI();
     }
 
     public BitmapFont getFont() {
