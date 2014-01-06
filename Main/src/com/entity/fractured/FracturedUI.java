@@ -19,7 +19,12 @@ public class FracturedUI {
     private Skin skin;
 
     private Window options;
-    private Table fractal, color, more;
+    private OptStatus optStatus;
+    private Table optWrapper, optCurrent;
+
+    private enum OptStatus {
+        FRACTAL, COLOR, MORE, UNKNOWN
+    }
 
 
     FracturedUI(Fractured owner) {
@@ -45,35 +50,14 @@ public class FracturedUI {
 
     public void createUI() {
         createOptions();
-
-        //table.add(options);
-
-        /*TextButton dots = new TextButton("...", skin);
-        dots.padLeft(8f).padRight(8f);
-        table.right().bottom().add(dots).row();
-
-        TextButton testBtn = new TextButton("Randomize", skin);
-        testBtn.padLeft(10f).padRight(10f);
-        testBtn.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                app.getFractalRenderer().setParameter(new Vector2((float)Math.random(), (float)Math.random()));
-                app.renderFractal();
-            }
-        });
-        table.left().add(testBtn).pad(5f);
-        table.row();
-
-        TextButton saveBtn = new TextButton("Save", skin);
-        saveBtn.padLeft(10f).padRight(10f);
-        table.add(saveBtn).pad(5f);*/
     }
 
     public void destroyUI() {
         options.remove();
     }
 
-    public void createOptions() {
+    private void createOptions() {
+        optStatus = OptStatus.UNKNOWN;
         options = new Window("Options", skin);
         options.removeListener(options.getListeners().first());
         options.setHeight(Gdx.graphics.getHeight() + 20);
@@ -84,39 +68,72 @@ public class FracturedUI {
         options.padTop(25f);
         options.top();
 
+        // header
         Table header = new Table();
         header.pad(10f);
         options.add(header);
+
         TextButton headerFractal = new TextButton("Fractal", skin);
         headerFractal.padLeft(10f).padRight(10f);
         headerFractal.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                color.setVisible(false);
-                more.setVisible(false);
-                fractal.setVisible(true);
+                if (optStatus != OptStatus.FRACTAL) {
+                    optCurrent.remove();
+                    optCurrent = createOptionsFractal();
+                    optWrapper.add(optCurrent).expand();
+                    optStatus = OptStatus.FRACTAL;
+                }
             }
         });
         header.add(headerFractal);
+
         TextButton headerColor = new TextButton("Color", skin);
         headerColor.padLeft(10f).padRight(10f);
         headerColor.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                color.setVisible(true);
-                more.setVisible(false);
-                fractal.setVisible(false);
+                if (optStatus != OptStatus.COLOR) {
+                    optCurrent.remove();
+                    optCurrent = createOptionsColor();
+                    optWrapper.add(optCurrent);
+                    optStatus = OptStatus.COLOR;
+                }
             }
         });
         header.add(headerColor);
+
         TextButton headerMore = new TextButton("More", skin);
         headerMore.padLeft(10f).padRight(10f);
+        headerMore.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (optStatus != OptStatus.MORE) {
+                    optCurrent.remove();
+                    optCurrent = createOptionsMore();
+                    optWrapper.add(optCurrent);
+                    optStatus = OptStatus.MORE;
+                }
+            }
+        });
         header.add(headerMore);
         options.row();
 
-        // fractal options
-        fractal = new Table();
-        options.add(fractal).expand();
+        // options
+        optWrapper = new Table();
+        options.add(optWrapper).expand();
+
+        // default to fractal options
+        optCurrent = createOptionsFractal();
+        optWrapper.add(optCurrent).expand();
+        optStatus = OptStatus.FRACTAL;
+
+        stage.addActor(options);
+        options.debug();
+    }
+
+    private Table createOptionsFractal() {
+        Table fractal = new Table();
 
         TextField paramXText = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
         fractal.add(paramXText);
@@ -131,24 +148,29 @@ public class FracturedUI {
         fractal.add(new TextButton("random", skin).padLeft(10f).padRight(10f));
         fractal.row();
 
-        // color options
-        color = new Table();
-        options.add(color).expand();
-        color.setVisible(false);
+        return fractal;
+    }
 
-        // more options
-        more = new Table();
-        options.add(more).expand();
-        more.setVisible(false);
+    private Table createOptionsColor() {
+        Table color = new Table();
 
-        stage.addActor(options);
-        options.debug();
+        color.add(new Label("Color options here!", skin));
+
+        return color;
+    }
+
+    private Table createOptionsMore() {
+        Table more = new Table();
+
+        more.add(new Label("More options here!", skin));
+
+        return more;
     }
 
     public void draw(float delta) {
         stage.act(delta);
         stage.draw();
-        Window.drawDebug(stage);
+        //Window.drawDebug(stage);
     }
 
     public void dispose() {
