@@ -2,11 +2,8 @@ package com.entity.fractured;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -18,7 +15,7 @@ public class FracturedUI {
     //private Table table;
     private Skin skin;
 
-    private MyWindow options;
+    private SlideWindow options;
     private OptStatus optStatus;
     private Table optWrapper, optCurrent;
 
@@ -58,11 +55,10 @@ public class FracturedUI {
 
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
-        options = new MyWindow("Options", skin);
-        options.setHeight(Gdx.graphics.getHeight() + 20f);
+        options = new SlideWindow("fractured! Options", skin);
+        options.setHeight(Gdx.graphics.getHeight());
         options.setWidth(Gdx.graphics.getWidth() / 3f);
-        options.setPosition((Gdx.graphics.getWidth() / 3f) * 2f + 5f, 0f);
-        options.setTitle("");
+        options.setPosition((Gdx.graphics.getWidth() / 3f) * 2f, 0f);
         options.setModal(false);
         options.setKeepWithinStage(false);
         options.padTop(25f);
@@ -119,7 +115,7 @@ public class FracturedUI {
         header.add(headerMore);
         options.row();
 
-        // options
+        // options wrapper table
         optWrapper = new Table();
         options.add(optWrapper).expand();
 
@@ -135,18 +131,41 @@ public class FracturedUI {
     private Table createOptionsFractal() {
         Table fractal = new Table();
 
-        TextField paramXText = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
-        fractal.add(paramXText);
-        TextField paramYText = new TextField(Float.toString(app.getFractalRenderer().getParameter().y), skin);
-        fractal.add(paramYText);
+        /*fractal.add(new Label("Type", skin));
+        String[] types = {"z^2 + c", "z^3 + c", "exp(z^2) - c", "exp(z^3) - c"};
+        SelectBox fractalType = new SelectBox(types, skin);
+        fractal.add(fractalType).expandX().fill();
+        fractal.row();*/
 
-        fractal.row();
-        fractal.add(new Slider(0f, 1f, 0.01f, false, skin));
-        fractal.add(new Slider(0f, 1f, 0.01f, false, skin));
-        fractal.row();
-        fractal.add(new TextButton("random", skin).padLeft(10f).padRight(10f));
-        fractal.add(new TextButton("random", skin).padLeft(10f).padRight(10f));
-        fractal.row();
+        // parameter
+        Table paramsTable = new Table();paramsTable.debug();
+        fractal.add(paramsTable);
+
+        // holds parameter controls
+        Table paramXTable = new Table();
+        TextField paramXText = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
+        paramXTable.add(paramXText).pad(5f).width(100f);
+        paramXTable.row();
+        paramXTable.add(new TextButton("random", skin).padLeft(10f).padRight(10f)).pad(5f);
+
+        // holds slider and parameter controls, resides in paramsTable
+        Table sliderXTable = new Table();
+        sliderXTable.add(new Slider(0f, 1f, 0.01f, true, skin));
+        sliderXTable.add(paramXTable);
+        paramsTable.add(sliderXTable);
+
+        // holds parameter controls
+        Table paramYTable = new Table();
+        TextField paramYText = new TextField(Float.toString(app.getFractalRenderer().getParameter().y), skin);
+        paramYTable.add(paramYText).pad(5f).width(100f);
+        paramYTable.row();
+        paramYTable.add(new TextButton("random", skin).padLeft(10f).padRight(10f)).pad(5f);
+
+        // holds slider and parameter controls, resides in paramsTable
+        Table sliderYTable = new Table();
+        sliderYTable.add(new Slider(0f, 1f, 0.01f, true, skin));
+        sliderYTable.add(paramYTable);
+        paramsTable.add(sliderYTable);
 
         return fractal;
     }
@@ -170,7 +189,7 @@ public class FracturedUI {
     public void draw(float delta) {
         stage.act(delta);
         stage.draw();
-        Window.drawDebug(stage);
+        //Table.drawDebug(stage);
     }
 
     public void dispose() {

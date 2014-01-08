@@ -8,10 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 
 
-public class MyWindow extends Window {
+public class SlideWindow extends Window {
 
-    public MyWindow(String title, Skin skin) {
+    public SlideWindow(String title, Skin skin) {
         super(title, skin);
+
+        getButtonTable().remove();
 
         removeListener(getListeners().first());
 

@@ -13,10 +13,10 @@ default
   index: -1
 default-window
   rotate: false
-  xy: 1, 20
-  size: 27, 29
+  xy: 0, 19
+  size: 28, 30
   split: 4, 3, 20, 3
-  orig: 27, 29
+  orig: 28, 30
   offset: 0, 0
   index: -1
 default-select
