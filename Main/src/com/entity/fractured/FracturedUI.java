@@ -4,6 +4,7 @@ package com.entity.fractured;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -18,6 +19,11 @@ public class FracturedUI {
     private SlideWindow options;
     private OptStatus optStatus;
     private Table optWrapper, optCurrent;
+
+    // fractal options
+    boolean optionsChanged = false;
+    TextField parameterX, parameterY;
+    Slider paramSliderX, paramSliderY;
 
     private enum OptStatus {
         FRACTAL, COLOR, MORE, UNKNOWN
@@ -51,6 +57,14 @@ public class FracturedUI {
 
     public void destroyUI() {
         options.remove();
+    }
+
+    public void requestFractalOptionsUpdate() {
+        Vector2 paramc = new Vector2(Float.parseFloat(parameterX.getText()),
+                Float.parseFloat(parameterY.getText()));
+        app.getFractalRenderer().setParameter(paramc);
+
+        optionsChanged = false;
     }
 
     private void createOptions() {
@@ -143,27 +157,65 @@ public class FracturedUI {
 
         // holds parameter controls
         Table paramXTable = new Table();
-        TextField paramXText = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
-        paramXTable.add(paramXText).pad(5f).width(100f);
+        parameterX = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
+        paramXTable.add(parameterX).pad(5f).width(100f);
         paramXTable.row();
-        paramXTable.add(new TextButton("random", skin).padLeft(10f).padRight(10f)).pad(5f);
-
+        TextButton randomX = new TextButton("random", skin);
+        randomX.padLeft(10f).padRight(10f);
+        randomX.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                float newVal = (float)Math.random();
+                parameterX.setText(Float.toString(newVal));
+                paramSliderX.setValue(newVal);
+                optionsChanged = true;
+            }
+        });
+        paramXTable.add(randomX).pad(5f);
         // holds slider and parameter controls, resides in paramsTable
         Table sliderXTable = new Table();
-        sliderXTable.add(new Slider(0f, 1f, 0.01f, true, skin));
+        paramSliderX = new Slider(0f, 1f, 0.01f, true, skin);
+        paramSliderX.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                float val = ((Slider)actor).getValue();
+                parameterX.setText(Float.toString(val));
+                optionsChanged = true;
+            }
+        });
+        sliderXTable.add(paramSliderX);
         sliderXTable.add(paramXTable);
         paramsTable.add(sliderXTable);
 
         // holds parameter controls
         Table paramYTable = new Table();
-        TextField paramYText = new TextField(Float.toString(app.getFractalRenderer().getParameter().y), skin);
-        paramYTable.add(paramYText).pad(5f).width(100f);
+        parameterY = new TextField(Float.toString(app.getFractalRenderer().getParameter().y), skin);
+        paramYTable.add(parameterY).pad(5f).width(100f);
         paramYTable.row();
-        paramYTable.add(new TextButton("random", skin).padLeft(10f).padRight(10f)).pad(5f);
-
+        TextButton randomY = new TextButton("random", skin);
+        randomY.padLeft(10f).padRight(10f);
+        randomY.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                float newVal = (float)Math.random();
+                parameterY.setText(Float.toString(newVal));
+                paramSliderY.setValue(newVal);
+                optionsChanged = true;
+            }
+        });
+        paramYTable.add(randomY).pad(5f);
         // holds slider and parameter controls, resides in paramsTable
         Table sliderYTable = new Table();
-        sliderYTable.add(new Slider(0f, 1f, 0.01f, true, skin));
+        paramSliderY = new Slider(0f, 1f, 0.01f, true, skin);
+        paramSliderY.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                float val = ((Slider)actor).getValue();
+                parameterY.setText(Float.toString(val));
+                optionsChanged = true;
+            }
+        });
+        sliderYTable.add(paramSliderY);
         sliderYTable.add(paramYTable);
         paramsTable.add(sliderYTable);
 
@@ -187,6 +239,9 @@ public class FracturedUI {
     }
 
     public void draw(float delta) {
+        if (optionsChanged) {
+            app.renderFractal();
+        }
         stage.act(delta);
         stage.draw();
         //Table.drawDebug(stage);

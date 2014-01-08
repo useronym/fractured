@@ -70,7 +70,7 @@ public class Fractured extends Game {
         }
 
         renderer = new FractalRenderer((int) (width/sQuality), (int) (height/sQuality));
-        renderer.loadShader("fractals/julia_z2.frag");
+        renderer.loadShader("fractals/julia_z3.frag");
         renderer.setGradient(new Texture(Gdx.files.internal("gradients/full_spectrum.png")));
 
         fractalSprite.setTexture(renderer.getTexture());
@@ -135,6 +135,8 @@ public class Fractured extends Game {
 
     public void renderFractal() {
         renderStart = TimeUtils.millis();
+
+        ui.requestFractalOptionsUpdate();
 
         Vector2 translationDelta = new Vector2(0f, 0f);
         translationDelta.x = -fractalSprite.getX() / Gdx.graphics.getWidth();
