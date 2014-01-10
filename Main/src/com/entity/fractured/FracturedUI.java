@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 public class FracturedUI {
     private Fractured app;
     private Stage stage;
-    //private Table table;
     private Skin skin;
 
     private SlideWindow options;
@@ -33,20 +32,14 @@ public class FracturedUI {
     FracturedUI(Fractured owner) {
         app = owner;
         stage = new Stage();
-        /*table = new Table();
-        table.setFillParent(true);
-        stage.addActor(table);*/
 
-        skin = new Skin();
-        BitmapFont defaultFont;
         if (Gdx.graphics.getDensity() > 1f) {
-            defaultFont = new BitmapFont(Gdx.files.internal("ui/monospace-22.fnt"));
+            skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
+            Gdx.app.log("fractured!", "using large ui skin");
         } else {
-            defaultFont = new BitmapFont(Gdx.files.internal("ui/monospace-15.fnt"));
+            skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+            Gdx.app.log("fractured!", "using standard ui skin");
         }
-        skin.add("default-font", defaultFont);
-        skin.addRegions(new TextureAtlas(Gdx.files.internal("ui/uiskin.atlas")));
-        skin.load(Gdx.files.internal("ui/uiskin.json"));
 
         createUI();
     }
@@ -60,8 +53,11 @@ public class FracturedUI {
     }
 
     public void requestFractalOptionsUpdate() {
-        Vector2 paramc = new Vector2(Float.parseFloat(parameterX.getText()),
-                Float.parseFloat(parameterY.getText()));
+        Vector2 paramc = new Vector2(Float.parseFloat(parameterX.getText().replaceAll("[^\\d.]", "")),
+                Float.parseFloat(parameterY.getText().replaceAll("[^\\d.]", "")));
+        // to remove unwanted characters lite accidental letters in the text field
+        parameterX.setText(Float.toString(paramc.x));
+        parameterY.setText(Float.toString(paramc.y));
         app.getFractalRenderer().setParameter(paramc);
 
         optionsChanged = false;
@@ -145,11 +141,15 @@ public class FracturedUI {
     private Table createOptionsFractal() {
         Table fractal = new Table();
 
-        /*fractal.add(new Label("Type", skin));
+        // type
+        Table typeTable = new Table();
+        fractal.add(typeTable);
+        fractal.row();
+
+        typeTable.add(new Label("Type", skin)).pad(5f);
         String[] types = {"z^2 + c", "z^3 + c", "exp(z^2) - c", "exp(z^3) - c"};
         SelectBox fractalType = new SelectBox(types, skin);
-        fractal.add(fractalType).expandX().fill();
-        fractal.row();*/
+        typeTable.add(fractalType).pad(5f);
 
         // parameter
         Table paramsTable = new Table();paramsTable.debug();
@@ -175,6 +175,7 @@ public class FracturedUI {
         // holds slider and parameter controls, resides in paramsTable
         Table sliderXTable = new Table();
         paramSliderX = new Slider(0f, 1f, 0.01f, true, skin);
+        paramSliderX.setValue(app.getFractalRenderer().getParameter().x);
         paramSliderX.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -207,6 +208,7 @@ public class FracturedUI {
         // holds slider and parameter controls, resides in paramsTable
         Table sliderYTable = new Table();
         paramSliderY = new Slider(0f, 1f, 0.01f, true, skin);
+        paramSliderY.setValue(app.getFractalRenderer().getParameter().y);
         paramSliderY.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -233,13 +235,15 @@ public class FracturedUI {
     private Table createOptionsMore() {
         Table more = new Table();
 
-        more.add(new Label("More options here!", skin));
+        more.add(new Label("Render quality", skin));
+        String[] qualitySettings = {"200%", "100%", "50%", "25%"};
+        more.add(new SelectBox(qualitySettings, skin)).pad(5f);
 
         return more;
     }
 
     public void draw(float delta) {
-        if (optionsChanged) {
+        if (optionsChanged && false) {
             app.renderFractal();
         }
         stage.act(delta);
