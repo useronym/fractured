@@ -14,7 +14,9 @@ public class FractalRenderer {
     private ShaderProgram shader = null;
     private boolean ready = false;
 
-    private String defaultVertex = "default.vert";
+    private String vertexPath = "default.vert";
+    private String fragmentPath;
+    private String gradientPath;
 
     // fractal uniforms
     private Vector2 translation = new Vector2(0f, 0f);
@@ -37,12 +39,31 @@ public class FractalRenderer {
         planeMesh.setIndices(new short[] {0, 1, 2, 2, 3, 0});
     }
 
+    public void copyFrom(FractalRenderer other) {
+        translation = other.getTranslation();
+        parameter = other.getParameter();
+        zoom = other.getZoom();
+
+        if (! other.fragmentPath.equals(fragmentPath)) {
+            loadShader(other.getVertexPath(), other.getFragmentPath());
+        }
+
+        if (! other.gradientPath.equals(gradientPath)) {
+            loadGradient(other.getGradientPath());
+        }
+    }
+
     public boolean loadShader(String fragment) {
-        return loadShader(defaultVertex, fragment);
+        return loadShader(vertexPath, fragment);
     }
 
     public boolean loadShader(String vertex, String fragment) {
+        Gdx.app.debug("fractured!", "loading shader " + fragment);
+
         unloadShader();
+
+        vertexPath = vertex;
+        fragmentPath = fragment;
 
         String vSource, fSource;
         vSource = Gdx.files.internal(vertex).readString();
@@ -66,8 +87,22 @@ public class FractalRenderer {
         }
     }
 
-    public void setGradient(Texture newgradient) {
+    private void setGradient(Texture newgradient) {
         gradient = newgradient;
+    }
+
+    public void loadGradient(String filename) {
+        Gdx.app.debug("fractured!", "loading gradient " + filename);
+        unloadGradient();
+
+        gradientPath = filename;
+        setGradient(new Texture(Gdx.files.internal(filename)));
+    }
+
+    public void unloadGradient() {
+        if (gradient != null) {
+            gradient.dispose();
+        }
     }
 
     public void dispose() {
@@ -139,6 +174,18 @@ public class FractalRenderer {
         } else {
             return null;
         }
+    }
+
+    public String getVertexPath() {
+        return vertexPath;
+    }
+
+    public String getFragmentPath() {
+        return fragmentPath;
+    }
+
+    public String getGradientPath() {
+        return gradientPath;
     }
 
     public Vector2 getParameter() {

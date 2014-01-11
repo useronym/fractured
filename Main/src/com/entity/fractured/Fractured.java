@@ -4,7 +4,6 @@ package com.entity.fractured;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
@@ -13,10 +12,11 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 
 public class Fractured extends Game {
-    FracturedUI ui;
+    FracturedUI ui = null;
     InputMultiplexer inputMultiplexer;
     private FracturedGestureListener gestureListener = null;
     private FractalRenderer renderer = null; // class which handles rendering of the fractal to a texture
+    private FractalRenderer previewRenderer = null;
     private boolean needsRender = false;
     private boolean justRendered = false;
     private long renderStart;
@@ -25,34 +25,23 @@ public class Fractured extends Game {
     private OrthographicCamera camera;
     private SpriteBatch Batch;
 
-    private float aspectRatio = 1f;
-
     // settings
-    private final boolean debugMode = true;
-    private final float sQuality = 1f; // 0.5 is 200%, 1 is 100%; 2 is 50% etc...
-    private final float sZoomSpeed = 0.5f;
+    FracturedSettings settings;
 
 
     @Override
     public void create() {
-        if (debugMode) {
+        settings = new FracturedSettings();
+
+        if (settings.debugMode) {
             Gdx.app.setLogLevel(Application.LOG_DEBUG);
         }
 
-        aspectRatio = Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
-
-        renderer = new FractalRenderer((int) (Gdx.graphics.getWidth()/sQuality), (int) (Gdx.graphics.getHeight()/sQuality));
-
-        ui = new FracturedUI(this);
-
         inputMultiplexer = new InputMultiplexer();
         gestureListener = new FracturedGestureListener();
-        inputMultiplexer.addProcessor(ui.getStage());
-        inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         Batch = new SpriteBatch();
 
@@ -61,17 +50,38 @@ public class Fractured extends Game {
 
     @Override
     public void resize(int width, int height) {
-        camera.setToOrtho(false, width, height);
-        aspectRatio = width / (float) height;
-        ui.invalidate();
+        settings.aspectRatio = width / (float) height;
 
-        if (renderer != null) {
-            renderer.dispose();
+        camera.setToOrtho(false, width, height);
+
+        if(previewRenderer != null) {
+            previewRenderer.dispose();
         }
 
-        renderer = new FractalRenderer((int) (width/sQuality), (int) (height/sQuality));
-        renderer.loadShader("fractals/julia_z3.frag");
-        renderer.setGradient(new Texture(Gdx.files.internal("gradients/full_spectrum.png")));
+        if (ui != null) {
+            ui.dispose();
+        }
+
+        FractalRenderer newRenderer = new FractalRenderer((int) (width/settings.highQuality),
+                (int) (height/settings.highQuality));
+
+        if (renderer != null) {
+            newRenderer.copyFrom(renderer);
+            renderer.dispose();
+            renderer = newRenderer;
+        } else {
+            renderer = newRenderer;
+            renderer.loadShader(settings.fractalTypes[settings.fractalType]);
+            renderer.loadGradient(settings.fractalColors[settings.fractalColor]);
+        }
+
+        previewRenderer = new FractalRenderer((int) (width/settings.previewQuality),
+                (int) (height/settings.previewQuality));
+
+        ui = new FracturedUI(this);
+        inputMultiplexer.clear();
+        inputMultiplexer.addProcessor(ui.getStage());
+        inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
 
         fractalSprite.setTexture(renderer.getTexture());
         fractalSprite.setRegion(0f, 0f, 1f, 1f);
@@ -129,19 +139,24 @@ public class Fractured extends Game {
         ui.dispose();
     }
 
+    public void requestPreviewRender() {
+        ui.requestFractalOptionsUpdate();
+        previewRenderer.copyFrom(renderer);
+        previewRenderer.render();
+        fractalSprite.setTexture(previewRenderer.getTexture());
+    }
+
     public FractalRenderer getFractalRenderer() {
         return renderer;
     }
 
-    public void renderFractal() {
+    private void renderFractal() {
         renderStart = TimeUtils.millis();
-
-        ui.requestFractalOptionsUpdate();
 
         Vector2 translationDelta = new Vector2(0f, 0f);
         translationDelta.x = -fractalSprite.getX() / Gdx.graphics.getWidth();
         translationDelta.y = -fractalSprite.getY() / Gdx.graphics.getHeight();
-        translationDelta.y /= aspectRatio;
+        translationDelta.y /= settings.aspectRatio;
         renderer.addTranslation(translationDelta);
 
         float zoomDelta = (1f / fractalSprite.getScaleX()) - 1f;
@@ -150,6 +165,7 @@ public class Fractured extends Game {
         renderer.render();
 
         // reset the screen quad sprite
+        fractalSprite.setTexture(renderer.getTexture());
         fractalSprite.setPosition(0f, 0f);
         fractalSprite.setScale(1f);
     }
@@ -167,7 +183,7 @@ public class Fractured extends Game {
 
         if (zoomDelta != 0f) {
             float spriteScale = fractalSprite.getScaleX();
-            fractalSprite.setScale(spriteScale - zoomDelta * sZoomSpeed * spriteScale);
+            fractalSprite.setScale(spriteScale - zoomDelta * settings.zoomSpeed * spriteScale);
 
             needsRender = true;
             return;
@@ -175,10 +191,11 @@ public class Fractured extends Game {
 
         // translation
         float inDeltaX = gestureListener.getDeltaPanX(),
-                inDeltaY = gestureListener.getDeltaPanY();
+                inDeltaY = -gestureListener.getDeltaPanY();
 
         if (inDeltaX != 0f || inDeltaY != 0f) {
-            fractalSprite.setPosition(fractalSprite.getX() + inDeltaX, fractalSprite.getY() - inDeltaY);
+            fractalSprite.setPosition(fractalSprite.getX() + inDeltaX, fractalSprite.getY() + inDeltaY);
+
             needsRender = true;
         }
     }
