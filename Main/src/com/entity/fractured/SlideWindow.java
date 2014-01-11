@@ -1,7 +1,7 @@
 package com.entity.fractured;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -9,6 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 
 
 public class SlideWindow extends Window {
+    private final float borderSize = 30f;
+
+    private boolean dragging = false, sliding = false;
+    private float speedX = 0f;
 
     public SlideWindow(String title, Skin skin) {
         super(title, skin);
@@ -18,14 +22,14 @@ public class SlideWindow extends Window {
         removeListener(getListeners().first());
 
         addListener(new InputListener() {
-            private boolean dragging = false;
-            private float lastX;
+            private float touchDownX;
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (button == 0) {
                     dragging = true;
-                    lastX = x;
+                    touchDownX = x;
+
                     return true;
                 }
                 return false;
@@ -34,21 +38,52 @@ public class SlideWindow extends Window {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 if (dragging) {
-                    if (getX() >= Gdx.graphics.getWidth() - getWidth()) {
-                        setPosition(getX() + (x - lastX), 0f);
-                    } else {
-                        setPosition(Gdx.graphics.getWidth() - getWidth(), 0f);
-                        dragging = false;
-                    }
+                    speedX = x - touchDownX;
+                    setPosition(getX() + speedX, 0f);
 
+                    checkWindowPosition();
                 }
-                lastX = x;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                dragging = false;
+                if (dragging) {
+                    dragging = false;
+
+                    if (speedX != 0f) {
+                        sliding = true;
+                    }
+                }
             }
         });
+    }
+
+    @Override
+    public void draw(SpriteBatch batch, float parentAlpha) {
+        if (sliding) {
+            speedX *= 0.92f;
+
+            setPosition(getX() + speedX, 0f);
+            checkWindowPosition();
+
+            if (Math.abs(speedX) < 0.1f) {
+                sliding = false;
+            }
+        }
+
+        super.draw(batch, parentAlpha);
+    }
+
+    private void checkWindowPosition() {
+        if (getX() < Gdx.graphics.getWidth() - getWidth()) {
+            setPosition(Gdx.graphics.getWidth() - getWidth(), 0f);
+            dragging = false;
+            sliding = false;
+        }
+        else if (getX() >= Gdx.graphics.getWidth() - borderSize) {
+            setPosition(Gdx.graphics.getWidth() - borderSize, 0f);
+            dragging = false;
+            sliding = false;
+        }
     }
 }

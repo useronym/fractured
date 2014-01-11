@@ -36,13 +36,14 @@ public class FracturedUI {
         app = owner;
         stage = new Stage();
 
+        Gdx.app.debug("fractured!", "display density ratio: " + String.valueOf(Gdx.graphics.getDensity()));
         if (Gdx.graphics.getDensity() > 1f) {
             skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
-            padding = 15f;
-            Gdx.app.log("fractured!", "using large ui skin");
+            padding = 10f;
+            Gdx.app.debug("fractured!", "using large ui skin");
         } else {
             skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-            Gdx.app.log("fractured!", "using standard ui skin");
+            Gdx.app.debug("fractured!", "using standard ui skin");
         }
 
         createUI();
@@ -86,7 +87,7 @@ public class FracturedUI {
         options.setPosition((Gdx.graphics.getWidth() / 3f) * 2f, 0f);
         options.setModal(false);
         options.setKeepWithinStage(false);
-        //options.padTop(25f);
+        //options.padLeft(30f);
         options.top();
 
         // header
@@ -295,7 +296,10 @@ public class FracturedUI {
     public void draw(float delta) {
         stage.act(delta);
         stage.draw();
-        //Table.drawDebug(stage);
+
+        if (app.settings.debugGUI) {
+            Table.drawDebug(stage);
+        }
 
         if (optionsChanged) {
             app.requestPreviewRender();

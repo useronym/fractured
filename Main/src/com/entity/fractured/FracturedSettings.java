@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class FracturedSettings {
     boolean debugMode = true;
+    boolean debugGUI = false;
     float aspectRatio;
     float previewQuality = 4f, highQuality = 1.25f;
     float zoomSpeed = 0.5f;
