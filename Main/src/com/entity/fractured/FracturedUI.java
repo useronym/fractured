@@ -81,6 +81,7 @@ public class FracturedUI {
 
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
+
         options = new SlideWindow("fractured! Options", skin);
         options.setHeight(Gdx.graphics.getHeight());
         options.setWidth(Gdx.graphics.getWidth() / 3f);
@@ -94,13 +95,16 @@ public class FracturedUI {
         Table header = new Table();
         header.pad(padding);
         options.add(header);
+        ButtonGroup headerGroup = new ButtonGroup();
+        headerGroup.setMinCheckCount(1);
+        headerGroup.setMaxCheckCount(1);
 
-        TextButton headerFractal = new TextButton("Fractal", skin);
+        TextButton headerFractal = new TextButton("Fractal", skin, "toggle");
         headerFractal.padLeft(10f).padRight(10f);
         headerFractal.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (optStatus != OptStatus.FRACTAL) {
+                if (optStatus != OptStatus.UNKNOWN) {
                     optCurrent.remove();
                     optCurrent = createOptionsFractal();
                     optWrapper.add(optCurrent).expand();
@@ -109,13 +113,14 @@ public class FracturedUI {
             }
         });
         header.add(headerFractal).pad(padding);
+        headerGroup.add(headerFractal);
 
-        TextButton headerColor = new TextButton("Color", skin);
+        TextButton headerColor = new TextButton("Color", skin, "toggle");
         headerColor.padLeft(10f).padRight(10f);
         headerColor.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (optStatus != OptStatus.COLOR) {
+                if (optStatus != OptStatus.UNKNOWN) {
                     optCurrent.remove();
                     optCurrent = createOptionsColor();
                     optWrapper.add(optCurrent);
@@ -124,13 +129,14 @@ public class FracturedUI {
             }
         });
         header.add(headerColor).pad(padding);
+        headerGroup.add(headerColor);
 
-        TextButton headerMore = new TextButton("More", skin);
+        TextButton headerMore = new TextButton("More", skin, "toggle");
         headerMore.padLeft(10f).padRight(10f);
         headerMore.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (optStatus != OptStatus.MORE) {
+                if (optStatus != OptStatus.UNKNOWN) {
                     optCurrent.remove();
                     optCurrent = createOptionsMore();
                     optWrapper.add(optCurrent);
@@ -139,6 +145,7 @@ public class FracturedUI {
             }
         });
         header.add(headerMore).pad(padding);
+        headerGroup.add(headerMore);
         options.row();
 
         // options wrapper table
@@ -149,6 +156,7 @@ public class FracturedUI {
         optCurrent = createOptionsFractal();
         optWrapper.add(optCurrent).expand();
         optStatus = OptStatus.FRACTAL;
+        headerGroup.setChecked("Fractal");
 
         stage.addActor(options);
         options.debug();
@@ -212,7 +220,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        sliderXTable.add(paramSliderX);
+        sliderXTable.add(paramSliderX).pad(padding);
         sliderXTable.add(paramXTable);
         paramsTable.add(sliderXTable);
 
@@ -245,7 +253,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        sliderYTable.add(paramSliderY);
+        sliderYTable.add(paramSliderY).pad(padding);
         sliderYTable.add(paramYTable);
         paramsTable.add(sliderYTable);
 
