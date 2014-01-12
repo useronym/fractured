@@ -102,6 +102,7 @@ public class FractalRenderer {
     public void unloadGradient() {
         if (gradient != null) {
             gradient.dispose();
+            gradient = null;
         }
     }
 

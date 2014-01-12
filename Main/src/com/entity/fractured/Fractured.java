@@ -33,7 +33,7 @@ public class Fractured extends Game {
     public void create() {
         settings = new FracturedSettings();
 
-        if (settings.debugMode) {
+        if (settings.debugLogging) {
             Gdx.app.setLogLevel(Application.LOG_DEBUG);
         }
 
@@ -50,33 +50,19 @@ public class Fractured extends Game {
 
     @Override
     public void resize(int width, int height) {
-        settings.aspectRatio = width / (float) height;
+        settings.updateDisplaySettings();
 
         camera.setToOrtho(false, width, height);
 
-        if(previewRenderer != null) {
-            previewRenderer.dispose();
-        }
+
 
         if (ui != null) {
             ui.dispose();
         }
 
-        FractalRenderer newRenderer = new FractalRenderer((int) (width/settings.highQuality),
-                (int) (height/settings.highQuality));
+        createRenderer();
 
-        if (renderer != null) {
-            newRenderer.copyFrom(renderer);
-            renderer.dispose();
-            renderer = newRenderer;
-        } else {
-            renderer = newRenderer;
-            renderer.loadShader(settings.fractalTypes[settings.fractalType]);
-            renderer.loadGradient(settings.fractalColors[settings.fractalColor]);
-        }
-
-        previewRenderer = new FractalRenderer((int) (width/settings.previewQuality),
-                (int) (height/settings.previewQuality));
+        createPreviewRenderer();
 
         ui = new FracturedUI(this);
         inputMultiplexer.clear();
@@ -139,11 +125,41 @@ public class Fractured extends Game {
         ui.dispose();
     }
 
+    public void requestRender() {
+        needsRender = true;
+    }
+
     public void requestPreviewRender() {
         ui.requestFractalOptionsUpdate();
         previewRenderer.copyFrom(renderer);
         previewRenderer.render();
         fractalSprite.setTexture(previewRenderer.getTexture());
+    }
+
+    public void createRenderer() {
+        float quality = settings.renderQualities[settings.renderSetting];
+        FractalRenderer newRenderer = new FractalRenderer((int) (settings.width/quality),
+                (int) (settings.height/quality));
+
+        if (renderer != null) {
+            newRenderer.copyFrom(renderer);
+            renderer.dispose();
+            renderer = newRenderer;
+        } else {
+            renderer = newRenderer;
+            renderer.loadShader(settings.fractalTypes[settings.fractalType]);
+            renderer.loadGradient(settings.fractalColors[settings.fractalColor]);
+        }
+    }
+
+    public void createPreviewRenderer() {
+        if(previewRenderer != null) {
+            previewRenderer.dispose();
+        }
+
+        float quality = settings.renderQualities[settings.previewSetting];
+        previewRenderer = new FractalRenderer((int) (settings.width/quality),
+                (int) (settings.height/quality));
     }
 
     public FractalRenderer getFractalRenderer() {

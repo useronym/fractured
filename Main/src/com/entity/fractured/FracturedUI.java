@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
+import java.util.Arrays;
+
 public class FracturedUI {
     private Fractured app;
     private Stage stage;
@@ -268,6 +270,7 @@ public class FracturedUI {
             colorNames[i] = app.settings.fractalColors[i].replace("gradients/", "");
         }
         colorSelector = new List(colorNames, skin);
+        colorSelector.setSelectedIndex(app.settings.fractalColor);
         colorSelector.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -287,14 +290,34 @@ public class FracturedUI {
         Table more = new Table();
 
         more.add(new Label("Render quality", skin));
-        String[] qualitySettings = {"200%", "100%", "50%", "25%"};
+        String[] qualitySettings = Arrays.copyOfRange(app.settings.renderQualityNames, 2, 8);
         SelectBox qualityBox = new SelectBox(qualitySettings, skin);
+        qualityBox.setSelection(app.settings.renderSetting - 2);
+        qualityBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                int selection = ((SelectBox)actor).getSelectionIndex();
+                app.settings.renderSetting = selection + 2;
+                app.createRenderer();
+                app.requestRender();
+            }
+        });
         more.add(qualityBox).pad(padding);
         more.row();
 
         more.add(new Label("Preview quality", skin));
-        String[] previewQualitySettings = {"100%", "50%", "25%", "12.5%"};
+        String[] previewQualitySettings = Arrays.copyOfRange(app.settings.renderQualityNames, 0, 5);
         SelectBox previewBox = new SelectBox(previewQualitySettings, skin);
+        previewBox.setSelection(app.settings.previewSetting);
+        previewBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                int selection = ((SelectBox)actor).getSelectionIndex();
+                app.settings.previewSetting = selection;
+                app.createPreviewRenderer();
+                optionsChanged = true;
+            }
+        });
         more.add(previewBox).pad(padding);
 
 
