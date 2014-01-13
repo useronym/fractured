@@ -26,7 +26,7 @@ public class SlideWindow extends Window {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (button == 0) {
+                if (button == 0 && SlideWindow.this.hit(x, y, true) == SlideWindow.this) {
                     dragging = true;
                     touchDownX = x;
 
@@ -51,7 +51,8 @@ public class SlideWindow extends Window {
                     dragging = false;
 
                     if (speedX != 0f) {
-                        sliding = true;
+                        speedX *= 2.5f;
+                        sliding = true;Gdx.app.log("f", Float.toString(speedX));
                     }
                 }
             }
@@ -61,7 +62,7 @@ public class SlideWindow extends Window {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         if (sliding) {
-            speedX *= 0.92f;
+            speedX *= 0.96f;
 
             setPosition(getX() + speedX, 0f);
             checkWindowPosition();
