@@ -11,8 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class FracturedUI {
     private Fractured app;
@@ -25,12 +27,17 @@ public class FracturedUI {
 
     private float padding = 5f;
 
+    private Label userMessage = null;
+    private float currentMessageTime;
+
     // fractal options
     boolean optionsChanged = false;
     SelectBox fractalType;
     TextField parameterX, parameterY;
     Slider paramSliderX, paramSliderY;
     List colorSelector;
+
+    private final float timeForMessages = 10f;
 
     private enum OptStatus {
         FRACTAL, COLOR, MORE, UNKNOWN
@@ -52,6 +59,17 @@ public class FracturedUI {
         }
 
         createUI();
+    }
+
+    public void postMessage(String msg) {
+        if (userMessage != null) {
+            userMessage.remove();
+        }
+
+        userMessage = new Label(msg, skin);
+        userMessage.setPosition(0f, 0f);
+        stage.addActor(userMessage);
+        currentMessageTime = timeForMessages;
     }
 
     public void createUI() {
@@ -164,7 +182,11 @@ public class FracturedUI {
         headerGroup.setChecked("Fractal");
 
         stage.addActor(options);
-        options.debug();
+
+
+        if (app.settings.debugGUI) {
+            options.debug();
+        }
     }
 
     private Table createOptionsFractal() {
@@ -329,8 +351,13 @@ public class FracturedUI {
         makeScreenshot.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                FileHandle screenHandle = Gdx.files.external("Pictures/screenshot.png");
-                PixmapIO.writePNG(screenHandle, app.getFractalRenderer().createScreenshot());
+                String screenName = "Pictures/fractured-" + TimeUtils.millis();
+                Pixmap screenMap = app.getFractalRenderer().createScreenshot();
+
+                if (screenMap != null) {
+                    PixmapIO.writePNG(Gdx.files.external(screenName), app.getFractalRenderer().createScreenshot());
+                    postMessage("Screenshot saved as " + screenName);
+                }
             }
         });
         more.add(makeScreenshot).pad(padding);
@@ -343,12 +370,21 @@ public class FracturedUI {
         stage.act(delta);
         stage.draw();
 
-        if (app.settings.debugGUI) {
-            Table.drawDebug(stage);
-        }
-
         if (optionsChanged) {
             app.requestPreviewRender();
+        }
+
+        if (userMessage != null) {
+            currentMessageTime -= delta;
+
+            if (currentMessageTime < 0f) {
+                userMessage.remove();
+                userMessage = null;
+            }
+        }
+
+        if (app.settings.debugGUI) {
+            Table.drawDebug(stage);
         }
     }
 

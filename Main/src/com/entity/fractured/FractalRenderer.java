@@ -120,14 +120,7 @@ public class FractalRenderer {
         fbo.begin();
         shader.begin();
 
-        shader.setUniformf("u_c", parameter);
-        shader.setUniformf("u_translation", translation);
-        shader.setUniformf("u_zoom", zoom);
-        shader.setUniformf("u_aspectratio", aspectRatio);
-        if (gradient != null) {
-            shader.setUniformi("gradient", 0);
-            gradient.bind(0);
-        }
+        setUniforms();
 
         planeMesh.render(shader, GL20.GL_TRIANGLES);
         shader.end();
@@ -137,19 +130,16 @@ public class FractalRenderer {
     }
 
     public Pixmap createScreenshot() {
+        if (!isReady()) {
+            return null;
+        }
+
         Pixmap screenMap = new Pixmap(fbo.getWidth(), fbo.getHeight(), Pixmap.Format.RGBA8888);
 
         fbo.begin();
         shader.begin();
 
-        shader.setUniformf("u_c", parameter);
-        shader.setUniformf("u_translation", translation);
-        shader.setUniformf("u_zoom", zoom);
-        shader.setUniformf("u_aspectratio", aspectRatio);
-        if (gradient != null) {
-            shader.setUniformi("gradient", 0);
-            gradient.bind(0);
-        }
+        setUniforms();
 
         planeMesh.render(shader, GL20.GL_TRIANGLES);
 
@@ -159,6 +149,17 @@ public class FractalRenderer {
         fbo.end();
 
         return screenMap;
+    }
+
+    private void setUniforms() {
+        shader.setUniformf("u_c", parameter);
+        shader.setUniformf("u_translation", translation);
+        shader.setUniformf("u_zoom", zoom);
+        shader.setUniformf("u_aspectratio", aspectRatio);
+        if (gradient != null) {
+            shader.setUniformi("gradient", 0);
+            gradient.bind(0);
+        }
     }
 
     public void setTranslation(Vector2 nt) {

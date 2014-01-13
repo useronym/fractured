@@ -76,6 +76,8 @@ public class Fractured extends Game {
 
         needsRender = true;
         justRendered = false;
+
+        ui.postMessage("Hello!");
     }
 
     @Override
