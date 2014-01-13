@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.TimeUtils;
+
+import java.nio.IntBuffer;
 
 
 public class FractalRenderer {
@@ -131,6 +134,31 @@ public class FractalRenderer {
         fbo.end();
 
         Gdx.app.debug("fractured!", "rendered fractal in " + String.valueOf(TimeUtils.millis() - startTime) + "ms");
+    }
+
+    public Pixmap createScreenshot() {
+        Pixmap screenMap = new Pixmap(fbo.getWidth(), fbo.getHeight(), Pixmap.Format.RGBA8888);
+
+        fbo.begin();
+        shader.begin();
+
+        shader.setUniformf("u_c", parameter);
+        shader.setUniformf("u_translation", translation);
+        shader.setUniformf("u_zoom", zoom);
+        shader.setUniformf("u_aspectratio", aspectRatio);
+        if (gradient != null) {
+            shader.setUniformi("gradient", 0);
+            gradient.bind(0);
+        }
+
+        planeMesh.render(shader, GL20.GL_TRIANGLES);
+
+        Gdx.gl.glReadPixels(0, 0, fbo.getWidth(), fbo.getHeight(), GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, screenMap.getPixels());
+
+        shader.end();
+        fbo.end();
+
+        return screenMap;
     }
 
     public void setTranslation(Vector2 nt) {

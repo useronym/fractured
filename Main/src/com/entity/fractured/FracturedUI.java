@@ -2,6 +2,9 @@ package com.entity.fractured;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -125,7 +128,7 @@ public class FracturedUI {
                 if (optStatus != OptStatus.UNKNOWN) {
                     optCurrent.remove();
                     optCurrent = createOptionsColor();
-                    optWrapper.add(optCurrent);
+                    optWrapper.add(optCurrent).expand();
                     optStatus = OptStatus.COLOR;
                 }
             }
@@ -267,10 +270,11 @@ public class FracturedUI {
 
         String[] colorNames = new String[app.settings.fractalColors.length];
         for(int i = 0; i < app.settings.fractalColors.length; i++) {
-            colorNames[i] = app.settings.fractalColors[i].replace("gradients/", "");
+            colorNames[i] = app.settings.fractalColors[i].replace("gradients/", "").replace(".png", "");
         }
         colorSelector = new List(colorNames, skin);
         colorSelector.setSelectedIndex(app.settings.fractalColor);
+        colorSelector.setFillParent(true);
         colorSelector.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -281,7 +285,7 @@ public class FracturedUI {
                 }
             }
         });
-        color.add(new ScrollPane(colorSelector, skin));
+        color.add(new ScrollPane(colorSelector, skin)).expandX();
 
         return color;
     }
@@ -319,6 +323,17 @@ public class FracturedUI {
             }
         });
         more.add(previewBox).pad(padding);
+        more.row();
+
+        TextButton makeScreenshot = new TextButton("Save screenshot", skin);
+        makeScreenshot.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                FileHandle screenHandle = Gdx.files.external("Pictures/screenshot.png");
+                PixmapIO.writePNG(screenHandle, app.getFractalRenderer().createScreenshot());
+            }
+        });
+        more.add(makeScreenshot).pad(padding);
 
 
         return more;
