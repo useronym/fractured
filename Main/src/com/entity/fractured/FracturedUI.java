@@ -105,7 +105,7 @@ public class FracturedUI {
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
 
-        options = new SlideWindow("fractured! Options", skin);
+        options = new SlideWindow("Options", skin);
         options.setHeight(Gdx.graphics.getHeight());
         options.setWidth(Gdx.graphics.getWidth() / 3f);
         options.setPosition((Gdx.graphics.getWidth() / 3f) * 2f, 0f);
@@ -351,7 +351,7 @@ public class FracturedUI {
         makeScreenshot.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                String screenName = "Pictures/fractured-" + TimeUtils.millis();
+                String screenName = "Pictures/fractured-" + TimeUtils.millis() + ".png";
                 Pixmap screenMap = app.getFractalRenderer().createScreenshot();
 
                 if (screenMap != null) {
