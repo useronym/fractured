@@ -7,8 +7,8 @@
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Desktoplibs" level="project" />
     <orderEntry type="module" module-name="Main" />
+    <orderEntry type="library" name="desktop" level="project" />
   </component>
 </module>
 

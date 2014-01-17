@@ -67,7 +67,7 @@ public class FracturedUI {
         }
 
         userMessage = new Label(msg, skin);
-        userMessage.setPosition(0f, 0f);
+        userMessage.setPosition(10f, 15f);
         stage.addActor(userMessage);
         currentMessageTime = timeForMessages;
     }
@@ -315,7 +315,8 @@ public class FracturedUI {
     private Table createOptionsMore() {
         Table more = new Table();
 
-        more.add(new Label("Render quality", skin));
+        Table moreQuality = new Table();
+        moreQuality.add(new Label("Render quality", skin));
         String[] qualitySettings = Arrays.copyOfRange(app.settings.renderQualityNames, 2, 8);
         SelectBox qualityBox = new SelectBox(qualitySettings, skin);
         qualityBox.setSelection(app.settings.renderSetting - 2);
@@ -328,10 +329,10 @@ public class FracturedUI {
                 app.requestRender();
             }
         });
-        more.add(qualityBox).pad(padding);
-        more.row();
+        moreQuality.add(qualityBox).pad(padding);
+        moreQuality.row();
 
-        more.add(new Label("Preview quality", skin));
+        moreQuality.add(new Label("Preview quality", skin));
         String[] previewQualitySettings = Arrays.copyOfRange(app.settings.renderQualityNames, 0, 5);
         SelectBox previewBox = new SelectBox(previewQualitySettings, skin);
         previewBox.setSelection(app.settings.previewSetting);
@@ -344,7 +345,9 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        more.add(previewBox).pad(padding);
+        moreQuality.add(previewBox).pad(padding);
+        moreQuality.row();
+        more.add(moreQuality);
         more.row();
 
         TextButton makeScreenshot = new TextButton("Save screenshot", skin);
