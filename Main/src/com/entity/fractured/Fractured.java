@@ -19,6 +19,7 @@ public class Fractured extends Game {
     private FractalRenderer previewRenderer = null;
     private boolean needsRender = false;
     private boolean justRendered = false;
+    private int renderRequestFrames = -1;
     private long renderStart;
 
     private Sprite fractalSprite; // sprite which renders the screen quad with the rendered fractal texture
@@ -65,6 +66,7 @@ public class Fractured extends Game {
         createPreviewRenderer();
 
         ui = new FracturedUI(this);
+        ui.setBusy(true);
         inputMultiplexer.clear();
         inputMultiplexer.addProcessor(ui.getStage());
         inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
@@ -77,7 +79,8 @@ public class Fractured extends Game {
         needsRender = false;
         justRendered = false;
 
-        requestPreviewRender();
+        // request render in 10 frames
+        requestRender(10);
     }
 
     @Override
@@ -96,6 +99,14 @@ public class Fractured extends Game {
         Batch.begin();
         fractalSprite.draw(Batch);
         Batch.end();
+
+        if (renderRequestFrames >= 0) {
+            if (renderRequestFrames == 0) {
+                needsRender = true;
+            }
+
+            renderRequestFrames--;
+        }
 
         if (needsRender)
             ui.setBusy(true);
@@ -131,8 +142,13 @@ public class Fractured extends Game {
         ui.dispose();
     }
 
+    // request render in n frames
+    public void requestRender(int n) {
+        renderRequestFrames = n;
+    }
+
     public void requestRender() {
-        needsRender = true;
+        requestRender(0);
     }
 
     public void requestPreviewRender() {
