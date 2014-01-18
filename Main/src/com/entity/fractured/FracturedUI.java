@@ -426,12 +426,13 @@ public class FracturedUI {
         makeScreenshot.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                String screenName = "Pictures/fractured-" + TimeUtils.millis() + ".png";
+                String screenName = "Pictures/fractured-" + app.settings.screenCounter + ".png";
                 Pixmap screenMap = app.getFractalRenderer().createScreenshot();
 
                 if (screenMap != null) {
                     PixmapIO.writePNG(Gdx.files.external(screenName), app.getFractalRenderer().createScreenshot());
                     postMessage("Screenshot saved as " + screenName);
+                    app.settings.screenCounter++;
                 }
             }
         });

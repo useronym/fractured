@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class FracturedSettings {
     String version = "1.0";
     String preferencesName = "fractured-preferences";
+    int screenCounter = 0;
     boolean debugLogging = true;
     boolean debugGUI = false;
     float width = 0f, height = 0f;
@@ -37,6 +38,7 @@ public class FracturedSettings {
         prefs.clear();
 
         prefs.putString("version", version);
+        prefs.putInteger("screenCounter", screenCounter);
         prefs.putInteger("guiMode", guiMode);
         prefs.putInteger("previewSetting", previewSetting);
         prefs.putInteger("renderSetting", renderSetting);
@@ -50,11 +52,12 @@ public class FracturedSettings {
 
         if (prefs.contains("version")) {
             if (prefs.getString("version").equals(version)) {
+                screenCounter = prefs.getInteger("screenCounter", screenCounter);
                 guiMode = prefs.getInteger("guiMode", guiMode);
                 previewSetting = prefs.getInteger("previewSetting", previewSetting);
                 renderSetting = prefs.getInteger("renderSetting", renderSetting);
             } else {
-                Gdx.app.log("fractured!", "ignoring an outdated version of settings");
+                Gdx.app.log("fractured!", "ignoring an outdated version of shared settings");
             }
         }
     }
