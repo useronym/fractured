@@ -15,7 +15,7 @@ public class FracturedSettings {
     float zoomSpeed = 0.5f;
 
     int fractalType = 0, fractalColor = 1;
-    int previewSetting = 2, renderSetting = 5;
+    int previewSetting = 2, renderSetting = 3;
 
     FracturedSettings() {
         updateDisplaySettings();

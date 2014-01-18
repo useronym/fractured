@@ -74,8 +74,10 @@ public class Fractured extends Game {
         fractalSprite.setSize(width, height);
         fractalSprite.setOrigin(width / 2f, height / 2f);
 
-        needsRender = true;
+        needsRender = false;
         justRendered = false;
+
+        requestPreviewRender();
     }
 
     @Override
@@ -95,13 +97,17 @@ public class Fractured extends Game {
         fractalSprite.draw(Batch);
         Batch.end();
 
+        if (needsRender)
+            ui.setBusy(true);
+
         ui.draw(Gdx.graphics.getDeltaTime());
 
         if (needsRender) {
-            if (!Gdx.input.isTouched() && !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+            if (! Gdx.input.isTouched() && !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
                 renderFractal();
                 needsRender = false;
                 justRendered = true;
+                ui.setBusy(false);
             }
         }
 

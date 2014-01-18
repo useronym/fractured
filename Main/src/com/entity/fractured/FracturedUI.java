@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.PixmapIO;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -27,8 +29,13 @@ public class FracturedUI {
 
     private float padding = 5f;
 
+    // user messages
     private Label userMessage = null;
     private float currentMessageTime;
+
+    // renderer busy icon
+    private boolean busy;
+    private Sprite iconBusy;
 
     // fractal options
     boolean optionsChanged = false;
@@ -72,8 +79,25 @@ public class FracturedUI {
         currentMessageTime = timeForMessages;
     }
 
+    public void removeMessage() {
+        if (userMessage != null) {
+            userMessage.remove();
+        }
+    }
+
+    public void setBusy(boolean isbusy) {
+        busy = isbusy;
+    }
+
+    public boolean isBusy() {
+        return busy;
+    }
+
     public void createUI() {
         createOptions();
+
+        iconBusy = new Sprite(new Texture(Gdx.files.internal("ui/loading.png")));
+        iconBusy.setPosition(20f, Gdx.graphics.getHeight() - 85f);
     }
 
     public void destroyUI() {
@@ -384,6 +408,12 @@ public class FracturedUI {
                 userMessage.remove();
                 userMessage = null;
             }
+        }
+
+        if (busy) {
+            stage.getSpriteBatch().begin();
+            iconBusy.draw(stage.getSpriteBatch());
+            stage.getSpriteBatch().end();
         }
 
         if (app.settings.debugGUI) {

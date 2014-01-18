@@ -73,7 +73,7 @@ public class FractalRenderer {
         fSource = Gdx.files.internal(fragment).readString();
         shader = new ShaderProgram(vSource, fSource);
 
-        if (!shader.isCompiled()) {
+        if (! shader.isCompiled()) {
             Gdx.app.error("fractured!", shader.getLog());
             ready = false;
             return false;
@@ -130,7 +130,7 @@ public class FractalRenderer {
     }
 
     public Pixmap createScreenshot() {
-        if (!isReady()) {
+        if (! isReady()) {
             return null;
         }
 
