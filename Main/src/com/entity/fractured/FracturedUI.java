@@ -2,19 +2,14 @@ package com.entity.fractured;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.Arrays;
 
@@ -31,7 +26,9 @@ public class FracturedUI {
 
     // user messages
     private Label userMessage = null;
+    private int currentMessageFrames = -1;
     private float currentMessageTime;
+    private float timeForMessage = 10f;
 
     // renderer busy icon
     private boolean busy;
@@ -44,8 +41,6 @@ public class FracturedUI {
     TextField parameterX, parameterY;
     Slider paramSliderX, paramSliderY;
     List colorSelector;
-
-    private final float timeForMessages = 10f;
 
     private enum OptStatus {
         FRACTAL, COLOR, MORE, UNKNOWN
@@ -79,7 +74,7 @@ public class FracturedUI {
         createUI();
     }
 
-    public void postMessage(String msg) {
+    public void postMessage(String msg, float time) {
         if (userMessage != null) {
             userMessage.remove();
         }
@@ -87,7 +82,12 @@ public class FracturedUI {
         userMessage = new Label(msg, skin);
         userMessage.setPosition(10f, 15f);
         stage.addActor(userMessage);
-        currentMessageTime = timeForMessages;
+        currentMessageFrames = 10;
+        currentMessageTime = -1f;
+    }
+
+    public void postMessage(String msg) {
+        postMessage(msg, 10f);
     }
 
     public void setBusy(boolean isbusy) {
@@ -426,14 +426,7 @@ public class FracturedUI {
         makeScreenshot.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                String screenName = "Pictures/fractured-" + app.settings.screenCounter + ".png";
-                Pixmap screenMap = app.getFractalRenderer().createScreenshot();
-
-                if (screenMap != null) {
-                    PixmapIO.writePNG(Gdx.files.external(screenName), app.getFractalRenderer().createScreenshot());
-                    postMessage("Screenshot saved as " + screenName);
-                    app.settings.screenCounter++;
-                }
+                app.requestScreenshot(5);
             }
         });
         more.add(makeScreenshot).pad(padding);
@@ -465,7 +458,13 @@ public class FracturedUI {
             app.requestPreviewRender();
         }
 
-        if (userMessage != null) {
+        if (currentMessageFrames >= 0) {
+            if (currentMessageFrames == 0) {
+                currentMessageTime = timeForMessage;
+            }
+
+            currentMessageFrames--;
+        } else if (userMessage != null) {
             currentMessageTime -= delta;
 
             if (currentMessageTime < 0f) {

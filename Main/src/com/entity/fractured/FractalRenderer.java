@@ -164,7 +164,8 @@ public class FractalRenderer {
 
         planeMesh.render(shader, GL20.GL_TRIANGLES);
 
-        Gdx.gl.glReadPixels(0, 0, fbo.getWidth(), fbo.getHeight(), GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, screenMap.getPixels());
+        Gdx.gl.glReadPixels(0, 0, fbo.getWidth(), fbo.getHeight(),
+                GL20.GL_RGBA, GL20.GL_UNSIGNED_BYTE, screenMap.getPixels());
 
         shader.end();
         fbo.end();

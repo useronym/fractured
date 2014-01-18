@@ -4,6 +4,8 @@ package com.entity.fractured;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
@@ -17,9 +19,9 @@ public class Fractured extends Game {
     private FracturedGestureListener gestureListener = null;
     private FractalRenderer renderer = null; // class which handles rendering of the fractal to a texture
     private FractalRenderer previewRenderer = null;
-    private boolean needsRender = false;
+    private boolean needsRender = false, needsScreenshot = false;
     private boolean justRendered = false;
-    private int renderRequestFrames = -1;
+    private int renderRequestFrames = -1, screenshotRequestFrames = -1;
     private long renderStart;
 
     private Sprite fractalSprite; // sprite which renders the screen quad with the rendered fractal texture
@@ -118,7 +120,25 @@ public class Fractured extends Game {
             }
         }
 
+        if (screenshotRequestFrames >= 0) {
+            if (screenshotRequestFrames == 0) {
+                String screenName = "Pictures/fractured-" + settings.screenCounter + ".png";
+                Pixmap screenMap = renderer.createScreenshot();
 
+                if (screenMap != null) {
+                    PixmapIO.writePNG(Gdx.files.external(screenName), screenMap);
+                    ui.postMessage("Screenshot saved as " + screenName);
+                    settings.screenCounter++;
+                } else {
+                    ui.postMessage("Failed to create screenshot");
+                }
+
+                ui.setBusy(false);
+                needsScreenshot = false;
+            }
+
+            screenshotRequestFrames--;
+        }
     }
 
     @Override
@@ -152,6 +172,12 @@ public class Fractured extends Game {
         previewRenderer.copyFrom(renderer);
         previewRenderer.render();
         fractalSprite.setTexture(previewRenderer.getTexture());
+    }
+
+    public void requestScreenshot(int n) {
+        ui.setBusy(true);
+        ui.postMessage("Creating screenshot...");
+        screenshotRequestFrames = n;
     }
 
     public void createRenderer() {
