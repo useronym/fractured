@@ -19,6 +19,8 @@ public class FractalRenderer {
     private String fragmentPath;
     private String gradientPath;
 
+    // fractal define :)
+    private int iterations = 100;
     // fractal uniforms
     private Vector2 translation = new Vector2(0f, 0f);
     private Vector2 parameter = new Vector2(0.33f, 0.4f);
@@ -41,12 +43,20 @@ public class FractalRenderer {
     }
 
     public void copyFrom(FractalRenderer other) {
+        boolean needsReload = false;
+        if (! other.fragmentPath.equals(fragmentPath) || iterations != other.iterations) {
+            needsReload = true;
+        }
+
+        vertexPath = other.vertexPath;
+        fragmentPath = other.fragmentPath;
+        iterations = other.iterations;
         translation = other.getTranslation();
         parameter = other.getParameter();
         zoom = other.getZoom();
 
-        if (! other.fragmentPath.equals(fragmentPath)) {
-            loadShader(other.getVertexPath(), other.getFragmentPath());
+        if (needsReload) {
+            loadShader(fragmentPath);
         }
 
         if (! other.gradientPath.equals(gradientPath)) {
@@ -55,10 +65,10 @@ public class FractalRenderer {
     }
 
     public boolean loadShader(String fragment) {
-        return loadShader(vertexPath, fragment);
+        return loadShader(vertexPath, fragment, iterations);
     }
 
-    public boolean loadShader(String vertex, String fragment) {
+    public boolean loadShader(String vertex, String fragment, int iter) {
         Gdx.app.debug("fractured!", "loading shader " + fragment);
 
         unloadShader();
@@ -69,6 +79,7 @@ public class FractalRenderer {
         String vSource, fSource;
         vSource = Gdx.files.internal(vertex).readString();
         fSource = Gdx.files.internal(fragment).readString();
+        fSource = fSource.replace("#define ITER", "#define ITER " + Integer.toString(iter) + "//");
         shader = new ShaderProgram(vSource, fSource);
 
         if (! shader.isCompiled()) {
@@ -86,6 +97,17 @@ public class FractalRenderer {
             shader.dispose();
             shader = null;
         }
+    }
+
+    public void setIterations(int n) {
+        if (iterations != n) {
+            iterations = n;
+            loadShader(fragmentPath);
+        }
+    }
+
+    public int getIterations() {
+        return iterations;
     }
 
     private void setGradient(Texture newgradient) {

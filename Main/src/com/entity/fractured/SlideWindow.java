@@ -52,7 +52,7 @@ public class SlideWindow extends Window {
 
                     if (speedX != 0f) {
                         speedX *= 2.5f;
-                        sliding = true;Gdx.app.log("f", Float.toString(speedX));
+                        sliding = true;
                     }
                 }
             }

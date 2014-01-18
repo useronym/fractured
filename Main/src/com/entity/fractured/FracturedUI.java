@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -38,6 +40,7 @@ public class FracturedUI {
     // fractal options
     boolean optionsChanged = false;
     SelectBox fractalType;
+    TextField iterations;
     TextField parameterX, parameterY;
     Slider paramSliderX, paramSliderY;
     List colorSelector;
@@ -53,7 +56,7 @@ public class FracturedUI {
         app = owner;
         stage = new Stage();
 
-        Gdx.app.debug("fractured!", "display density ratio: " + String.valueOf(Gdx.graphics.getDensity()));
+        Gdx.app.debug("fractured!", "display density ratio " + String.valueOf(Gdx.graphics.getDensity()));
         if (app.settings.guiMode == 0) {
             if (Gdx.graphics.getDensity() > 1f) {
                 skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
@@ -117,6 +120,11 @@ public class FracturedUI {
         // color
         if (! app.getFractalRenderer().getGradientPath().equals(app.settings.fractalColors[app.settings.fractalColor])) {
             app.getFractalRenderer().loadGradient((app.settings.fractalColors[app.settings.fractalColor]));
+        }
+
+        // iterations
+        if (Integer.parseInt(iterations.getText()) != app.getFractalRenderer().getIterations()) {
+            app.getFractalRenderer().setIterations(Integer.parseInt(iterations.getText()));
         }
 
         // parameter
@@ -228,7 +236,6 @@ public class FracturedUI {
         Table typeTable = new Table();
         fractal.add(typeTable);
         fractal.row();
-
         typeTable.add(new Label("Type", skin)).pad(padding);
         String[] types = {"z^2 + c", "z^3 + c", "exp(z^2) - c", "exp(z^3) - c"};
         fractalType = new SelectBox(types, skin);
@@ -245,14 +252,46 @@ public class FracturedUI {
             }
         });
         typeTable.add(fractalType).pad(padding);
+        fractal.row();
+
+        // iterations
+        Table iterTable = new Table();
+        fractal.add(iterTable);
+        fractal.row();
+        iterTable.add(new Label("Iterations", skin)).pad(padding);
+        /*TextButton iterMinus = new TextButton("-", skin);
+        iterMinus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                int it = Integer.parseInt(iterations.getText());
+                iterations.setText(String.valueOf(it - 10));
+            }
+        });
+        iterTable.add(iterMinus);*/
+        iterations = new TextField(Integer.toString(app.getFractalRenderer().getIterations()),
+                skin);
+        iterations.setText(Integer.toString(app.getFractalRenderer().getIterations()));
+        iterTable.add(iterations);
+        iterTable.row();
+        Slider iterSlider = new Slider(25, 250, 1, false, skin);
+        iterSlider.setValue(app.getFractalRenderer().getIterations());
+        iterSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                int it = Math.round(((Slider) actor).getValue());
+                iterations.setText(Integer.toString(it));
+                optionsChanged = true;
+            }
+        });
+        iterTable.add(iterSlider).colspan(2).pad(padding); 
 
         // parameter
-        Table paramsTable = new Table();paramsTable.debug();
+        Table paramsTable = new Table();
         fractal.add(paramsTable);
-
         // holds parameter controls
         Table paramXTable = new Table();
         parameterX = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
+        parameterX.setDisabled(true);
         paramXTable.add(parameterX).pad(padding).width(100f);
         paramXTable.row();
         TextButton randomX = new TextButton("random", skin);
@@ -341,7 +380,7 @@ public class FracturedUI {
                 }
             }
         });
-        color.add(new ScrollPane(colorSelector, skin)).expandX();
+        color.add(new ScrollPane(colorSelector, skin, "transparent")).expandX();
 
         return color;
     }

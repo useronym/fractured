@@ -4,6 +4,13 @@ uiskin.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+nothing
+  rotate: false
+  xy: 0, 0
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
 default
   rotate: false
   xy: 1, 50
@@ -128,10 +135,10 @@ default-pane
   index: -1
 default-rect-pad
   rotate: false
-  xy: 11, 1
-  size: 5, 3
-  split: 1, 1, 1, 1
-  orig: 5, 3
+  xy: 46, 1
+  size: 9, 9
+  split: 2, 2, 2, 2
+  orig: 9, 9
   offset: 0, 0
   index: -1
 default-splitpane

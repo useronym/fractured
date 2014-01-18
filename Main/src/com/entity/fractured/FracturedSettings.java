@@ -1,10 +1,13 @@
 package com.entity.fractured;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 
 import java.util.Arrays;
 
 public class FracturedSettings {
+    String version = "1.0";
+    String preferencesName = "fractured-preferences";
     boolean debugLogging = true;
     boolean debugGUI = false;
     float width = 0f, height = 0f;
@@ -19,12 +22,41 @@ public class FracturedSettings {
 
     FracturedSettings() {
         Arrays.sort(fractalColors);
+
+        loadFromShared();
     }
 
     public void updateDisplaySettings() {
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         aspectRatio = width / height;
+    }
+
+    public void saveToShared() {
+        Preferences prefs = Gdx.app.getPreferences(preferencesName);
+        prefs.clear();
+
+        prefs.putString("version", version);
+        prefs.putInteger("guiMode", guiMode);
+        prefs.putInteger("previewSetting", previewSetting);
+        prefs.putInteger("renderSetting", renderSetting);
+        prefs.flush();
+
+        Gdx.app.log("fractured!", "saved shared settings");
+    }
+
+    public void loadFromShared() {
+        Preferences prefs = Gdx.app.getPreferences(preferencesName);
+
+        if (prefs.contains("version")) {
+            if (prefs.getString("version").equals(version)) {
+                guiMode = prefs.getInteger("guiMode", guiMode);
+                previewSetting = prefs.getInteger("previewSetting", previewSetting);
+                renderSetting = prefs.getInteger("renderSetting", renderSetting);
+            } else {
+                Gdx.app.log("fractured!", "ignoring an outdated version of settings");
+            }
+        }
     }
 
     float[] renderQualities = {8f, 4f, 2f, 1.25f, 1f, 0.8f, 0.66f, 0.5f};

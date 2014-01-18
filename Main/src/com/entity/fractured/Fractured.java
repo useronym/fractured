@@ -123,16 +123,16 @@ public class Fractured extends Game {
 
     @Override
     public void pause() {
-
+        settings.saveToShared();
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void dispose() {
+        settings.saveToShared();
         renderer.dispose();
         Batch.dispose();
         ui.dispose();
