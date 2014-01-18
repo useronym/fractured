@@ -8,7 +8,7 @@ import java.util.List;
 public class FracturedSettings {
     boolean debugLogging = true;
     boolean debugGUI = false;
-    float width, height;
+    float width = 0f, height = 0f;
     float aspectRatio;
     //float previewQuality = 2f, highQuality = 0.5f;
 
@@ -18,7 +18,6 @@ public class FracturedSettings {
     int previewSetting = 2, renderSetting = 3;
 
     FracturedSettings() {
-        updateDisplaySettings();
         Arrays.sort(fractalColors);
     }
 

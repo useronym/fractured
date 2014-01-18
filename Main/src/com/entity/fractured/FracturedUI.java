@@ -262,6 +262,8 @@ public class FracturedUI {
         // holds slider and parameter controls, resides in paramsTable
         Table sliderXTable = new Table();
         paramSliderX = new Slider(0f, 1f, 0.01f, true, skin);
+        paramSliderX.setHeight(400f);
+        paramSliderX.pack();
         paramSliderX.setValue(app.getFractalRenderer().getParameter().x);
         paramSliderX.addListener(new ChangeListener() {
             @Override

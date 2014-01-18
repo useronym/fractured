@@ -51,11 +51,11 @@ public class Fractured extends Game {
 
     @Override
     public void resize(int width, int height) {
+        if (width == settings.width && height == settings.height) return;
+
         settings.updateDisplaySettings();
 
         camera.setToOrtho(false, width, height);
-
-
 
         if (ui != null) {
             ui.dispose();
