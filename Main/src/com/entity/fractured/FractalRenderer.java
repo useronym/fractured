@@ -16,6 +16,7 @@ public class FractalRenderer {
     private Mesh planeMesh;
     private ShaderProgram shader = null;
     private boolean ready = false;
+    private boolean hasRendered = false;
 
     private String vertexPath = "default.vert";
     private String fragmentPath;
@@ -127,6 +128,7 @@ public class FractalRenderer {
         fbo.end();
 
         Gdx.app.debug("fractured!", "rendered fractal in " + String.valueOf(TimeUtils.millis() - startTime) + "ms");
+        hasRendered = true;
     }
 
     public Pixmap createScreenshot() {
@@ -198,12 +200,17 @@ public class FractalRenderer {
         return str;
     }
 
-    public Texture getTexture() {
-        if (ready) {
+    // passing true results in obtaining the texture even if it's all black(hasn't been rendered yet)
+    public Texture getTexture(boolean force) {
+        if (ready && (hasRendered || force)) {
             return fbo.getColorBufferTexture();
         } else {
             return null;
         }
+    }
+
+    public Texture getTexture() {
+        return getTexture(false);
     }
 
     public String getVertexPath() {

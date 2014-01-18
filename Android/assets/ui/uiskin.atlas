@@ -50,6 +50,13 @@ default-slider-knob
   orig: 9, 18
   offset: 0, 0
   index: -1
+default-slider-vertical-knob
+  rotate: false
+  xy: 27, 1
+  size: 18, 9
+  orig: 18, 9
+  offset: 0, 10
+  index: -1
 default-round-down
   rotate: false
   xy: 99, 29

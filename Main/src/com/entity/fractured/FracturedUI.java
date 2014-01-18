@@ -79,12 +79,6 @@ public class FracturedUI {
         currentMessageTime = timeForMessages;
     }
 
-    public void removeMessage() {
-        if (userMessage != null) {
-            userMessage.remove();
-        }
-    }
-
     public void setBusy(boolean isbusy) {
         busy = isbusy;
     }
@@ -102,6 +96,8 @@ public class FracturedUI {
 
     public void destroyUI() {
         options.remove();
+
+        iconBusy.getTexture().dispose();
     }
 
     public void requestFractalOptionsUpdate() {
@@ -126,6 +122,10 @@ public class FracturedUI {
         optionsChanged = false;
     }
 
+    private float getScaled(float f) {
+        return Gdx.graphics.getDensity() * f;
+    }
+
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
 
@@ -135,7 +135,7 @@ public class FracturedUI {
         options.setPosition((Gdx.graphics.getWidth() / 3f) * 2f, 0f);
         options.setModal(false);
         options.setKeepWithinStage(false);
-        //options.padLeft(30f);
+        //options.padLeft(20f + padding);
         options.top();
 
         // header

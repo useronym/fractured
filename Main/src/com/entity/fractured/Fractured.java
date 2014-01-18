@@ -69,7 +69,7 @@ public class Fractured extends Game {
         inputMultiplexer.addProcessor(ui.getStage());
         inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
 
-        fractalSprite.setTexture(renderer.getTexture());
+        fractalSprite.setTexture(renderer.getTexture(true));
         fractalSprite.setRegion(0f, 0f, 1f, 1f);
         fractalSprite.setSize(width, height);
         fractalSprite.setOrigin(width / 2f, height / 2f);
@@ -207,7 +207,7 @@ public class Fractured extends Game {
             float spriteScale = fractalSprite.getScaleX();
             fractalSprite.setScale(spriteScale - zoomDelta * settings.zoomSpeed * spriteScale);
 
-            needsRender = true;
+            requestRender();
             return;
         }
 
@@ -218,7 +218,7 @@ public class Fractured extends Game {
         if (inDeltaX != 0f || inDeltaY != 0f) {
             fractalSprite.setPosition(fractalSprite.getX() + inDeltaX, fractalSprite.getY() + inDeltaY);
 
-            needsRender = true;
+            requestRender();
         }
     }
 }
