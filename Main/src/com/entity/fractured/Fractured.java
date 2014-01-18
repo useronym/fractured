@@ -65,11 +65,7 @@ public class Fractured extends Game {
 
         createPreviewRenderer();
 
-        ui = new FracturedUI(this);
-        ui.setBusy(true);
-        inputMultiplexer.clear();
-        inputMultiplexer.addProcessor(ui.getStage());
-        inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
+        createUi();
 
         fractalSprite.setTexture(renderer.getTexture(true));
         fractalSprite.setRegion(0f, 0f, 1f, 1f);
@@ -182,6 +178,13 @@ public class Fractured extends Game {
         float quality = settings.renderQualities[settings.previewSetting];
         previewRenderer = new FractalRenderer((int) (settings.width/quality),
                 (int) (settings.height/quality));
+    }
+
+    public void createUi() {
+        ui = new FracturedUI(this);
+        inputMultiplexer.clear();
+        inputMultiplexer.addProcessor(ui.getStage());
+        inputMultiplexer.addProcessor(new GestureDetector(gestureListener));
     }
 
     public FractalRenderer getFractalRenderer() {

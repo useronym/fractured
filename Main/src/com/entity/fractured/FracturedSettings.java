@@ -3,15 +3,15 @@ package com.entity.fractured;
 import com.badlogic.gdx.Gdx;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class FracturedSettings {
     boolean debugLogging = true;
     boolean debugGUI = false;
     float width = 0f, height = 0f;
     float aspectRatio;
-    //float previewQuality = 2f, highQuality = 0.5f;
 
+    // 0 = auto; 1 = force standard; 2 = force large
+    int guiMode = 0;
     float zoomSpeed = 0.5f;
 
     int fractalType = 0, fractalColor = 1;

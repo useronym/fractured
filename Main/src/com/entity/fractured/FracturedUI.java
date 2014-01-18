@@ -2,7 +2,6 @@ package com.entity.fractured;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 public class FracturedUI {
     private Fractured app;
@@ -56,14 +54,24 @@ public class FracturedUI {
         stage = new Stage();
 
         Gdx.app.debug("fractured!", "display density ratio: " + String.valueOf(Gdx.graphics.getDensity()));
-        if (Gdx.graphics.getDensity() > 1f) {
+        if (app.settings.guiMode == 0) {
+            if (Gdx.graphics.getDensity() > 1f) {
+                skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
+                padding = 10f;
+                Gdx.app.debug("fractured!", "using large ui skin");
+            } else {
+                skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+                Gdx.app.debug("fractured!", "using standard ui skin");
+            }
+        } else if (app.settings.guiMode == 2) {
             skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
             padding = 10f;
             Gdx.app.debug("fractured!", "using large ui skin");
-        } else {
+        } else if (app.settings.guiMode == 1) {
             skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
             Gdx.app.debug("fractured!", "using standard ui skin");
         }
+
 
         createUI();
     }
@@ -365,8 +373,7 @@ public class FracturedUI {
         previewBox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                int selection = ((SelectBox)actor).getSelectionIndex();
-                app.settings.previewSetting = selection;
+                app.settings.previewSetting = ((SelectBox)actor).getSelectionIndex();
                 app.createPreviewRenderer();
                 optionsChanged = true;
             }
@@ -390,6 +397,21 @@ public class FracturedUI {
             }
         });
         more.add(makeScreenshot).pad(padding);
+        more.row();
+
+        Table moreGuiMode = new Table();
+        moreGuiMode.add(new Label("GUI Size", skin)).pad(padding);
+        SelectBox guiMode = new SelectBox(new String[] {"Auto", "Standard", "Large"}, skin);
+        guiMode.setSelection(app.settings.guiMode);
+        guiMode.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                app.settings.guiMode = ((SelectBox)actor).getSelectionIndex();
+                app.createUi();
+            }
+        });
+        moreGuiMode.add(guiMode).pad(padding);
+        more.add(moreGuiMode);
 
 
         return more;
