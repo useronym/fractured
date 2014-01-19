@@ -17,6 +17,9 @@ public class FracturedSettings {
     // 0 = auto; 1 = force standard; 2 = force large
     int guiMode = 0;
     float zoomSpeed = 0.5f;
+    float uiPadding = 5f, uiPaddingLarge = 10f;
+    float uiWidth = 50f, uiWidthLarge = 80f;
+
 
     int fractalType = 0, fractalColor = 1;
     int previewSetting = 2, renderSetting = 3;

@@ -23,6 +23,7 @@ public class FracturedUI {
     private Table optWrapper, optCurrent;
 
     private float padding = 5f;
+    private float width = 50f;
 
     // user messages
     private Label userMessage = null;
@@ -52,22 +53,28 @@ public class FracturedUI {
         stage = new Stage();
 
         Gdx.app.debug("fractured!", "display density ratio " + String.valueOf(Gdx.graphics.getDensity()));
+        int guiToUse = 0;
         if (app.settings.guiMode == 0) {
             if (Gdx.graphics.getDensity() > 1f) {
-                skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
-                padding = 10f;
-                Gdx.app.debug("fractured!", "using large ui skin");
+                guiToUse = 2;
             } else {
-                skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-                Gdx.app.debug("fractured!", "using standard ui skin");
+                guiToUse = 1;
             }
-        } else if (app.settings.guiMode == 2) {
-            skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
-            padding = 10f;
-            Gdx.app.debug("fractured!", "using large ui skin");
-        } else if (app.settings.guiMode == 1) {
+        } else {
+            guiToUse = app.settings.guiMode;
+        }
+
+        if (guiToUse == 1) {
             skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
             Gdx.app.debug("fractured!", "using standard ui skin");
+            padding = app.settings.uiPadding;
+            width = app.settings.uiWidth;
+        }
+        else if (guiToUse == 2) {
+            skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
+            padding = app.settings.uiPaddingLarge;
+            width = app.settings.uiWidthLarge;
+            Gdx.app.debug("fractured!", "using large ui skin");
         }
 
 
@@ -249,7 +256,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        typeTable.add(fractalType).pad(padding);
+        typeTable.add(fractalType).width(width * 2f).pad(padding);
         fractal.add(typeTable);
         fractal.row();
 
@@ -271,7 +278,7 @@ public class FracturedUI {
         iterations = new TextField(Integer.toString(app.getFractalRenderer().getIterations()),
                 skin);
         iterations.setText(Integer.toString(app.getFractalRenderer().getIterations()));
-        iterTable.add(iterations).pad(padding);
+        iterTable.add(iterations).width(width).pad(padding);
         TextButton iterPlus = new TextButton("+", skin);
         iterPlus.padLeft(padding).padRight(padding);
         iterPlus.addListener(new ChangeListener() {
@@ -304,7 +311,7 @@ public class FracturedUI {
         Table paramXTable = new Table();
         parameterX = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
         parameterX.setDisabled(true);
-        paramXTable.add(parameterX).pad(padding).width(100f);
+        paramXTable.add(parameterX).width(width).pad(padding);
         paramXTable.row();
         TextButton randomX = new TextButton("random", skin);
         randomX.padLeft(10f).padRight(10f);
@@ -339,7 +346,7 @@ public class FracturedUI {
         // holds parameter controls
         Table paramYTable = new Table();
         parameterY = new TextField(Float.toString(app.getFractalRenderer().getParameter().y), skin);
-        paramYTable.add(parameterY).pad(padding).width(100f);
+        paramYTable.add(parameterY).width(width).pad(padding);
         paramYTable.row();
         TextButton randomY = new TextButton("random", skin);
         randomY.padLeft(10f).padRight(10f);
