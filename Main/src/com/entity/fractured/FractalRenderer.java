@@ -69,7 +69,8 @@ public class FractalRenderer {
     }
 
     public boolean loadShader(String vertex, String fragment, int iter) {
-        Gdx.app.debug("fractured!", "loading shader " + fragment);
+        Gdx.app.debug("fractured!", "loading shader " + fragment +
+                " with " + Integer.toString(iter) + " iterations");
 
         unloadShader();
 

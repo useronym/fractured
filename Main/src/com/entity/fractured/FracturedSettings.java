@@ -74,6 +74,11 @@ public class FracturedSettings {
             "fractals/julia_expz3.frag",
     };
 
+    String[] fractalNames = {"z^2 + c",
+            "z^3 + c",
+            "exp(z^2) - c",
+            "exp(z^3) - c"};
+
     String[] fractalColors = {"gradients/aneurism.png",
             "gradients/full_spectrum.png",
             "gradients/incandescent.png",

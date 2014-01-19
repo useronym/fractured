@@ -158,7 +158,7 @@ public class FracturedUI {
         options.setPosition((Gdx.graphics.getWidth() / 3f) * 2f, 0f);
         options.setModal(false);
         options.setKeepWithinStage(false);
-        //options.padLeft(20f + padding);
+        options.padLeft(width - 15f);
         options.top();
 
         // header
@@ -242,8 +242,7 @@ public class FracturedUI {
         // type
         Table typeTable = new Table();
         typeTable.add(new Label("Type", skin)).pad(padding);
-        String[] types = {"z^2 + c", "z^3 + c", "exp(z^2) - c", "exp(z^3) - c"};
-        fractalType = new SelectBox(types, skin);
+        fractalType = new SelectBox(app.settings.fractalNames, skin);
         fractalType.setSelection(app.settings.fractalType);
         fractalType.addListener(new ChangeListener() {
             @Override
@@ -253,10 +252,9 @@ public class FracturedUI {
                     app.settings.fractalType = newSelection;
                     optionsChanged = true;
                 }
-                optionsChanged = true;
             }
         });
-        typeTable.add(fractalType).width(width * 2f).pad(padding);
+        typeTable.add(fractalType).width(width * 2.5f).pad(padding);
         fractal.add(typeTable);
         fractal.row();
 
@@ -306,7 +304,6 @@ public class FracturedUI {
 
         // parameter
         Table paramsTable = new Table();
-        fractal.add(paramsTable);
         // holds parameter controls
         Table paramXTable = new Table();
         parameterX = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
@@ -328,8 +325,6 @@ public class FracturedUI {
         // holds slider and parameter controls, resides in paramsTable
         Table sliderXTable = new Table();
         paramSliderX = new Slider(0f, 1f, 0.01f, true, skin);
-        paramSliderX.setHeight(400f);
-        paramSliderX.pack();
         paramSliderX.setValue(app.getFractalRenderer().getParameter().x);
         paramSliderX.addListener(new ChangeListener() {
             @Override
@@ -339,7 +334,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        sliderXTable.add(paramSliderX).pad(padding);
+        sliderXTable.add(paramSliderX).expand().pad(padding);
         sliderXTable.add(paramXTable);
         paramsTable.add(sliderXTable);
 
@@ -375,6 +370,7 @@ public class FracturedUI {
         sliderYTable.add(paramSliderY).pad(padding);
         sliderYTable.add(paramYTable);
         paramsTable.add(sliderYTable);
+        fractal.add(paramsTable).expandY();
 
         return fractal;
     }
