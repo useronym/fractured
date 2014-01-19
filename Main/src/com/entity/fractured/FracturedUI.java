@@ -234,8 +234,6 @@ public class FracturedUI {
 
         // type
         Table typeTable = new Table();
-        fractal.add(typeTable);
-        fractal.row();
         typeTable.add(new Label("Type", skin)).pad(padding);
         String[] types = {"z^2 + c", "z^3 + c", "exp(z^2) - c", "exp(z^3) - c"};
         fractalType = new SelectBox(types, skin);
@@ -252,28 +250,40 @@ public class FracturedUI {
             }
         });
         typeTable.add(fractalType).pad(padding);
+        fractal.add(typeTable);
         fractal.row();
 
         // iterations
         Table iterTable = new Table();
-        fractal.add(iterTable);
-        fractal.row();
-        iterTable.add(new Label("Iterations", skin)).pad(padding);
-        /*TextButton iterMinus = new TextButton("-", skin);
+        iterTable.add(new Label("Iterations", skin)).colspan(3).pad(padding);
+        iterTable.row();
+        TextButton iterMinus = new TextButton("-", skin);
+        iterMinus.padLeft(padding).padRight(padding);
         iterMinus.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 int it = Integer.parseInt(iterations.getText());
                 iterations.setText(String.valueOf(it - 10));
+                optionsChanged = true;
             }
         });
-        iterTable.add(iterMinus);*/
+        iterTable.add(iterMinus).pad(padding);
         iterations = new TextField(Integer.toString(app.getFractalRenderer().getIterations()),
                 skin);
         iterations.setText(Integer.toString(app.getFractalRenderer().getIterations()));
-        iterTable.add(iterations);
-        iterTable.row();
-        Slider iterSlider = new Slider(25, 250, 1, false, skin);
+        iterTable.add(iterations).pad(padding);
+        TextButton iterPlus = new TextButton("+", skin);
+        iterPlus.padLeft(padding).padRight(padding);
+        iterPlus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                int it = Integer.parseInt(iterations.getText());
+                iterations.setText(String.valueOf(it + 10));
+                optionsChanged = true;
+            }
+        });
+        iterTable.add(iterPlus).pad(padding);
+        /*Slider iterSlider = new Slider(25, 250, 1, false, skin);
         iterSlider.setValue(app.getFractalRenderer().getIterations());
         iterSlider.addListener(new ChangeListener() {
             @Override
@@ -283,7 +293,9 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        iterTable.add(iterSlider).colspan(2).pad(padding); 
+        iterTable.add(iterSlider).colspan(2).pad(padding); */
+        fractal.add(iterTable);
+        fractal.row();
 
         // parameter
         Table paramsTable = new Table();

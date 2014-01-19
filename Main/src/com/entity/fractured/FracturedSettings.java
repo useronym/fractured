@@ -44,7 +44,7 @@ public class FracturedSettings {
         prefs.putInteger("renderSetting", renderSetting);
         prefs.flush();
 
-        Gdx.app.log("fractured!", "saved shared settings");
+        Gdx.app.debug("fractured!", "saved shared settings");
     }
 
     public void loadFromShared() {
@@ -57,7 +57,7 @@ public class FracturedSettings {
                 previewSetting = prefs.getInteger("previewSetting", previewSetting);
                 renderSetting = prefs.getInteger("renderSetting", renderSetting);
             } else {
-                Gdx.app.log("fractured!", "ignoring an outdated version of shared settings");
+                Gdx.app.debug("fractured!", "ignoring an outdated version of shared settings");
             }
         }
     }
