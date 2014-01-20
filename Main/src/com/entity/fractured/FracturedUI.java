@@ -262,7 +262,7 @@ public class FracturedUI {
 
         // iterations
         Table iterTable = new Table();
-        iterTable.add(new Label("Iterations", skin)).colspan(3).pad(padding);
+        iterTable.add(new Label("Iterations", skin)).colspan(3).padTop(padding);
         iterTable.row();
         TextButton iterMinus = new TextButton("-", skin);
         iterMinus.padLeft(padding).padRight(padding);
@@ -274,11 +274,11 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        iterTable.add(iterMinus).pad(padding);
+        iterTable.add(iterMinus).padRight(padding);
         iterations = new TextField(Integer.toString(app.getFractalRenderer().getIterations()),
                 skin);
         iterations.setText(Integer.toString(app.getFractalRenderer().getIterations()));
-        iterTable.add(iterations).width(width).pad(padding);
+        iterTable.add(iterations).width(width).padLeft(padding).padRight(padding).padBottom(padding);
         TextButton iterPlus = new TextButton("+", skin);
         iterPlus.padLeft(padding).padRight(padding);
         iterPlus.addListener(new ChangeListener() {
@@ -289,7 +289,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        iterTable.add(iterPlus).pad(padding);
+        iterTable.add(iterPlus).padLeft(padding);
         /*Slider iterSlider = new Slider(25, 250, 1, false, skin);
         iterSlider.setValue(app.getFractalRenderer().getIterations());
         iterSlider.addListener(new ChangeListener() {

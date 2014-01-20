@@ -60,6 +60,7 @@ public class FractalRenderer {
         }
 
         if (! other.gradientPath.equals(gradientPath)) {
+            unloadGradient();
             loadGradient(other.getGradientPath());
         }
     }
