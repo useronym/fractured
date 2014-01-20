@@ -113,7 +113,6 @@ public class FracturedSettings {
             "gradients/green-cyan.png",
             "gradients/magenta.png",
             "gradients/magenta-red.png",
-            "gradients/metallic_something.png",
             "gradients/neutral.png",
             "gradients/neutral_vermillion.png",
             "gradients/old_leaf.png",
@@ -124,6 +123,23 @@ public class FracturedSettings {
             "gradients/red-yellow.png",
             "gradients/red-yellow-zigzig.png",
             "gradients/turanj.png",
+            "gradients/green-cyan-whte.png",
+            "gradients/green_eyeball.png",
+            "gradients/green-HSVCCW.png",
+            "gradients/green-HSVCW.png",
+            "gradients/green.png",
+            "gradients/green-yellow.png",
+            "gradients/green-yellow-white.png",
+            "gradients/magenta-blue.png",
+            "gradients/magenta-HSVCCW.png",
+            "gradients/magenta-HSVCW.png",
+            "gradients/white.png",
+            "gradients/wood.png",
+            "gradients/yellow-green.png",
+            "gradients/yellow-HSVCCW.png",
+            "gradients/yellow-HSVCW.png",
+            "gradients/yellow.png",
+            "gradients/yellow-red.png"
     };
 
     float[] renderQualities = {8f, 4f, 2f, 1.25f, 1f, 0.8f, 0.66f, 0.5f};
