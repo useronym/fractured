@@ -381,7 +381,8 @@ public class FracturedUI {
 
         String[] colorNames = new String[app.settings.fractalColors.length];
         for(int i = 0; i < app.settings.fractalColors.length; i++) {
-            colorNames[i] = app.settings.fractalColors[i].replace("gradients/", "").replace(".png", "");
+            colorNames[i] = app.settings.fractalColors[i]
+                    .replace("gradients/", "").replace(".png", "").replace("_", " ");
         }
         colorSelector = new List(colorNames, skin);
         colorSelector.setSelectedIndex(app.settings.fractalColor);
@@ -396,7 +397,9 @@ public class FracturedUI {
                 }
             }
         });
-        color.add(new ScrollPane(colorSelector, skin, "transparent")).expandX();
+        ScrollPane colorSelectorScroller = new ScrollPane(colorSelector, skin, "transparent");
+        colorSelectorScroller.setScrollingDisabled(true, false);
+        color.add(colorSelectorScroller).expandX();
 
         return color;
     }
