@@ -19,7 +19,7 @@ public class Fractured extends Game {
     private FracturedGestureListener gestureListener = null;
     private FractalRenderer renderer = null; // class which handles rendering of the fractal to a texture
     private FractalRenderer previewRenderer = null;
-    private boolean needsRender = false, needsScreenshot = false;
+    private boolean needsRender = false;
     private boolean justRendered = false;
     private int renderRequestFrames = -1, screenshotRequestFrames = -1;
     private long renderStart;
@@ -135,7 +135,6 @@ public class Fractured extends Game {
                 }
 
                 ui.setBusy(false);
-                needsScreenshot = false;
                 setInputEnabled(true);
             }
 

@@ -388,7 +388,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        sliderYTable.add(paramSliderY).pad(padding).height(app.settings.height / 2f);;
+        sliderYTable.add(paramSliderY).pad(padding).height(app.settings.height / 2f);
         sliderYTable.add(paramYTable);
         paramsTable.add(sliderYTable);
         fractal.add(paramsTable).expandY();
