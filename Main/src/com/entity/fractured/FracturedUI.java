@@ -386,7 +386,7 @@ public class FracturedUI {
         }
         colorSelector = new List(colorNames, skin);
         colorSelector.setSelectedIndex(app.settings.fractalColor);
-        colorSelector.setFillParent(true);
+        //colorSelector.setFillParent(true);
         colorSelector.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -399,7 +399,10 @@ public class FracturedUI {
         });
         ScrollPane colorSelectorScroller = new ScrollPane(colorSelector, skin, "transparent");
         colorSelectorScroller.setScrollingDisabled(true, false);
-        color.add(colorSelectorScroller).expandX();
+        //colorSelectorScroller.setScrollbarsOnTop(true);
+        colorSelectorScroller.setScrollPercentY(1f);
+        colorSelectorScroller.setScrollPercentX(1f);
+        color.add(colorSelectorScroller).expand();
 
         return color;
     }
