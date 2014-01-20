@@ -9,13 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 
 
 public class SlideWindow extends Window {
-    private final float borderSize = 30f;
+    private float borderSize;
 
     private boolean dragging = false, sliding = false;
     private float speedX = 0f;
 
-    public SlideWindow(String title, Skin skin) {
+    public SlideWindow(String title, Skin skin, float border) {
         super(title, skin);
+        borderSize = border;
 
         getButtonTable().remove();
 

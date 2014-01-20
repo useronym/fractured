@@ -66,9 +66,9 @@ public class FracturedUI {
 
         if (guiToUse == 1) {
             skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-            Gdx.app.debug("fractured!", "using standard ui skin");
             padding = app.settings.uiPadding;
             width = app.settings.uiWidth;
+            Gdx.app.debug("fractured!", "using standard ui skin");
         }
         else if (guiToUse == 2) {
             skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
@@ -152,10 +152,11 @@ public class FracturedUI {
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
 
-        options = new SlideWindow("Options", skin);
+        options = new SlideWindow("Options", skin, width - 15f);
         options.setHeight(Gdx.graphics.getHeight());
-        options.setWidth(Gdx.graphics.getWidth() / 3f);
-        options.setPosition((Gdx.graphics.getWidth() / 3f) * 2f, 0f);
+        float windowWidth = Gdx.graphics.getWidth() / 3f + width - 15f;
+        options.setWidth(windowWidth);
+        options.setPosition(Gdx.graphics.getWidth() - windowWidth, 0f);
         options.setModal(false);
         options.setKeepWithinStage(false);
         options.padLeft(width - 15f);
