@@ -34,11 +34,9 @@ public class Fractured extends Game {
 
     @Override
     public void create() {
-        settings = new FracturedSettings();
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
-        if (settings.debugLogging) {
-            Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        }
+        settings = new FracturedSettings();
 
         inputMultiplexer = new InputMultiplexer();
         gestureListener = new FracturedGestureListener();
