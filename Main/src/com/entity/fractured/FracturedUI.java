@@ -156,7 +156,10 @@ public class FracturedUI {
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
 
-        float borderSize = width - 45f;
+        float borderSize = app.settings.uiWindowBorder;
+        if (guiUsed == GuiMode.LARGE)
+            borderSize = app.settings.uiWindowBorderLarge;
+
         options = new SlideWindow("", skin, borderSize);
         options.setHeight(Gdx.graphics.getHeight());
         float windowWidth = Gdx.graphics.getWidth() / 3f + borderSize;

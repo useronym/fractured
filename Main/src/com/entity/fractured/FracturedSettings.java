@@ -24,7 +24,7 @@ public class FracturedSettings {
     float zoomSpeed = 0.5f;
     float uiPadding = 5f, uiPaddingLarge = 10f;
     float uiWidth = 80f, uiWidthLarge = 100f;
-    float uiWindowBorder = 45f, uiWindowBorderLarge = 80f;
+    float uiWindowBorder = 35f, uiWindowBorderLarge = 50f;
     float uiWindowMin = 280f, uiWindowMinLarge = 450f;
 
 
