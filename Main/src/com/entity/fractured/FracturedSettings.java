@@ -9,6 +9,10 @@ import java.util.Arrays;
 public class FracturedSettings {
     String version = "1.0";
     String preferencesName = "fractured-preferences";
+    String aboutText = "fractured! v." + version + "\n" +
+            "Faculty of Informatics, Masaryk University\n" +
+            "PV097, fall 2013\n" +
+            "Adam Krupicka";
     int screenCounter = 0;
     boolean debugLogging = true;
     boolean debugGUI = false;
@@ -19,11 +23,12 @@ public class FracturedSettings {
     int guiMode = 0;
     float zoomSpeed = 0.5f;
     float uiPadding = 5f, uiPaddingLarge = 10f;
-    float uiWidth = 50f, uiWidthLarge = 80f;
-    float uiWindowMin = 250f, uiWindowMinLarge = 400f;
+    float uiWidth = 80f, uiWidthLarge = 100f;
+    float uiWindowBorder = 45f, uiWindowBorderLarge = 80f;
+    float uiWindowMin = 280f, uiWindowMinLarge = 450f;
 
 
-    int fractalType = 0, fractalColor = 1;
+    int fractalType = 0, fractalColor = 0;
     int previewSetting = 2, renderSetting = 3;
 
     FracturedSettings() {

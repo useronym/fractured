@@ -1,6 +1,7 @@
 package com.entity.fractured;
 
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -25,6 +26,7 @@ public class FracturedUI {
     private OptStatus optStatus;
     private Table optWrapper, optCurrent;
 
+    private boolean guiDisables = false;
     private float padding = 5f;
     private float width = 50f;
 
@@ -46,6 +48,8 @@ public class FracturedUI {
     Slider paramSliderX, paramSliderY;
     List colorSelector;
 
+    private Window aboutWnd = null;
+
     private enum OptStatus {
         FRACTAL, COLOR, MORE, UNKNOWN
     }
@@ -54,6 +58,9 @@ public class FracturedUI {
     FracturedUI(Fractured owner) {
         app = owner;
         stage = new Stage();
+
+        if (Gdx.app.getType() == Application.ApplicationType.Android)
+            guiDisables = true;
 
         Gdx.app.debug("fractured!", "display density ratio " + String.valueOf(Gdx.graphics.getDensity()));
         if (app.settings.guiMode == 0) {
@@ -149,9 +156,10 @@ public class FracturedUI {
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
 
-        options = new SlideWindow("Options", skin, width - 15f);
+        float borderSize = width - 45f;
+        options = new SlideWindow("", skin, borderSize);
         options.setHeight(Gdx.graphics.getHeight());
-        float windowWidth = Gdx.graphics.getWidth() / 3f + width - 15f;
+        float windowWidth = Gdx.graphics.getWidth() / 3f + borderSize;
         if (guiUsed == GuiMode.STANDARD && windowWidth < app.settings.uiWindowMin)
             windowWidth = app.settings.uiWindowMin;
         if (guiUsed == GuiMode.LARGE && windowWidth < app.settings.uiWindowMinLarge)
@@ -160,7 +168,7 @@ public class FracturedUI {
         options.setPosition(Gdx.graphics.getWidth() - windowWidth, 0f);
         options.setModal(false);
         options.setKeepWithinStage(false);
-        options.padLeft(width - 15f);
+        options.padLeft(borderSize).padTop(0f);
         options.top();
 
         // header
@@ -211,7 +219,7 @@ public class FracturedUI {
                 if (optStatus != OptStatus.UNKNOWN) {
                     optCurrent.remove();
                     optCurrent = createOptionsMore();
-                    optWrapper.add(optCurrent);
+                    optWrapper.add(optCurrent).expand();
                     optStatus = OptStatus.MORE;
                 }
             }
@@ -256,7 +264,7 @@ public class FracturedUI {
                 }
             }
         });
-        typeTable.add(fractalType).width(width * 2.5f).pad(padding);
+        typeTable.add(fractalType).width(width * 1.75f).pad(padding);
         fractal.add(typeTable);
         fractal.row();
 
@@ -277,6 +285,7 @@ public class FracturedUI {
         iterTable.add(iterMinus).padRight(padding);
         iterations = new TextField(Integer.toString(app.getFractalRenderer().getIterations()),
                 skin);
+        iterations.setDisabled(guiDisables);
         iterations.setText(Integer.toString(app.getFractalRenderer().getIterations()));
         iterTable.add(iterations).width(width).padLeft(padding).padRight(padding).padBottom(padding);
         TextButton iterPlus = new TextButton("+", skin);
@@ -290,26 +299,33 @@ public class FracturedUI {
             }
         });
         iterTable.add(iterPlus).padLeft(padding);
-        /*Slider iterSlider = new Slider(25, 250, 1, false, skin);
-        iterSlider.setValue(app.getFractalRenderer().getIterations());
-        iterSlider.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                int it = Math.round(((Slider) actor).getValue());
-                iterations.setText(Integer.toString(it));
-                optionsChanged = true;
-            }
-        });
-        iterTable.add(iterSlider).colspan(2).pad(padding); */
-        fractal.add(iterTable);
+
+        /*if (!guiDisables) {
+            iterTable.row();
+            Slider iterSlider = new Slider(25, 250, 1, false, skin);
+            iterSlider.setValue(app.getFractalRenderer().getIterations());
+            iterSlider.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    int it = Math.round(((Slider) actor).getValue());
+                    iterations.setText(Integer.toString(it));
+                    optionsChanged = true;
+                }
+            });
+            iterTable.add(iterSlider).colspan(3).pad(padding).expand();
+        }*/
+
+        fractal.add(iterTable).expandY();
         fractal.row();
 
         // parameter
         Table paramsTable = new Table();
         // holds parameter controls
         Table paramXTable = new Table();
+        paramXTable.add(new Label("Param X", skin));
+        paramXTable.row();
         parameterX = new TextField(Float.toString(app.getFractalRenderer().getParameter().x), skin);
-        parameterX.setDisabled(true);
+        parameterX.setDisabled(guiDisables);
         paramXTable.add(parameterX).width(width).pad(padding);
         paramXTable.row();
         TextButton randomX = new TextButton("random", skin);
@@ -326,7 +342,7 @@ public class FracturedUI {
         paramXTable.add(randomX).pad(padding);
         // holds slider and parameter controls, resides in paramsTable
         Table sliderXTable = new Table();
-        paramSliderX = new Slider(0f, 1f, 0.01f, true, skin);
+        paramSliderX = new Slider(0f, 1f, 0.005f, true, skin);
         paramSliderX.setValue(app.getFractalRenderer().getParameter().x);
         paramSliderX.addListener(new ChangeListener() {
             @Override
@@ -336,13 +352,16 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        sliderXTable.add(paramSliderX).expand().pad(padding);
+        sliderXTable.add(paramSliderX).pad(padding).height(app.settings.height / 2f); // haxx lol
         sliderXTable.add(paramXTable);
         paramsTable.add(sliderXTable);
 
         // holds parameter controls
         Table paramYTable = new Table();
+        paramYTable.add(new Label("Param Y", skin));
+        paramYTable.row();
         parameterY = new TextField(Float.toString(app.getFractalRenderer().getParameter().y), skin);
+        parameterY.setDisabled(guiDisables);
         paramYTable.add(parameterY).width(width).pad(padding);
         paramYTable.row();
         TextButton randomY = new TextButton("random", skin);
@@ -359,7 +378,7 @@ public class FracturedUI {
         paramYTable.add(randomY).pad(padding);
         // holds slider and parameter controls, resides in paramsTable
         Table sliderYTable = new Table();
-        paramSliderY = new Slider(0f, 1f, 0.01f, true, skin);
+        paramSliderY = new Slider(0f, 1f, 0.005f, true, skin);
         paramSliderY.setValue(app.getFractalRenderer().getParameter().y);
         paramSliderY.addListener(new ChangeListener() {
             @Override
@@ -369,7 +388,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        sliderYTable.add(paramSliderY).pad(padding);
+        sliderYTable.add(paramSliderY).pad(padding).height(app.settings.height / 2f);;
         sliderYTable.add(paramYTable);
         paramsTable.add(sliderYTable);
         fractal.add(paramsTable).expandY();
@@ -400,16 +419,26 @@ public class FracturedUI {
         });
         ScrollPane colorSelectorScroller = new ScrollPane(colorSelector, skin, "transparent");
         colorSelectorScroller.setScrollingDisabled(true, false);
-        //colorSelectorScroller.setScrollbarsOnTop(true);
-        //colorSelectorScroller.scrollToCenter(2000f, 2000f, 1f, 1f);
-        //colorSelectorScroller.setScrollPercentX(0f);
-        color.add(colorSelectorScroller).expand();
+        colorSelectorScroller.scrollToCenter(0f, 500f, 100f, 100f);
+        colorSelectorScroller.setScrollPercentY(50f);
+        color.add(colorSelectorScroller).width(optWrapper.getWidth());
 
         return color;
     }
 
     private Table createOptionsMore() {
         Table more = new Table();
+
+        TextButton makeScreenshot = new TextButton("Save screenshot", skin);
+        makeScreenshot.padLeft(padding).padRight(padding);
+        makeScreenshot.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                app.requestScreenshot(5);
+            }
+        });
+        more.add(makeScreenshot).pad(padding).padBottom(padding * 3f);
+        more.row();
 
         Table moreQuality = new Table();
         moreQuality.add(new Label("Render quality", skin));
@@ -440,19 +469,9 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        moreQuality.add(previewBox).pad(padding);
+        moreQuality.add(previewBox).pad(padding).padBottom(padding * 3f);
         moreQuality.row();
         more.add(moreQuality);
-        more.row();
-
-        TextButton makeScreenshot = new TextButton("Save screenshot", skin);
-        makeScreenshot.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                app.requestScreenshot(5);
-            }
-        });
-        more.add(makeScreenshot).pad(padding);
         more.row();
 
         Table moreGuiMode = new Table();
@@ -468,6 +487,38 @@ public class FracturedUI {
         });
         moreGuiMode.add(guiMode).pad(padding);
         more.add(moreGuiMode);
+        more.row();
+
+        TextButton moreAbout = new TextButton("About", skin);
+        moreAbout.padLeft(padding).padRight(padding);
+        moreAbout.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                aboutWnd = new Window("About", skin, "dialog");
+                aboutWnd.setWidth(options.getWidth() * 1.35f);
+                aboutWnd.setHeight(aboutWnd.getWidth() * 0.5f);
+                aboutWnd.setModal(true);
+                aboutWnd.padTop(padding * 4f);
+                Label moreAboutText = new Label(app.settings.aboutText, skin);
+                moreAboutText.setAlignment(1);
+                aboutWnd.add(moreAboutText).expand();
+                aboutWnd.row();
+                TextButton moreAboutOk = new TextButton("Ok", skin);
+                moreAboutOk.padLeft(width).padRight(width);
+                moreAboutOk.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        aboutWnd.remove();
+                        aboutWnd = null;
+                    }
+                });
+                aboutWnd.add(moreAboutOk).pad(padding * 2f).expand().bottom();
+                aboutWnd.setPosition(app.settings.width / 2f - aboutWnd.getWidth() / 2f,
+                        app.settings.height / 2f - aboutWnd.getHeight() / 2f);
+                stage.addActor(aboutWnd);
+            }
+        });
+        more.add(moreAbout).pad(padding);
 
 
         return more;
