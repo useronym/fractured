@@ -20,6 +20,7 @@ public class FracturedSettings {
     float zoomSpeed = 0.5f;
     float uiPadding = 5f, uiPaddingLarge = 10f;
     float uiWidth = 50f, uiWidthLarge = 80f;
+    float uiWindowMin = 250f, uiWindowMinLarge = 400f;
 
 
     int fractalType = 0, fractalColor = 1;
@@ -87,22 +88,8 @@ public class FracturedSettings {
             "fractals/julia_expz2.frag",
             "fractals/julia_expz3.frag",
     };
-
     String[] fractalNames = {"z^2 + c",
             "z^3 + c",
             "exp(z^2) - c",
             "exp(z^3) - c"};
-
-    /*String[] fractalColors = {"gradients/aneurism.png",
-            "gradients/full_spectrum.png",
-            "gradients/incandescent.png",
-            "gradients/metallic_something.png",
-            "gradients/purples.png",
-            "gradients/shadows1.png",
-            "gradients/shadows3.png",
-            "gradients/skyline.png",
-            "gradients/three_bars_sin.png",
-            "gradients/tropical_colors.png",
-            "gradients/yellow_contrast.png",
-    };*/
 }

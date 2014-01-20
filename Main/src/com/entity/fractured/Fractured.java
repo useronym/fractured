@@ -74,9 +74,6 @@ public class Fractured extends Game {
         fractalSprite.setSize(width, height);
         fractalSprite.setOrigin(width / 2f, height / 2f);
 
-        needsRender = false;
-        justRendered = false;
-
         // request render in 10 frames
         requestRender(10);
     }
@@ -106,17 +103,21 @@ public class Fractured extends Game {
             renderRequestFrames--;
         }
 
-        if (needsRender)
+        if (needsRender) {
             ui.setBusy(true);
+        }
+
 
         ui.draw(Gdx.graphics.getDeltaTime());
 
         if (needsRender) {
             if (! Gdx.input.isTouched() && !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+                setInputEnabled(false);
                 renderFractal();
                 needsRender = false;
                 justRendered = true;
                 ui.setBusy(false);
+                setInputEnabled(true);
             }
         }
 
@@ -135,6 +136,7 @@ public class Fractured extends Game {
 
                 ui.setBusy(false);
                 needsScreenshot = false;
+                setInputEnabled(true);
             }
 
             screenshotRequestFrames--;
@@ -177,6 +179,7 @@ public class Fractured extends Game {
     public void requestScreenshot(int n) {
         ui.setBusy(true);
         ui.postMessage("Creating screenshot...");
+        setInputEnabled(false);
         screenshotRequestFrames = n;
     }
 
@@ -216,6 +219,7 @@ public class Fractured extends Game {
     public FractalRenderer getFractalRenderer() {
         return renderer;
     }
+
 
     private void renderFractal() {
         renderStart = TimeUtils.millis();
@@ -265,5 +269,12 @@ public class Fractured extends Game {
 
             requestRender();
         }
+    }
+
+    private void setInputEnabled(boolean enabled) {
+        if (enabled)
+            Gdx.input.setInputProcessor(inputMultiplexer);
+        else
+            Gdx.input.setInputProcessor(null);
     }
 }

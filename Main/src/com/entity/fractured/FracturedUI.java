@@ -3,7 +3,6 @@ package com.entity.fractured;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,6 +17,10 @@ public class FracturedUI {
     private Stage stage;
     private Skin skin;
 
+    private enum GuiMode {
+        STANDARD, LARGE
+    }
+    private GuiMode guiUsed;
     private SlideWindow options;
     private OptStatus optStatus;
     private Table optWrapper, optCurrent;
@@ -29,7 +32,7 @@ public class FracturedUI {
     private Label userMessage = null;
     private int currentMessageFrames = -1;
     private float currentMessageTime;
-    private float timeForMessage = 10f;
+    private final float timeForMessage = 10f;
 
     // renderer busy icon
     private boolean busy;
@@ -53,24 +56,26 @@ public class FracturedUI {
         stage = new Stage();
 
         Gdx.app.debug("fractured!", "display density ratio " + String.valueOf(Gdx.graphics.getDensity()));
-        int guiToUse = 0;
         if (app.settings.guiMode == 0) {
             if (Gdx.graphics.getDensity() > 1f) {
-                guiToUse = 2;
+                guiUsed = GuiMode.LARGE;
             } else {
-                guiToUse = 1;
+                guiUsed = GuiMode.STANDARD;
             }
         } else {
-            guiToUse = app.settings.guiMode;
+            switch (app.settings.guiMode) {
+                case 1: guiUsed = GuiMode.STANDARD; break;
+                case 2: guiUsed = GuiMode.LARGE; break;
+            }
         }
 
-        if (guiToUse == 1) {
+        if (guiUsed == GuiMode.STANDARD) {
             skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
             padding = app.settings.uiPadding;
             width = app.settings.uiWidth;
             Gdx.app.debug("fractured!", "using standard ui skin");
         }
-        else if (guiToUse == 2) {
+        else if (guiUsed == GuiMode.LARGE) {
             skin = new Skin(Gdx.files.internal("ui/uiskin_large.json"));
             padding = app.settings.uiPaddingLarge;
             width = app.settings.uiWidthLarge;
@@ -81,7 +86,7 @@ public class FracturedUI {
         createUI();
     }
 
-    public void postMessage(String msg, float time) {
+    public void postMessage(String msg) {
         if (userMessage != null) {
             userMessage.remove();
         }
@@ -91,10 +96,6 @@ public class FracturedUI {
         stage.addActor(userMessage);
         currentMessageFrames = 10;
         currentMessageTime = -1f;
-    }
-
-    public void postMessage(String msg) {
-        postMessage(msg, 10f);
     }
 
     public void setBusy(boolean isbusy) {
@@ -145,16 +146,16 @@ public class FracturedUI {
         optionsChanged = false;
     }
 
-    private float getScaled(float f) {
-        return Gdx.graphics.getDensity() * f;
-    }
-
     private void createOptions() {
         optStatus = OptStatus.UNKNOWN;
 
         options = new SlideWindow("Options", skin, width - 15f);
         options.setHeight(Gdx.graphics.getHeight());
         float windowWidth = Gdx.graphics.getWidth() / 3f + width - 15f;
+        if (guiUsed == GuiMode.STANDARD && windowWidth < app.settings.uiWindowMin)
+            windowWidth = app.settings.uiWindowMin;
+        if (guiUsed == GuiMode.LARGE && windowWidth < app.settings.uiWindowMinLarge)
+            windowWidth = app.settings.uiWindowMinLarge;
         options.setWidth(windowWidth);
         options.setPosition(Gdx.graphics.getWidth() - windowWidth, 0f);
         options.setModal(false);
@@ -400,8 +401,8 @@ public class FracturedUI {
         ScrollPane colorSelectorScroller = new ScrollPane(colorSelector, skin, "transparent");
         colorSelectorScroller.setScrollingDisabled(true, false);
         //colorSelectorScroller.setScrollbarsOnTop(true);
-        colorSelectorScroller.setScrollPercentY(1f);
-        colorSelectorScroller.setScrollPercentX(1f);
+        //colorSelectorScroller.scrollToCenter(2000f, 2000f, 1f, 1f);
+        //colorSelectorScroller.setScrollPercentX(0f);
         color.add(colorSelectorScroller).expand();
 
         return color;
@@ -509,10 +510,6 @@ public class FracturedUI {
     public void dispose() {
         destroyUI();
         stage.dispose();
-    }
-
-    public BitmapFont getFont() {
-        return skin.getFont("default-font");
     }
 
     public Stage getStage() {
