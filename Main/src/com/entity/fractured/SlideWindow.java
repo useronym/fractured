@@ -51,7 +51,7 @@ public class SlideWindow extends Window {
                 if (dragging) {
                     dragging = false;
 
-                    if (speedX != 0f) {
+                    if (Math.abs(speedX) > 1.1f) {
                         speedX *= 2.5f;
                         sliding = true;
                     }

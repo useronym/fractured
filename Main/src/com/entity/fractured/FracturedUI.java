@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -47,6 +48,7 @@ public class FracturedUI {
     TextField parameterX, parameterY;
     Slider paramSliderX, paramSliderY;
     List colorSelector;
+    ScrollPane colorSelectorScroller;
 
     private Window aboutWnd = null;
 
@@ -171,13 +173,12 @@ public class FracturedUI {
         options.setPosition(Gdx.graphics.getWidth() - windowWidth, 0f);
         options.setModal(false);
         options.setKeepWithinStage(false);
-        options.padLeft(borderSize).padTop(0f);
+        options.padTop(0f);
         options.top();
 
         // header
         Table header = new Table();
         header.pad(padding);
-        options.add(header);
         ButtonGroup headerGroup = new ButtonGroup();
         headerGroup.setMinCheckCount(1);
         headerGroup.setMaxCheckCount(1);
@@ -229,7 +230,23 @@ public class FracturedUI {
         });
         header.add(headerMore).pad(padding);
         headerGroup.add(headerMore);
+        options.add(header).colspan(2);
         options.row();
+
+        /*// drag image
+        ImageButton dragger = new ImageButton(skin, "drag-button");
+        dragger.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (! event.getBubbles()) {
+                    event.setBubbles(true);
+                    actor.fire(event);
+                } else {
+
+                }
+            }
+        });
+        options.add(dragger);*/
 
         // options wrapper table
         optWrapper = new Table();
@@ -332,7 +349,6 @@ public class FracturedUI {
         paramXTable.add(parameterX).width(width).pad(padding);
         paramXTable.row();
         TextButton randomX = new TextButton("random", skin);
-        randomX.padLeft(10f).padRight(10f);
         randomX.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -342,7 +358,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        paramXTable.add(randomX).pad(padding);
+        paramXTable.add(randomX).pad(padding).fill();
         // holds slider and parameter controls, resides in paramsTable
         Table sliderXTable = new Table();
         paramSliderX = new Slider(0f, 1f, 0.005f, true, skin);
@@ -368,7 +384,6 @@ public class FracturedUI {
         paramYTable.add(parameterY).width(width).pad(padding);
         paramYTable.row();
         TextButton randomY = new TextButton("random", skin);
-        randomY.padLeft(10f).padRight(10f);
         randomY.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -378,7 +393,7 @@ public class FracturedUI {
                 optionsChanged = true;
             }
         });
-        paramYTable.add(randomY).pad(padding);
+        paramYTable.add(randomY).pad(padding).fill();
         // holds slider and parameter controls, resides in paramsTable
         Table sliderYTable = new Table();
         paramSliderY = new Slider(0f, 1f, 0.005f, true, skin);
@@ -409,7 +424,6 @@ public class FracturedUI {
         }
         colorSelector = new List(colorNames, skin);
         colorSelector.setSelectedIndex(app.settings.fractalColor);
-        //colorSelector.setFillParent(true);
         colorSelector.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -420,10 +434,10 @@ public class FracturedUI {
                 }
             }
         });
-        ScrollPane colorSelectorScroller = new ScrollPane(colorSelector, skin, "transparent");
+        Table colorSelectorTable = new Table();
+        colorSelectorTable.add(colorSelector);
+        colorSelectorScroller = new ScrollPane(colorSelectorTable, skin, "transparent");
         colorSelectorScroller.setScrollingDisabled(true, false);
-        colorSelectorScroller.scrollToCenter(0f, 500f, 100f, 100f);
-        colorSelectorScroller.setScrollPercentY(50f);
         color.add(colorSelectorScroller).width(optWrapper.getWidth());
 
         return color;
@@ -433,14 +447,13 @@ public class FracturedUI {
         Table more = new Table();
 
         TextButton makeScreenshot = new TextButton("Save screenshot", skin);
-        makeScreenshot.padLeft(padding).padRight(padding);
         makeScreenshot.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 app.requestScreenshot(5);
             }
         });
-        more.add(makeScreenshot).pad(padding).padBottom(padding * 3f);
+        more.add(makeScreenshot).pad(padding).padBottom(padding * 3f).fill();
         more.row();
 
         Table moreQuality = new Table();
@@ -492,7 +505,7 @@ public class FracturedUI {
         more.add(moreGuiMode);
         more.row();
 
-        TextButton moreAbout = new TextButton("About", skin);
+        final TextButton moreAbout = new TextButton("About", skin);
         moreAbout.padLeft(padding).padRight(padding);
         moreAbout.addListener(new ChangeListener() {
             @Override
@@ -507,7 +520,7 @@ public class FracturedUI {
                 aboutWnd.add(moreAboutText).expand();
                 aboutWnd.row();
                 TextButton moreAboutOk = new TextButton("Ok", skin);
-                moreAboutOk.padLeft(width).padRight(width);
+                //moreAboutOk.padLeft(width).padRight(width);
                 moreAboutOk.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
@@ -515,14 +528,13 @@ public class FracturedUI {
                         aboutWnd = null;
                     }
                 });
-                aboutWnd.add(moreAboutOk).pad(padding * 2f).expand().bottom();
+                aboutWnd.add(moreAboutOk).pad(padding * 2f).expand().bottom().width(moreAbout.getWidth());
                 aboutWnd.setPosition(app.settings.width / 2f - aboutWnd.getWidth() / 2f,
                         app.settings.height / 2f - aboutWnd.getHeight() / 2f);
                 stage.addActor(aboutWnd);
             }
         });
-        more.add(moreAbout).pad(padding);
-
+        more.add(moreAbout).expand().pad(padding).fill().bottom();
 
         return more;
     }
