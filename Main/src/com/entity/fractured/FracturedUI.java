@@ -7,55 +7,45 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.util.Arrays;
 
 public class FracturedUI {
+    private final float timeForMessage = 10f;
+
+    // fractal options gui
+    private boolean optionsChanged = false;
+    private SelectBox fractalType;
+    private TextField iterations;
+    private TextField parameterX, parameterY;
+    private Slider paramSliderX, paramSliderY;
+    private List colorSelector;
+    private ScrollPane colorSelectorScroller;
+
     private Fractured app;
     private Stage stage;
     private Skin skin;
-
-    private enum GuiMode {
-        STANDARD, LARGE
-    }
     private GuiMode guiUsed;
     private SlideWindow options;
     private OptStatus optStatus;
     private Table optWrapper, optCurrent;
-
     private boolean guiDisables = false;
     private float padding = 5f;
     private float width = 50f;
-
     // user messages
     private Label userMessage = null;
     private int currentMessageFrames = -1;
     private float currentMessageTime;
-    private final float timeForMessage = 10f;
-
     // renderer busy icon
     private boolean busy;
     private Sprite iconBusy;
-
-    // fractal options
-    boolean optionsChanged = false;
-    SelectBox fractalType;
-    TextField iterations;
-    TextField parameterX, parameterY;
-    Slider paramSliderX, paramSliderY;
-    List colorSelector;
-    ScrollPane colorSelectorScroller;
-
-    private Window aboutWnd = null;
-
-    private enum OptStatus {
-        FRACTAL, COLOR, MORE, UNKNOWN
-    }
-
+    // "spawnable" windows
+    private Window aboutWnd;
+    private Window welcomeWnd;
 
     FracturedUI(Fractured owner) {
         app = owner;
@@ -107,12 +97,12 @@ public class FracturedUI {
         currentMessageTime = -1f;
     }
 
-    public void setBusy(boolean isbusy) {
-        busy = isbusy;
-    }
-
     public boolean isBusy() {
         return busy;
+    }
+
+    public void setBusy(boolean isbusy) {
+        busy = isbusy;
     }
 
     public void createUI() {
@@ -120,6 +110,11 @@ public class FracturedUI {
 
         iconBusy = new Sprite(new Texture(Gdx.files.internal("ui/loading.png")));
         iconBusy.setPosition(20f, Gdx.graphics.getHeight() - 85f);
+
+        if (app.settings.welcome) {
+            Gdx.app.debug("fractured!", "creating welcome window");
+            createWelcomeWnd();
+        }
     }
 
     public void destroyUI() {
@@ -505,38 +500,106 @@ public class FracturedUI {
         more.add(moreGuiMode);
         more.row();
 
+        CheckBox moreTip = new CheckBox(" Show startup tip", skin);
+        moreTip.setChecked(app.settings.welcome);
+        moreTip.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                app.settings.welcome = ((CheckBox)actor).isChecked();
+            }
+        });
+        more.add(moreTip).pad(padding);
+        more.row();
+
         final TextButton moreAbout = new TextButton("About", skin);
         moreAbout.padLeft(padding).padRight(padding);
         moreAbout.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                aboutWnd = new Window("About", skin, "dialog");
-                aboutWnd.setWidth(options.getWidth() * 1.35f);
-                aboutWnd.setHeight(aboutWnd.getWidth() * 0.5f);
-                aboutWnd.setModal(true);
-                aboutWnd.padTop(padding * 4f);
-                Label moreAboutText = new Label(app.settings.aboutText, skin);
-                moreAboutText.setAlignment(1);
-                aboutWnd.add(moreAboutText).expand();
-                aboutWnd.row();
-                TextButton moreAboutOk = new TextButton("Ok", skin);
-                //moreAboutOk.padLeft(width).padRight(width);
-                moreAboutOk.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        aboutWnd.remove();
-                        aboutWnd = null;
-                    }
-                });
-                aboutWnd.add(moreAboutOk).pad(padding * 2f).expand().bottom().width(moreAbout.getWidth());
-                aboutWnd.setPosition(app.settings.width / 2f - aboutWnd.getWidth() / 2f,
-                        app.settings.height / 2f - aboutWnd.getHeight() / 2f);
-                stage.addActor(aboutWnd);
+                createAboutWnd(moreAbout.getWidth());
             }
         });
         more.add(moreAbout).expand().pad(padding).fill().bottom();
 
         return more;
+    }
+
+    private void createWelcomeWnd() {
+        welcomeWnd = new Window("fractured! v." + app.settings.version, skin, "dialog");
+        float width = options.getWidth() * 1.8f;
+        if (width >= app.settings.width)
+            width = app.settings.width - padding * 2f;
+        welcomeWnd.setWidth(width);
+        float height = welcomeWnd.getWidth() * 0.75f;
+        if (height >= app.settings.height)
+            height = app.settings.height - padding * 2f;
+        welcomeWnd.setHeight(height);
+        welcomeWnd.setModal(true);
+        welcomeWnd.pad(padding);
+        welcomeWnd.padTop(padding * 4f);
+        Table welcomeTable = new Table();
+
+        Label welcomeTitle = new Label(app.settings.welcomeTitle, skin);
+        welcomeTitle.setAlignment(Align.center);
+        welcomeTable.add(welcomeTitle).pad(padding).center().width(welcomeWnd.getWidth());
+        welcomeTable.row();
+        Label welcomeText = new Label(app.settings.welcomeText, skin);
+        welcomeText.setWrap(true);
+        welcomeText.setAlignment(Align.center, Align.left);
+        welcomeTable.add(welcomeText).pad(padding).expandY().width(welcomeWnd.getWidth() - padding * 4f);
+        welcomeTable.row();
+        CheckBox showAgain = new CheckBox(" Show next time", skin);
+        showAgain.setChecked(app.settings.welcome);
+        showAgain.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                app.settings.welcome = ((CheckBox)actor).isChecked();
+            }
+        });
+        welcomeTable.add(showAgain).pad(padding * 3f).left();
+        welcomeTable.row();
+        TextButton welcomeOk = new TextButton("Ok", skin);
+        welcomeOk.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                welcomeWnd.remove();
+            }
+        });
+        welcomeTable.add(welcomeOk).pad(padding * 2f).bottom().width(welcomeWnd.getWidth() * 0.33f);
+
+        ScrollPane welcomeScroller = new ScrollPane(welcomeTable, skin, "transparent");
+        welcomeScroller.setScrollingDisabled(true, false);
+        welcomeScroller.setupFadeScrollBars(0f, 0f);
+        welcomeWnd.add(welcomeScroller);
+
+        welcomeWnd.setPosition(app.settings.width / 2f - welcomeWnd.getWidth() / 2f,
+                app.settings.height / 2f - welcomeWnd.getHeight() / 2f);
+        stage.addActor(welcomeWnd);
+    }
+
+    private void createAboutWnd(float btnWidth) {
+        aboutWnd = new Window("About", skin, "dialog");
+        aboutWnd.setWidth(options.getWidth() * 1.35f);
+        aboutWnd.setHeight(aboutWnd.getWidth() * 0.5f);
+        aboutWnd.setModal(true);
+        aboutWnd.padTop(padding * 4f);
+
+        Label moreAboutText = new Label(app.settings.aboutText, skin);
+        moreAboutText.setAlignment(1);
+        aboutWnd.add(moreAboutText).expand();
+        aboutWnd.row();
+        TextButton moreAboutOk = new TextButton("Ok", skin);
+        //moreAboutOk.padLeft(width).padRight(width);
+        moreAboutOk.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                aboutWnd.remove();
+            }
+        });
+        aboutWnd.add(moreAboutOk).pad(padding * 2f).expand().bottom().width(btnWidth);
+        aboutWnd.setPosition(app.settings.width / 2f - aboutWnd.getWidth() / 2f,
+                app.settings.height / 2f - aboutWnd.getHeight() / 2f);
+        stage.addActor(aboutWnd);
     }
 
     public void draw(float delta) {
@@ -580,5 +643,13 @@ public class FracturedUI {
 
     public Stage getStage() {
         return stage;
+    }
+
+    private enum GuiMode {
+        STANDARD, LARGE
+    }
+
+    private enum OptStatus {
+        FRACTAL, COLOR, MORE, UNKNOWN
     }
 }

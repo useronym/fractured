@@ -9,6 +9,16 @@ import java.util.Arrays;
 public class FracturedSettings {
     String version = "1.0";
     String preferencesName = "fractured-preferences";
+    boolean welcome = true;
+    String welcomeTitle = "Welcome to fractured! , a GPU fractal explorer.";
+    String welcomeText = "> Controls\n" +
+            "Pan to move around the fractal\n" +
+            "Pinch to zoom\n" +
+            "\n" +
+            "> Tips\n" +
+            "You can slide the window on the right off the screen.\n" +
+            "Screenshots are rendered with the \"Render\" quality setting and are stored on the SD card.\n" +
+            "Performance can be increased by lowering the render qualities in the \"More\" tab.";
     String aboutText = "fractured! v." + version + "\n" +
             "Faculty of Informatics, Masaryk University\n" +
             "PV097, fall 2013\n" +
@@ -47,6 +57,7 @@ public class FracturedSettings {
         prefs.clear();
 
         prefs.putString("version", version);
+        prefs.putBoolean("welcome", welcome);
         prefs.putInteger("screenCounter", screenCounter);
         prefs.putInteger("guiMode", guiMode);
         prefs.putInteger("previewSetting", previewSetting);
@@ -61,6 +72,7 @@ public class FracturedSettings {
 
         if (prefs.contains("version")) {
             if (prefs.getString("version").equals(version)) {
+                welcome = prefs.getBoolean("welcome", welcome);
                 screenCounter = prefs.getInteger("screenCounter", screenCounter);
                 guiMode = prefs.getInteger("guiMode", guiMode);
                 previewSetting = prefs.getInteger("previewSetting", previewSetting);
@@ -68,6 +80,8 @@ public class FracturedSettings {
             } else {
                 Gdx.app.debug("fractured!", "ignoring an outdated version of shared settings");
             }
+        } else {
+            Gdx.app.debug("fractured!", "no shared settings found, using defaults");
         }
     }
 

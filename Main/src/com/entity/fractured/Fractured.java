@@ -153,6 +153,7 @@ public class Fractured extends Game {
     public void dispose() {
         settings.saveToShared();
         renderer.dispose();
+        previewRenderer.dispose();
         Batch.dispose();
         ui.dispose();
     }
