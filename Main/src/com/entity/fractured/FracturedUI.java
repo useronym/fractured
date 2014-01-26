@@ -208,7 +208,6 @@ public class FracturedUI {
                     options.layout();
                     float scrollTo = (colorSelector.getSelectedIndex() / (float) colorSelector.getItems().length);
                     scrollTo *= colorSelectorScroller.getMaxY();
-                    Gdx.app.log("f!", Float.toString(app.settings.fractalColors.length));
                     colorSelectorScroller.setScrollY(scrollTo);
                 }
             }
@@ -531,7 +530,7 @@ public class FracturedUI {
     }
 
     private void createWelcomeWnd() {
-        welcomeWnd = new Window("fractured! v." + app.settings.version, skin, "dialog");
+        welcomeWnd = new Window("fractured! v" + app.settings.version, skin, "dialog");
         float width = options.getWidth() * 1.8f;
         if (width >= app.settings.width)
             width = app.settings.width - padding * 2f;
