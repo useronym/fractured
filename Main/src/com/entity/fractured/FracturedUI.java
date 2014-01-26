@@ -204,6 +204,12 @@ public class FracturedUI {
                     optCurrent = createOptionsColor();
                     optWrapper.add(optCurrent).expand();
                     optStatus = OptStatus.COLOR;
+                    // kinda dirty
+                    options.layout();
+                    float scrollTo = (colorSelector.getSelectedIndex() / (float) colorSelector.getItems().length);
+                    scrollTo *= colorSelectorScroller.getMaxY();
+                    Gdx.app.log("f!", Float.toString(app.settings.fractalColors.length));
+                    colorSelectorScroller.setScrollY(scrollTo);
                 }
             }
         });

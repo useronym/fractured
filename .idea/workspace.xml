@@ -20,7 +20,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90062549-1e00-4640-981b-58063f1691ca" name="Default" comment="Added a &quot;busy&quot; icon to the GUI.">
+    <list default="true" id="90062549-1e00-4640-981b-58063f1691ca" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Android/assets/ui/uiskin.png" afterPath="$PROJECT_DIR$/Android/assets/ui/uiskin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" afterPath="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Android/assets/ui/uiskin.atlas" afterPath="$PROJECT_DIR$/Android/assets/ui/uiskin.atlas" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Android/assets/ui/uiskin.json" afterPath="$PROJECT_DIR$/Android/assets/ui/uiskin.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shaded.iws" />
@@ -85,31 +89,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Fractured.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Fractured.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="41" selection-start="822" selection-end="822" vertical-scroll-proportion="0.33777037" vertical-offset="175" max-vertical-offset="5112">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="155" column="34" selection-start="4443" selection-end="4443" vertical-scroll-proportion="0.0" vertical-offset="2790" max-vertical-offset="5112">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FracturedUI.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FracturedUI.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="393" column="43" selection-start="14852" selection-end="14852" vertical-scroll-proportion="0.0" vertical-offset="5646" max-vertical-offset="9522">
+            <state line="208" column="81" selection-start="7497" selection-end="7497" vertical-scroll-proportion="0.5" vertical-offset="3261" max-vertical-offset="10962">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3110#3111#0" expanded="true" />
-                <element signature="e#3139#3140#0" expanded="true" />
-                <element signature="e#16489#16671#0" expanded="true" />
-                <element signature="e#16660#16661#0" expanded="true" />
-                <element signature="e#19125#20461#0" expanded="true" />
-                <element signature="e#19896#20146#0" expanded="true" />
-                <element signature="e#20127#20128#0" expanded="true" />
-                <element signature="e#20450#20451#0" expanded="true" />
+                <element signature="e#3163#3164#0" expanded="true" />
+                <element signature="e#3190#3191#0" expanded="true" />
+                <element signature="e#3233#3234#0" expanded="true" />
+                <element signature="e#3262#3263#0" expanded="true" />
+                <element signature="e#19612#19857#0" expanded="true" />
+                <element signature="e#19846#19847#0" expanded="true" />
+                <element signature="e#20105#20309#0" expanded="true" />
+                <element signature="e#20298#20299#0" expanded="true" />
+                <element signature="e#22155#22359#0" expanded="true" />
+                <element signature="e#22348#22349#0" expanded="true" />
+                <element signature="e#22541#22712#0" expanded="true" />
+                <element signature="e#22701#22702#0" expanded="true" />
+                <element signature="e#23877#24046#0" expanded="true" />
+                <element signature="e#24035#24036#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,7 +125,16 @@
       <file leaf-file-name="SlideWindow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/SlideWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="35" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1656">
+            <state line="54" column="24" selection-start="1727" selection-end="1727" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1656">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FracturedSettings.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="24" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="3114">
               <folding />
             </state>
           </provider>
@@ -127,18 +143,7 @@
       <file leaf-file-name="FractalRenderer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="41" selection-start="1881" selection-end="1881" vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4410">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FracturedSettings.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="46" selection-start="1014" selection-end="1014" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1836">
+            <state line="91" column="24" selection-start="3054" selection-end="3054" vertical-scroll-proportion="0.0" vertical-offset="1098" max-vertical-offset="4320">
               <folding />
             </state>
           </provider>
@@ -175,23 +180,23 @@
         <option value="$PROJECT_DIR$/Android/assets/uiskin.atlas" />
         <option value="$PROJECT_DIR$/Android/assets/uiskin.json" />
         <option value="$PROJECT_DIR$/Desktop/src/com/entity/fractured/DesktopStarter.java" />
-        <option value="$PROJECT_DIR$/Android/assets/ui/uiskin.atlas" />
         <option value="$PROJECT_DIR$/Android/assets/ui/uiskin_large.json" />
         <option value="$PROJECT_DIR$/Android/assets/ui/uiskin_large.atlas" />
+        <option value="$PROJECT_DIR$/Android/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/Android/assets/ui/uiskin.atlas" />
+        <option value="$PROJECT_DIR$/Android/assets/ui/uiskin.json" />
+        <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/SlideWindow.java" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java" />
-        <option value="$PROJECT_DIR$/Android/assets/ui/uiskin.json" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedSettings.java" />
         <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java" />
-        <option value="$PROJECT_DIR$/Main/src/com/entity/fractured/SlideWindow.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
     <option name="y" value="29" />
-    <option name="width" value="1368" />
-    <option name="height" value="745" />
+    <option name="width" value="1366" />
+    <option name="height" value="739" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -229,7 +234,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -310,7 +315,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -326,12 +331,30 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Android/libs/armeabi" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="dynamic.classpath" value="false" />
     <property name="FullScreen" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="83" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="93" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="98" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1007" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="83" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="93" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="98" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1007" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -342,7 +365,7 @@
       <recent name="C:\Dev\android\fractured\Android\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DesktopStarter">
+  <component name="RunManager" selected="Android Application.Android">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -377,19 +400,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -415,6 +425,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -626,7 +649,39 @@
       <created>1390248065834</created>
       <updated>1390248065834</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="ss">
+      <created>1390248092478</created>
+      <updated>1390248092478</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Supposedly, last commit before going &quot;official&quot;.">
+      <created>1390248521220</created>
+      <updated>1390248521220</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Had to hardcode all the gradient filenames -.-">
+      <created>1390250485130</created>
+      <updated>1390250485130</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Fixed window border size.">
+      <created>1390250843891</created>
+      <updated>1390250843891</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Updated AndroidManifest.">
+      <created>1390250979719</created>
+      <updated>1390250979719</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added missing gradients.">
+      <created>1390251517187</created>
+      <updated>1390251517187</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Small GUI improvements.">
+      <created>1390492426964</created>
+      <updated>1390492426964</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Added a nice welcome window and fixed a memory leak :)">
+      <created>1390761921589</created>
+      <updated>1390761921589</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -650,33 +705,33 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="29" width="1368" height="745" extended-state="6" />
+    <frame x="0" y="29" width="1366" height="739" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7919463" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7919463" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32872504" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6442953" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31118315" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6442953" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3100159" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32872504" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.28691274" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35031846" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31687897" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34976152" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3163752" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.7919463" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23111783" sideWeight="0.6807131" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.2563694" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.25596184" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="92" y="122" width="1182" height="554" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -697,16 +752,12 @@
     </option>
     <confirmMoveToFailedCommit value="1" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Improved the code, zooming is implemented but buggy" />
-    <MESSAGE value="Added a quality setting" />
-    <MESSAGE value="Got some basic UI prototype working" />
     <MESSAGE value="Zooming is working (almost!) correctly" />
     <MESSAGE value="Fixed the (presumably) last problem in zooming... that was an easy one :)" />
     <MESSAGE value="Added two new gradients and a new julia fractal: z^3 + c" />
     <MESSAGE value="Implemented supersampling and improved input processing" />
     <MESSAGE value="Added two new julia fractals: exp(z^3)-c and exp(z^2)-c" />
     <MESSAGE value="Updated to the latest stable version of libGDX (0.9.9)" />
-    <MESSAGE value="Small GUI improvements." />
     <MESSAGE value="Added a &quot;busy&quot; icon to the GUI." />
     <MESSAGE value="Improved GUI skins, mostly the large one. Plus the &quot;aneurism&quot; gradient :)" />
     <MESSAGE value="Improved the fractal rendering logic." />
@@ -718,22 +769,103 @@
     <MESSAGE value="Improved many GUI aspects." />
     <MESSAGE value="Fixed a (likely) memleak involving a texture in FractalRenderer" />
     <MESSAGE value="Countless GUI improvements." />
-    <option name="LAST_COMMIT_MESSAGE" value="Countless GUI improvements." />
+    <MESSAGE value="ss" />
+    <MESSAGE value="Supposedly, last commit before going &quot;official&quot;." />
+    <MESSAGE value="Had to hardcode all the gradient filenames -.-" />
+    <MESSAGE value="Fixed window border size." />
+    <MESSAGE value="Updated AndroidManifest." />
+    <MESSAGE value="Added missing gradients." />
+    <MESSAGE value="Small GUI improvements." />
+    <MESSAGE value="Added a nice welcome window and fixed a memory leak :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a nice welcome window and fixed a memory leak :)" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="60" selection-start="2225" selection-end="2225" vertical-scroll-proportion="0.0" vertical-offset="1206" max-vertical-offset="4320">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="12" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="2646">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Android/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="38" selection-start="259" selection-end="259" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="41" selection-start="863" selection-end="863" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="5094">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="31" selection-start="818" selection-end="818" vertical-scroll-proportion="0.0" vertical-offset="522" max-vertical-offset="10350">
+          <folding>
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="e#3190#3191#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3262#3263#0" expanded="true" />
+            <element signature="e#19612#19857#0" expanded="true" />
+            <element signature="e#19846#19847#0" expanded="true" />
+            <element signature="e#20105#20309#0" expanded="true" />
+            <element signature="e#20298#20299#0" expanded="true" />
+            <element signature="e#22155#22359#0" expanded="true" />
+            <element signature="e#22348#22349#0" expanded="true" />
+            <element signature="e#22541#22712#0" expanded="true" />
+            <element signature="e#22701#22702#0" expanded="true" />
+            <element signature="e#23877#24046#0" expanded="true" />
+            <element signature="e#24035#24036#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/SlideWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="35" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="1746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="41" selection-start="1881" selection-end="1881" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="4806">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="46" selection-start="1014" selection-end="1014" vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="1908">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="186" column="31" selection-start="5332" selection-end="5332" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4914">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -748,15 +880,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="434" column="9" selection-start="16231" selection-end="16231" vertical-scroll-proportion="0.0" vertical-offset="7812" max-vertical-offset="9504">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3110#3111#0" expanded="true" />
-            <element signature="e#3139#3140#0" expanded="true" />
-            <element signature="e#16489#16671#0" expanded="true" />
-            <element signature="e#16660#16661#0" expanded="true" />
-            <element signature="e#19125#20461#0" expanded="true" />
-            <element signature="e#19896#20146#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
-            <element signature="e#20450#20451#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="e#3190#3191#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3262#3263#0" expanded="true" />
+            <element signature="e#19612#19857#0" expanded="true" />
+            <element signature="e#19846#19847#0" expanded="true" />
+            <element signature="e#20105#20309#0" expanded="true" />
+            <element signature="e#20298#20299#0" expanded="true" />
+            <element signature="e#22155#22359#0" expanded="true" />
+            <element signature="e#22348#22349#0" expanded="true" />
+            <element signature="e#22541#22712#0" expanded="true" />
+            <element signature="e#22701#22702#0" expanded="true" />
+            <element signature="e#23877#24046#0" expanded="true" />
+            <element signature="e#24035#24036#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -764,18 +901,14 @@
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="37" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="4878">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="175" column="41" selection-start="4838" selection-end="4838" vertical-scroll-proportion="0.0" vertical-offset="3150" max-vertical-offset="4140">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -788,15 +921,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="72" selection-start="1713" selection-end="1713" vertical-scroll-proportion="0.0" vertical-offset="1062" max-vertical-offset="7002">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3110#3111#0" expanded="true" />
-            <element signature="e#3139#3140#0" expanded="true" />
-            <element signature="e#16489#16671#0" expanded="true" />
-            <element signature="e#16660#16661#0" expanded="true" />
-            <element signature="e#19125#20461#0" expanded="true" />
-            <element signature="e#19896#20146#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
-            <element signature="e#20450#20451#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="e#3190#3191#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3262#3263#0" expanded="true" />
+            <element signature="e#19612#19857#0" expanded="true" />
+            <element signature="e#19846#19847#0" expanded="true" />
+            <element signature="e#20105#20309#0" expanded="true" />
+            <element signature="e#20298#20299#0" expanded="true" />
+            <element signature="e#22155#22359#0" expanded="true" />
+            <element signature="e#22348#22349#0" expanded="true" />
+            <element signature="e#22541#22712#0" expanded="true" />
+            <element signature="e#22701#22702#0" expanded="true" />
+            <element signature="e#23877#24046#0" expanded="true" />
+            <element signature="e#24035#24036#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -804,18 +942,14 @@
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="212" column="33" selection-start="5829" selection-end="5829" vertical-scroll-proportion="0.0" vertical-offset="3816" max-vertical-offset="4410">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="37" selection-start="1512" selection-end="1512" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4032">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -823,48 +957,45 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="342" column="56" selection-start="12972" selection-end="12972" vertical-scroll-proportion="0.0" vertical-offset="6156" max-vertical-offset="7146">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3110#3111#0" expanded="true" />
-            <element signature="e#3139#3140#0" expanded="true" />
-            <element signature="e#16489#16671#0" expanded="true" />
-            <element signature="e#16660#16661#0" expanded="true" />
-            <element signature="e#19125#20461#0" expanded="true" />
-            <element signature="e#19896#20146#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
-            <element signature="e#20450#20451#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="e#3190#3191#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3262#3263#0" expanded="true" />
+            <element signature="e#19612#19857#0" expanded="true" />
+            <element signature="e#19846#19847#0" expanded="true" />
+            <element signature="e#20105#20309#0" expanded="true" />
+            <element signature="e#20298#20299#0" expanded="true" />
+            <element signature="e#22155#22359#0" expanded="true" />
+            <element signature="e#22348#22349#0" expanded="true" />
+            <element signature="e#22541#22712#0" expanded="true" />
+            <element signature="e#22701#22702#0" expanded="true" />
+            <element signature="e#23877#24046#0" expanded="true" />
+            <element signature="e#24035#24036#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Desktop/src/com/entity/fractured/DesktopStarter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="414">
-          <folding />
-        </state>
+        <state line="5" column="0" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="414" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="18" selection-start="2681" selection-end="2681" vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="4284">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="21" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="1890">
-          <folding />
-        </state>
+        <state line="84" column="21" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="1890" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="37" selection-start="1512" selection-end="1512" vertical-scroll-proportion="0.0" vertical-offset="846" max-vertical-offset="4032">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -872,48 +1003,45 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="37" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="7362">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3110#3111#0" expanded="true" />
-            <element signature="e#3139#3140#0" expanded="true" />
-            <element signature="e#16489#16671#0" expanded="true" />
-            <element signature="e#16660#16661#0" expanded="true" />
-            <element signature="e#19125#20461#0" expanded="true" />
-            <element signature="e#19896#20146#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
-            <element signature="e#20450#20451#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="e#3190#3191#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3262#3263#0" expanded="true" />
+            <element signature="e#19612#19857#0" expanded="true" />
+            <element signature="e#19846#19847#0" expanded="true" />
+            <element signature="e#20105#20309#0" expanded="true" />
+            <element signature="e#20298#20299#0" expanded="true" />
+            <element signature="e#22155#22359#0" expanded="true" />
+            <element signature="e#22348#22349#0" expanded="true" />
+            <element signature="e#22541#22712#0" expanded="true" />
+            <element signature="e#22701#22702#0" expanded="true" />
+            <element signature="e#23877#24046#0" expanded="true" />
+            <element signature="e#24035#24036#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Desktop/src/com/entity/fractured/DesktopStarter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="32" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="504">
-          <folding />
-        </state>
+        <state line="19" column="32" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="504" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="18" selection-start="2681" selection-end="2681" vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="4284">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="21" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="1890">
-          <folding />
-        </state>
+        <state line="84" column="21" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="1890" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="37" selection-start="1512" selection-end="1512" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3360">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -921,15 +1049,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="5" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="5910">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3110#3111#0" expanded="true" />
-            <element signature="e#3139#3140#0" expanded="true" />
-            <element signature="e#16489#16671#0" expanded="true" />
-            <element signature="e#16660#16661#0" expanded="true" />
-            <element signature="e#19125#20461#0" expanded="true" />
-            <element signature="e#19896#20146#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
-            <element signature="e#20450#20451#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="e#3190#3191#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3262#3263#0" expanded="true" />
+            <element signature="e#19612#19857#0" expanded="true" />
+            <element signature="e#19846#19847#0" expanded="true" />
+            <element signature="e#20105#20309#0" expanded="true" />
+            <element signature="e#20298#20299#0" expanded="true" />
+            <element signature="e#22155#22359#0" expanded="true" />
+            <element signature="e#22348#22349#0" expanded="true" />
+            <element signature="e#22541#22712#0" expanded="true" />
+            <element signature="e#22701#22702#0" expanded="true" />
+            <element signature="e#23877#24046#0" expanded="true" />
+            <element signature="e#24035#24036#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -937,17 +1070,13 @@
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="18" selection-start="2681" selection-end="2681" vertical-scroll-proportion="0.0" vertical-offset="1290" max-vertical-offset="3570">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="21" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="1260" max-vertical-offset="1575">
-          <folding />
-        </state>
+        <state line="84" column="21" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="1260" max-vertical-offset="1575" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Android/build.xml">
@@ -955,11 +1084,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Desktop/src/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Android/assets/fractals/julia_z3.frag">
@@ -989,16 +1113,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Desktop/src/com/entity/fractured/DesktopStarter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="21" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
+        <state line="5" column="0" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Android/src/com/entity/fractured/FracturedActivity.java">
@@ -1016,68 +1131,90 @@
         <state line="33" column="2" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.5346535" vertical-offset="378" max-vertical-offset="1206" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Android/assets/ui/uiskin.atlas">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="755" selection-end="867" vertical-scroll-proportion="0.375" vertical-offset="702" max-vertical-offset="3816" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Android/assets/ui/uiskin_large.atlas">
       <provider selected="true" editor-type-id="text-editor">
         <state line="56" column="14" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="3816" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
+    <entry file="file://$PROJECT_DIR$/Desktop/src/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="41" selection-start="1881" selection-end="1881" vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4410">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="1" column="9" selection-start="31" selection-end="31" vertical-scroll-proportion="0.029950082" vertical-offset="0" max-vertical-offset="601" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Android/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="38" selection-start="259" selection-end="259" vertical-scroll-proportion="0.17910448" vertical-offset="0" max-vertical-offset="603">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Android/assets/ui/uiskin.atlas">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="11" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4068">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Android/assets/ui/uiskin.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="61" selection-start="1661" selection-end="1661" vertical-scroll-proportion="0.35204083" vertical-offset="369" max-vertical-offset="1224">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="46" selection-start="1014" selection-end="1014" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1836">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="393" column="43" selection-start="14852" selection-end="14852" vertical-scroll-proportion="0.0" vertical-offset="5646" max-vertical-offset="9522">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3110#3111#0" expanded="true" />
-            <element signature="e#3139#3140#0" expanded="true" />
-            <element signature="e#16489#16671#0" expanded="true" />
-            <element signature="e#16660#16661#0" expanded="true" />
-            <element signature="e#19125#20461#0" expanded="true" />
-            <element signature="e#19896#20146#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
-            <element signature="e#20450#20451#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/SlideWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="35" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1656">
+        <state line="21" column="51" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1278">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/Fractured.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="41" selection-start="822" selection-end="822" vertical-scroll-proportion="0.33777037" vertical-offset="175" max-vertical-offset="5112">
+        <state line="155" column="34" selection-start="4443" selection-end="4443" vertical-scroll-proportion="0.0" vertical-offset="2292" max-vertical-offset="4914">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/SlideWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="24" selection-start="1727" selection-end="1727" vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="1656">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedGestureListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="21" selection-start="1722" selection-end="1722" vertical-scroll-proportion="0.4413793" vertical-offset="1094" max-vertical-offset="1728">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FractalRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="24" selection-start="3054" selection-end="3054" vertical-scroll-proportion="0.0" vertical-offset="882" max-vertical-offset="4320">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="24" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="3114">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/com/entity/fractured/FracturedUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="208" column="81" selection-start="7497" selection-end="7497" vertical-scroll-proportion="0.5" vertical-offset="3261" max-vertical-offset="10962">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="e#3190#3191#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+            <element signature="e#3262#3263#0" expanded="true" />
+            <element signature="e#19612#19857#0" expanded="true" />
+            <element signature="e#19846#19847#0" expanded="true" />
+            <element signature="e#20105#20309#0" expanded="true" />
+            <element signature="e#20298#20299#0" expanded="true" />
+            <element signature="e#22155#22359#0" expanded="true" />
+            <element signature="e#22348#22349#0" expanded="true" />
+            <element signature="e#22541#22712#0" expanded="true" />
+            <element signature="e#22701#22702#0" expanded="true" />
+            <element signature="e#23877#24046#0" expanded="true" />
+            <element signature="e#24035#24036#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1088,7 +1225,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>Android</last-edited>
+          <last-edited>Desktop:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
