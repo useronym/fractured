@@ -86,11 +86,11 @@ public class FractalRenderer {
         if (! shader.isCompiled()) {
             Gdx.app.error("fractured!", shader.getLog());
             ready = false;
-            return false;
         } else {
             ready = true;
-            return true;
         }
+
+        return ready;
     }
 
     public void unloadShader() {

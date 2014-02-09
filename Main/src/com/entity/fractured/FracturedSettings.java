@@ -6,7 +6,7 @@ import com.badlogic.gdx.Preferences;
 import java.util.Arrays;
 
 public class FracturedSettings {
-    String version = "1.1";
+    String version = "1.1.1";
     String preferencesName = "fractured-preferences";
     boolean welcome = true;
     String welcomeTitle = "Welcome to fractured! , a GPU fractal explorer.";
@@ -16,14 +16,13 @@ public class FracturedSettings {
             "\n" +
             "> Tips\n" +
             "You can slide the window on the right off the screen.\n" +
-            "Screenshots are rendered with the \"Render\" quality setting and are stored on the SD card.\n" +
+            "Screenshots are rendered with the \"Render\" quality setting and are stored in the 'Pictures' folder.\n" +
             "Performance can be increased by lowering the render qualities in the \"More\" tab.";
     String aboutText = "fractured! v" + version + "\n" +
             "Faculty of Informatics, Masaryk University\n" +
             "PV097, fall 2013\n" +
             "Adam Krupicka";
     int screenCounter = 0;
-    //boolean debugLogging = true;
     boolean debugGUI = false;
     float width = 0f, height = 0f;
     float aspectRatio;
@@ -78,6 +77,8 @@ public class FracturedSettings {
                 renderSetting = prefs.getInteger("renderSetting", renderSetting);
             } else {
                 Gdx.app.debug("fractured!", "ignoring an outdated version of shared settings");
+                // try not to overwrite previous screenshots
+                screenCounter = prefs.getInteger("screenCounter", screenCounter);
             }
         } else {
             Gdx.app.debug("fractured!", "no shared settings found, using defaults");

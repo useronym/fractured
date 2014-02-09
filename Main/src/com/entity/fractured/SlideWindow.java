@@ -1,6 +1,8 @@
 package com.entity.fractured;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -14,11 +16,15 @@ public class SlideWindow extends Window {
     private boolean dragging = false, sliding = false;
     private float speedX = 0f;
 
-    public SlideWindow(String title, Skin skin, float border) {
+    private Sprite dragImage = null;
+
+    public SlideWindow(String title, Skin skin, float border, String dragger) {
         super(title, skin);
         borderSize = border;
 
         getButtonTable().remove();
+
+        dragImage = new Sprite(new Texture(Gdx.files.internal(dragger)));
 
         removeListener(getListeners().first());
 
@@ -74,6 +80,24 @@ public class SlideWindow extends Window {
         }
 
         super.draw(batch, parentAlpha);
+
+        dragImage.setPosition(getX(), dragImage.getY());
+        dragImage.draw(batch);
+    }
+
+    @Override
+    public void setHeight(float height) {
+        super.setHeight(height);
+
+        if (dragImage != null) {
+            dragImage.setPosition(getX(), getHeight() / 2f - dragImage.getHeight() / 2f);
+        }
+    }
+
+    public void dispose() {
+        dragImage.getTexture().dispose();
+
+        remove();
     }
 
     private void checkWindowPosition() {

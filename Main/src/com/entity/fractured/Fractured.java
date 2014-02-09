@@ -51,15 +51,15 @@ public class Fractured extends Game {
 
     @Override
     public void resize(int width, int height) {
-        if (width == settings.width && height == settings.height) return;
+        if (width == settings.width && height == settings.height)
+            return;
 
         settings.updateDisplaySettings();
 
         camera.setToOrtho(false, width, height);
 
-        if (ui != null) {
+        if (ui != null)
             ui.dispose();
-        }
 
         createRenderer();
 
@@ -67,8 +67,8 @@ public class Fractured extends Game {
 
         createUi();
 
-        fractalSprite.setTexture(renderer.getTexture(true));
-        fractalSprite.setRegion(0f, 0f, 1f, 1f);
+        //fractalSprite.setTexture(renderer.getTexture(true));
+        //fractalSprite.setRegion(0f, 0f, 1f, 1f);
         fractalSprite.setSize(width, height);
         fractalSprite.setOrigin(width / 2f, height / 2f);
 
@@ -90,7 +90,8 @@ public class Fractured extends Game {
 
         Batch.setProjectionMatrix(camera.combined);
         Batch.begin();
-        fractalSprite.draw(Batch);
+        if  (fractalSprite.getTexture() != null)
+            fractalSprite.draw(Batch);
         Batch.end();
 
         if (renderRequestFrames >= 0) {
@@ -126,7 +127,7 @@ public class Fractured extends Game {
 
                 if (screenMap != null) {
                     PixmapIO.writePNG(Gdx.files.external(screenName), screenMap);
-                    ui.postMessage("Screenshot saved as " + screenName);
+                    ui.postMessage(screenName);
                     settings.screenCounter++;
                 } else {
                     ui.postMessage("Failed to create screenshot");
@@ -235,6 +236,7 @@ public class Fractured extends Game {
 
         // reset the screen quad sprite
         fractalSprite.setTexture(renderer.getTexture());
+        fractalSprite.setRegion(0f, 0f, 1f, 1f);
         fractalSprite.setPosition(0f, 0f);
         fractalSprite.setScale(1f);
     }

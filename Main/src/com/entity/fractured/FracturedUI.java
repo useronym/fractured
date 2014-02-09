@@ -118,7 +118,7 @@ public class FracturedUI {
     }
 
     public void destroyUI() {
-        options.remove();
+        options.dispose();
 
         iconBusy.getTexture().dispose();
     }
@@ -157,7 +157,11 @@ public class FracturedUI {
         if (guiUsed == GuiMode.LARGE)
             borderSize = app.settings.uiWindowBorderLarge;
 
-        options = new SlideWindow("", skin, borderSize);
+        if (guiUsed == GuiMode.STANDARD)
+            options = new SlideWindow("", skin, borderSize, "ui/dragger.png");
+        else if (guiUsed == GuiMode.LARGE)
+            options = new SlideWindow("", skin, borderSize, "ui/dragger-large.png");
+
         options.setHeight(Gdx.graphics.getHeight());
         float windowWidth = Gdx.graphics.getWidth() / 3f + borderSize;
         if (guiUsed == GuiMode.STANDARD && windowWidth < app.settings.uiWindowMin)
@@ -535,9 +539,11 @@ public class FracturedUI {
         if (width >= app.settings.width)
             width = app.settings.width - padding * 2f;
         welcomeWnd.setWidth(width);
+
         float height = welcomeWnd.getWidth() * 0.75f;
         if (height >= app.settings.height)
             height = app.settings.height - padding * 2f;
+
         welcomeWnd.setHeight(height);
         welcomeWnd.setModal(true);
         welcomeWnd.pad(padding);
@@ -545,20 +551,21 @@ public class FracturedUI {
         Table welcomeTable = new Table();
 
         Label welcomeTitle = new Label(app.settings.welcomeTitle, skin);
+        welcomeTitle.setWrap(true);
         welcomeTitle.setAlignment(Align.center);
         welcomeTable.add(welcomeTitle).pad(padding).center().width(welcomeWnd.getWidth());
         welcomeTable.row();
         Label welcomeText = new Label(app.settings.welcomeText, skin);
         welcomeText.setWrap(true);
-        welcomeText.setAlignment(Align.center, Align.left);
-        welcomeTable.add(welcomeText).pad(padding).expandY().width(welcomeWnd.getWidth() - padding * 4f);
+        welcomeText.setAlignment(Align.left);
+        welcomeTable.add(welcomeText).pad(padding).expandY().width(welcomeWnd.getWidth() - padding * 4f - 15f);
         welcomeTable.row();
         CheckBox showAgain = new CheckBox(" Show next time", skin);
         showAgain.setChecked(app.settings.welcome);
         showAgain.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                app.settings.welcome = ((CheckBox)actor).isChecked();
+                app.settings.welcome = ((CheckBox) actor).isChecked();
             }
         });
         welcomeTable.add(showAgain).pad(padding * 3f).left();
@@ -574,7 +581,9 @@ public class FracturedUI {
 
         ScrollPane welcomeScroller = new ScrollPane(welcomeTable, skin, "transparent");
         welcomeScroller.setScrollingDisabled(true, false);
-        welcomeScroller.setupFadeScrollBars(0f, 0f);
+        welcomeScroller.setOverscroll(false, false);
+        welcomeScroller.setFadeScrollBars(false);
+
         welcomeWnd.add(welcomeScroller);
 
         welcomeWnd.setPosition(app.settings.width / 2f - welcomeWnd.getWidth() / 2f,
