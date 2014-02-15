@@ -159,12 +159,16 @@ public class FracturedSettings {
     float[] renderQualities = {8f, 4f, 2f, 1.25f, 1f, 0.8f, 0.66f, 0.5f};
     String[] renderQualityNames = {"12.5%", "25%", "50%", "80%", "100%", "125%", "150%", "200%"};
 
-    String[] fractalTypes = {"fractals/julia_z2.frag",
+    String[] fractalTypes = {"fractals/mandelbrot.frag",
+            "fractals/burningship.frag",
+            "fractals/julia_z2.frag",
             "fractals/julia_z3.frag",
             "fractals/julia_expz2.frag",
             "fractals/julia_expz3.frag",
     };
-    String[] fractalNames = {"z^2 + c",
+    String[] fractalNames = {"Mandelbrot",
+            "Burning ship",
+            "z^2 + c",
             "z^3 + c",
             "exp(z^2) - c",
             "exp(z^3) - c"};

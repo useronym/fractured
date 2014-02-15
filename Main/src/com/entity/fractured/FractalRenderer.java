@@ -15,6 +15,7 @@ public class FractalRenderer {
     private boolean ready = false;
     private boolean hasRendered = false;
 
+    private boolean juliaMode = false;
     private String vertexPath = "default.vert";
     private String fragmentPath;
     private String gradientPath;
@@ -50,6 +51,7 @@ public class FractalRenderer {
 
         vertexPath = other.vertexPath;
         fragmentPath = other.fragmentPath;
+        juliaMode = other.juliaMode;
         iterations = other.iterations;
         translation = other.getTranslation();
         parameter = other.getParameter();
@@ -65,10 +67,10 @@ public class FractalRenderer {
     }
 
     public boolean loadShader(String fragment) {
-        return loadShader(vertexPath, fragment, iterations);
+        return loadShader(vertexPath, fragment, iterations, juliaMode);
     }
 
-    public boolean loadShader(String vertex, String fragment, int iter) {
+    public boolean loadShader(String vertex, String fragment, int iter, boolean julia) {
         Gdx.app.debug("fractured!", "loading shader " + fragment +
                 " with " + Integer.toString(iter) + " iterations");
 
@@ -76,10 +78,17 @@ public class FractalRenderer {
 
         vertexPath = vertex;
         fragmentPath = fragment;
+        juliaMode = julia;
 
         String vSource, fSource;
         vSource = Gdx.files.internal(vertex).readString();
         fSource = Gdx.files.internal(fragment).readString();
+
+        if (fSource.contains("JULIA true"))
+            juliaMode = true;
+        else
+            juliaMode = false;
+
         fSource = fSource.replace("#define ITER", "#define ITER " + Integer.toString(iter) + "//");
         shader = new ShaderProgram(vSource, fSource);
 
@@ -176,7 +185,9 @@ public class FractalRenderer {
     }
 
     private void setUniforms() {
-        shader.setUniformf("u_c", parameter);
+        if (juliaMode)
+            shader.setUniformf("u_c", parameter);
+
         shader.setUniformf("u_translation", translation);
         shader.setUniformf("u_zoom", zoom);
         shader.setUniformf("u_aspectratio", aspectRatio);
@@ -220,6 +231,10 @@ public class FractalRenderer {
         str += " Zoom: " + zoom;
 
         return str;
+    }
+
+    public boolean isJuliaMode() {
+        return juliaMode;
     }
 
     // passing true results in obtaining the texture even if it's all black(hasn't been rendered yet)

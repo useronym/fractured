@@ -1,3 +1,5 @@
+//FRACTAL JULIA true
+
 precision highp float;
 
 #define ITER 150

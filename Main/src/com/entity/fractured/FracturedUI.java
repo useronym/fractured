@@ -21,8 +21,11 @@ public class FracturedUI {
     private boolean optionsChanged = false;
     private SelectBox fractalType;
     private TextField iterations;
+
+    private TextButton randomX, randomY;
     private TextField parameterX, parameterY;
     private Slider paramSliderX, paramSliderY;
+
     private List colorSelector;
     private ScrollPane colorSelectorScroller;
 
@@ -127,6 +130,7 @@ public class FracturedUI {
         // type
         if (! app.getFractalRenderer().getFragmentPath().equals(app.settings.fractalTypes[app.settings.fractalType])) {
             app.getFractalRenderer().loadShader(app.settings.fractalTypes[app.settings.fractalType]);
+            handleNonJuliaMode();
         }
 
         // color
@@ -237,21 +241,6 @@ public class FracturedUI {
         options.add(header).colspan(2);
         options.row();
 
-        /*// drag image
-        ImageButton dragger = new ImageButton(skin, "drag-button");
-        dragger.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                if (! event.getBubbles()) {
-                    event.setBubbles(true);
-                    actor.fire(event);
-                } else {
-
-                }
-            }
-        });
-        options.add(dragger);*/
-
         // options wrapper table
         optWrapper = new Table();
         options.add(optWrapper).expand();
@@ -352,7 +341,7 @@ public class FracturedUI {
         parameterX.setDisabled(guiDisables);
         paramXTable.add(parameterX).width(width).pad(padding);
         paramXTable.row();
-        TextButton randomX = new TextButton("random", skin);
+        randomX = new TextButton("random", skin);
         randomX.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -387,7 +376,7 @@ public class FracturedUI {
         parameterY.setDisabled(guiDisables);
         paramYTable.add(parameterY).width(width).pad(padding);
         paramYTable.row();
-        TextButton randomY = new TextButton("random", skin);
+        randomY = new TextButton("random", skin);
         randomY.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -415,7 +404,27 @@ public class FracturedUI {
         paramsTable.add(sliderYTable);
         fractal.add(paramsTable).expandY();
 
+        handleNonJuliaMode();
+
         return fractal;
+    }
+
+    private void handleNonJuliaMode() {
+        if (! app.getFractalRenderer().isJuliaMode()) {
+            parameterX.setDisabled(true);
+            parameterY.setDisabled(true);
+            paramSliderX.setDisabled(true);
+            paramSliderY.setDisabled(true);
+            randomX.setDisabled(true);
+            randomY.setDisabled(true);
+        } else {
+            parameterX.setDisabled(false);
+            parameterY.setDisabled(false);
+            paramSliderX.setDisabled(false);
+            paramSliderY.setDisabled(false);
+            randomX.setDisabled(false);
+            randomY.setDisabled(false);
+        }
     }
 
     private Table createOptionsColor() {
