@@ -22,7 +22,7 @@ public class FracturedUI {
     private SelectBox fractalType;
     private TextField iterations;
 
-    private TextButton randomX, randomY;
+    private Table paramsTable;
     private TextField parameterX, parameterY;
     private Slider paramSliderX, paramSliderY;
 
@@ -332,7 +332,7 @@ public class FracturedUI {
         fractal.row();
 
         // parameter
-        Table paramsTable = new Table();
+        paramsTable = new Table();
         // holds parameter controls
         Table paramXTable = new Table();
         paramXTable.add(new Label("Param X", skin));
@@ -341,7 +341,7 @@ public class FracturedUI {
         parameterX.setDisabled(guiDisables);
         paramXTable.add(parameterX).width(width).pad(padding);
         paramXTable.row();
-        randomX = new TextButton("random", skin);
+        TextButton randomX = new TextButton("random", skin);
         randomX.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -376,7 +376,7 @@ public class FracturedUI {
         parameterY.setDisabled(guiDisables);
         paramYTable.add(parameterY).width(width).pad(padding);
         paramYTable.row();
-        randomY = new TextButton("random", skin);
+        TextButton randomY = new TextButton("random", skin);
         randomY.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -411,19 +411,9 @@ public class FracturedUI {
 
     private void handleNonJuliaMode() {
         if (! app.getFractalRenderer().isJuliaMode()) {
-            parameterX.setDisabled(true);
-            parameterY.setDisabled(true);
-            paramSliderX.setDisabled(true);
-            paramSliderY.setDisabled(true);
-            randomX.setDisabled(true);
-            randomY.setDisabled(true);
+            paramsTable.setVisible(false);
         } else {
-            parameterX.setDisabled(false);
-            parameterY.setDisabled(false);
-            paramSliderX.setDisabled(false);
-            paramSliderY.setDisabled(false);
-            randomX.setDisabled(false);
-            randomY.setDisabled(false);
+            paramsTable.setVisible(true);
         }
     }
 

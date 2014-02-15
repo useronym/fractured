@@ -67,18 +67,18 @@ public class FractalRenderer {
     }
 
     public boolean loadShader(String fragment) {
-        return loadShader(vertexPath, fragment, iterations, juliaMode);
+        return loadShader(vertexPath, fragment, iterations);
     }
 
-    public boolean loadShader(String vertex, String fragment, int iter, boolean julia) {
+    public boolean loadShader(String vertex, String fragment, int iter) {
         Gdx.app.debug("fractured!", "loading shader " + fragment +
                 " with " + Integer.toString(iter) + " iterations");
 
+        if (fragmentPath != fragment) reset();
         unloadShader();
 
         vertexPath = vertex;
         fragmentPath = fragment;
-        juliaMode = julia;
 
         String vSource, fSource;
         vSource = Gdx.files.internal(vertex).readString();
@@ -100,6 +100,12 @@ public class FractalRenderer {
         }
 
         return ready;
+    }
+
+    public void reset() {
+        translation = new Vector2(0f, 0f);
+        parameter = new Vector2(0.33f, 0.4f);
+        zoom = 4f;
     }
 
     public void unloadShader() {
